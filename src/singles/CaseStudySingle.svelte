@@ -21,6 +21,80 @@
   export let caseStudy = {}
 </script>
 
+<!-- METADATA -->
+<!-- <MetaData post={caseStudy} /> -->
+
+<div class="case-study-single" in:fade use:links>
+  <!-- HEADER -->
+
+  {#if caseStudy.title}
+    <!-- BACK LINK -->
+    <div
+      class="go-back"
+      on:click={e => {
+        window.history.back()
+      }}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        ><path
+          d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"
+        /></svg
+      >
+    </div>
+    <div class="main-header">
+      <!-- COLOR CODE  -->
+      <div class="color-icon {caseStudy.category}" />
+      <!-- TITLE -->
+      <div class="title">{caseStudy.title}</div>
+      <!-- PARTICIPANTS -->
+      {#if get(caseStudy, "participants", false) && Array.isArray(caseStudy.participants)}
+        <div class="participants">
+          <ParticipantsList
+            participants={caseStudy.participants}
+            messaging={true}
+          />
+        </div>
+      {/if}
+    </div>
+    <div class="divider" />
+  {/if}
+
+  <!-- TEXT -->
+  {#if Array.isArray(get(caseStudy, "content.content", false))}
+    <div class="text">
+      {@html renderBlockText(caseStudy.content.content)}
+    </div>
+    <div class="divider" />
+  {/if}
+
+  <!-- MATERIAL -->
+  {#if Array.isArray(caseStudy.material)}
+    <div class="material">
+      <div class="material-item header">
+        <div class="row">
+          <div class="title">Material</div>
+          <div class="format">Type</div>
+        </div>
+      </div>
+      {#each caseStudy.material as item (item._key)}
+        <MaterialItem {item} />
+      {/each}
+    </div>
+    <div class="divider" />
+  {/if}
+
+  <!-- RELATED EVENTS -->
+  {#if Array.isArray(get(caseStudy, "connectedEvents", false))}
+    <div class="related-events">
+      <EventList events={caseStudy.connectedEvents} related={true} />
+    </div>
+  {/if}
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -163,72 +237,3 @@
     }
   }
 </style>
-
-<!-- METADATA -->
-<!-- <MetaData post={caseStudy} /> -->
-
-<div class="case-study-single" in:fade use:links>
-  <!-- HEADER -->
-
-  {#if caseStudy.title}
-    <!-- BACK LINK -->
-    <div
-      class="go-back"
-      on:click={e => {
-        window.history.back()
-      }}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="24"
-        viewBox="0 0 24 24"
-        width="24"><path
-          d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z" /></svg>
-    </div>
-    <div class="main-header">
-      <!-- COLOR CODE  -->
-      <div class="color-icon {caseStudy.category}" />
-      <!-- TITLE -->
-      <div class="title">{caseStudy.title}</div>
-      <!-- PARTICIPANTS -->
-      {#if get(caseStudy, 'participants', false) && Array.isArray(caseStudy.participants)}
-        <div class="participants">
-          <ParticipantsList
-            participants={caseStudy.participants}
-            messaging={true} />
-        </div>
-      {/if}
-    </div>
-    <div class="divider" />
-  {/if}
-
-  <!-- TEXT -->
-  {#if Array.isArray(get(caseStudy, 'content.content', false))}
-    <div class="text">
-      {@html renderBlockText(caseStudy.content.content)}
-    </div>
-    <div class="divider" />
-  {/if}
-
-  <!-- MATERIAL -->
-  {#if Array.isArray(caseStudy.material)}
-    <div class="material">
-      <div class="material-item header">
-        <div class="row">
-          <div class="title">Material</div>
-          <div class="format">Type</div>
-        </div>
-      </div>
-      {#each caseStudy.material as item (item._key)}
-        <MaterialItem {item} />
-      {/each}
-    </div>
-    <div class="divider" />
-  {/if}
-
-  <!-- RELATED EVENTS -->
-  {#if Array.isArray(get(caseStudy, 'connectedEvents', false))}
-    <div class="related-events">
-      <EventList events={caseStudy.connectedEvents} related={true} />
-    </div>
-  {/if}
-</div>

@@ -28,6 +28,28 @@
   })
 </script>
 
+<div
+  class="username-dialog"
+  transition:fade={{ duration: 400, easing: quartOut }}
+>
+  <div class="box">
+    <input
+      type="text"
+      bind:this={inputEl}
+      bind:value={username}
+      placeholder="Choose your username"
+      on:keydown={e => {
+        if (e.keyCode == 13) dispatch("username", { username: username })
+      }}
+    />
+    <button
+      on:click={e => {
+        dispatch("username", { username: username })
+      }}>Enter</button
+    >
+  </div>
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -81,7 +103,7 @@
           border: 1px solid $COLOR_LIGHT;
         }
 
-        &::placeholder{
+        &::placeholder {
           opacity: 0.5;
         }
 
@@ -137,22 +159,3 @@
     }
   }
 </style>
-
-<div
-  class="username-dialog"
-  transition:fade={{ duration: 400, easing: quartOut }}>
-  <div class="box">
-    <input
-      type="text"
-      bind:this={inputEl}
-      bind:value={username}
-      placeholder="Choose your username"
-      on:keydown={e => {
-        if (e.keyCode == 13) dispatch('username', { username: username })
-      }} />
-    <button
-      on:click={e => {
-        dispatch('username', { username: username })
-      }}>Enter</button>
-  </div>
-</div>

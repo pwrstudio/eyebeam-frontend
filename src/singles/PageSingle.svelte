@@ -18,6 +18,35 @@
   export let page = {}
 </script>
 
+<!-- METADATA -->
+<!-- <MetaData post={page} /> -->
+
+<div class="page-single" in:fade use:links>
+  <!-- HEADER -->
+  <div class="main-header">
+    <!-- TITLE -->
+    <div class="title">{page.title}</div>
+  </div>
+  <div class="divider" />
+
+  <!-- TEXT -->
+  {#if Array.isArray(get(page, "content.content", false))}
+    <div class="text">
+      {@html renderBlockText(page.content.content)}
+    </div>
+    <div class="divider" />
+  {/if}
+
+  <!-- RELATED pageS -->
+  <!-- <div class="related-case-studies"> -->
+  <!-- {await relatedpages then relatedpages} -->
+  <!-- {#if Array.isArray(get(page, 'connectedpages', false))}
+      <Calendar pages={page.connectedpages} related={true} />
+    {/if} -->
+  <!-- {/await} -->
+  <!-- </div> -->
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -52,32 +81,3 @@
     }
   }
 </style>
-
-<!-- METADATA -->
-<!-- <MetaData post={page} /> -->
-
-<div class="page-single" in:fade use:links>
-  <!-- HEADER -->
-  <div class="main-header">
-    <!-- TITLE -->
-    <div class="title">{page.title}</div>
-  </div>
-  <div class="divider" />
-
-  <!-- TEXT -->
-  {#if Array.isArray(get(page, 'content.content', false))}
-    <div class="text">
-      {@html renderBlockText(page.content.content)}
-    </div>
-    <div class="divider" />
-  {/if}
-
-  <!-- RELATED pageS -->
-  <!-- <div class="related-case-studies"> -->
-  <!-- {await relatedpages then relatedpages} -->
-  <!-- {#if Array.isArray(get(page, 'connectedpages', false))}
-      <Calendar pages={page.connectedpages} related={true} />
-    {/if} -->
-  <!-- {/await} -->
-  <!-- </div> -->
-</div>

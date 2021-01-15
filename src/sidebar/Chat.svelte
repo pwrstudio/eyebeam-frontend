@@ -23,7 +23,7 @@
   export let currentRoom = 2
   export let mobile = false
   export let mobileExpanded = false
-  
+
   // *** VARIABLES
   let pinnedText = false
   let pinnedMessageClosed = false
@@ -66,28 +66,55 @@
     }, 500)
   })
 
-	afterUpdate(() => {
+  afterUpdate(() => {
     if (messageContainerEl) {
       // if(messageContainerEl.scrollHeight - messageContainerEl.scrollTop < 300) {
       messageContainerEl.scrollTo({
         top: messageContainerEl.scrollHeight,
-        left: 0
+        left: 0,
       })
       // }
     }
-	});
+  })
 
   onMount(async () => {
     if (messageContainerEl) {
-        setTimeout(() => {
-          messageContainerEl.scrollTo({
+      setTimeout(() => {
+        messageContainerEl.scrollTo({
           top: messageContainerEl.scrollHeight,
-          left: 0
+          left: 0,
         })
       }, 2000)
     }
   })
 </script>
+
+<div class="chat-container">
+  {#if mobile && mobileExpanded}
+    <div class="header">You are in: {currentRoom}</div>
+  {/if}
+  <div
+    id="message-container"
+    class="message-container"
+    class:expanded={mobileExpanded}
+    bind:this={messageContainerEl}
+  >
+    {#if pinnedText && !pinnedMessageClosed}
+      <div class="pinned-message" transition:fade|local>
+        {@html renderBlockText(pinnedText)}
+        <div
+          class="close-pinned-message"
+          on:click={e => {
+            pinnedMessageClosed = true
+          }}
+        >×</div>
+      </div>
+    {/if}
+    {#each chatMessages as message (message.msgId)}
+      <ChatMessage {message} />
+    {/each}
+  </div>
+</div>
 
 <style lang="scss">
   @import "../variables.scss";
@@ -139,7 +166,7 @@
       border-bottom: 1px solid $COLOR_MID_2;
       pointer-events: all;
 
-      @include screen-size("small"){
+      @include screen-size("small") {
         position: fixed;
         top: 80px;
       }
@@ -165,30 +192,3 @@
     cursor: pointer;
   }
 </style>
-
-<div class="chat-container">
-  {#if mobile && mobileExpanded}
-    <div class="header">You are in: {currentRoom}</div>
-  {/if}
-  <div
-    id="message-container"
-    class="message-container"
-    class:expanded={mobileExpanded}
-    bind:this={messageContainerEl}>
-    {#if pinnedText && !pinnedMessageClosed}
-      <div class="pinned-message" transition:fade|local>
-        {@html renderBlockText(pinnedText)}
-        <div
-          class="close-pinned-message"
-          on:click={e => {
-            pinnedMessageClosed = true
-          }}>
-          ×
-        </div>
-      </div>
-    {/if}
-    {#each chatMessages as message (message.msgId)}
-      <ChatMessage {message} />
-    {/each}
-  </div>
-</div>

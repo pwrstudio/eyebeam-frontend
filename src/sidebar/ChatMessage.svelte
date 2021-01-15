@@ -19,6 +19,23 @@
   import { localUserName } from "../stores"
 </script>
 
+<div class="chat-message" transition:fade|local>
+  <div class="meta">
+    <span class="name">{message.name}</span>
+    <span class="date">{formattedChatDate(message.timestamp)}</span>
+  </div>
+  <div class="body">
+    {@html anchorme({
+      input: message.text,
+      options: {
+        attributes: {
+          target: "_blank",
+        },
+      },
+    })}
+  </div>
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -77,20 +94,3 @@
     }
   }
 </style>
-
-<div class="chat-message" transition:fade|local>
-  <div class="meta">
-    <span class="name">{message.name}</span>
-    <span class="date">{formattedChatDate(message.timestamp)}</span>
-  </div>
-  <div class="body">
-    {@html anchorme({
-      input: message.text,
-      options: {
-        attributes: {
-          target: '_blank',
-        },
-      },
-    })}
-  </div>
-</div>

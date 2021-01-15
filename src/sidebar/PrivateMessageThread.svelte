@@ -24,6 +24,48 @@
   let expanded = false
 </script>
 
+<div class="message-container">
+  <div
+    class="header"
+    class:expanded
+    on:click={e => {
+      expanded = !expanded
+    }}
+  >
+    <div class="meta">
+      <div class="title">{message.title}</div>
+      <div class="date">{formattedDate(message.last_posted_at)}</div>
+    </div>
+    <div class="participants">
+      {#each get(message, "details.allowed_users", []).filter(p => p.username != get($authenticatedUserInformation, "username", "")) as participant (participant.id)}
+        <span>{participant.name}, </span>
+      {/each}
+    </div>
+  </div>
+  {#if expanded}
+    <div class="thread-container" transition:slide|local>
+      {#each get(message, "post_stream.posts", []) as post (post.id)}
+        <div class="post">
+          <div class="meta">
+            <div class="sender">{post.name}</div>
+            <div class="date">{formattedDate(post.created_at)}</div>
+          </div>
+          <div class="content">
+            {@html post.cooked}
+          </div>
+        </div>
+      {/each}
+    </div>
+    <NewPrivateMessage
+      url={"https://work.anthropocene-curriculum.org/t/" +
+        message.slug +
+        "/" +
+        message.id}
+      text="> Go to thread"
+    />
+  {/if}
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -95,40 +137,3 @@
     }
   }
 </style>
-
-<div class="message-container">
-  <div
-    class="header"
-    class:expanded
-    on:click={e => {
-      expanded = !expanded
-    }}>
-    <div class="meta">
-      <div class="title">{message.title}</div>
-      <div class="date">{formattedDate(message.last_posted_at)}</div>
-    </div>
-    <div class="participants">
-      {#each get(message, 'details.allowed_users', []).filter(p => p.username != get($authenticatedUserInformation, 'username', '')) as participant (participant.id)}
-        <span>{participant.name}, </span>
-      {/each}
-    </div>
-  </div>
-  {#if expanded}
-    <div class="thread-container" transition:slide|local>
-      {#each get(message, 'post_stream.posts', []) as post (post.id)}
-        <div class="post">
-          <div class="meta">
-            <div class="sender">{post.name}</div>
-            <div class="date">{formattedDate(post.created_at)}</div>
-          </div>
-          <div class="content">
-            {@html post.cooked}
-          </div>
-        </div>
-      {/each}
-    </div>
-    <NewPrivateMessage
-      url={'https://work.anthropocene-curriculum.org/t/' + message.slug + '/' + message.id}
-      text="> Go to thread" />
-  {/if}
-</div>

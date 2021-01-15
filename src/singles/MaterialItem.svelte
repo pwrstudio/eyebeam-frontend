@@ -44,10 +44,22 @@
   }
 </script>
 
+<a href={url} target="_blank" class="material-item">
+  <div class="row">
+    <div class="title">{item.title}</div>
+    <div class="elips">
+      ....................................................................
+    </div>
+    <div class="format">
+      {item._type === "fileBlock" || item._type === "linkBlock"
+        ? item.fileType
+        : FORMATMAP[item._type]}
+    </div>
+  </div>
+</a>
+
 <style lang="scss">
   @import "../variables.scss";
-
-  
 
   .material-item {
     width: 100%;
@@ -58,9 +70,9 @@
     user-select: none;
     padding-top: $SPACE_XS;
     padding-bottom: $SPACE_XS;
-    font-size:$FONT_SIZE_SMALL;
-    
-    &:first-of-type{
+    font-size: $FONT_SIZE_SMALL;
+
+    &:first-of-type {
       margin-top: $SPACE_XS;
     }
 
@@ -74,7 +86,7 @@
         font-weight: bold;
         white-space: nowrap;
         max-width: 80%;
-        overflow:hidden;
+        overflow: hidden;
         text-overflow: ellipsis;
       }
 
@@ -117,15 +129,3 @@
     }
   }
 </style>
-
-<a href={url} target="_blank" class="material-item">
-  <div class="row">
-    <div class="title">{item.title}</div>
-    <div class="elips">
-      ....................................................................
-    </div>
-    <div class="format">
-      {item._type === 'fileBlock' || item._type === 'linkBlock' ? item.fileType : FORMATMAP[item._type]}
-    </div>
-  </div>
-</a>

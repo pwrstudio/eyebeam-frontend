@@ -11,6 +11,10 @@
   export let text = "+ New message"
 </script>
 
+<div class="new-message">
+  <a href={url} target="_blank" class="header">{text}</a>
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -128,7 +132,3 @@
     }
   }
 </style>
-
-<div class="new-message">
-  <a href={url} target="_blank" class="header">{text}</a>
-</div>

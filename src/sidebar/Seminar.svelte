@@ -57,6 +57,39 @@
   })
 </script>
 
+<div class="seminar-container">
+  {#await seminar then seminar}
+    {#if seminar}
+      <div class="header">{seminar.title}</div>
+      <div class="body-container" class:expanded={mobileExpanded}>
+        <!-- TEXT BLOCK #1 -->
+        {#if Array.isArray(get(seminar, "firstTextBlock.content", false)) && seminar.firstTextBlock.content.length > 0}
+          <div class="text-block">
+            {@html renderBlockText(seminar.firstTextBlock.content)}
+          </div>
+        {/if}
+        <div class="link">
+          <!-- LINK: MORE INFORMATION -->
+          <a href={seminar.moreInformationLink} target="_blank"
+            >More information</a
+          >
+          <!-- LINK: BIG BLUE BUTTON -->
+          <a href={seminar.bbbLink} target="_blank">Join on BigBlueButton</a>
+        </div>
+        <!-- PARTICIPANTS LIST -->
+        <div class="participants-list">
+          <div>Participants in seminar:</div>
+          <ParticipantsList
+            participants={loadedParticipants}
+            messaging={true}
+            isSeminar={true}
+          />
+        </div>
+      </div>
+    {/if}
+  {/await}
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -124,30 +157,3 @@
     }
   }
 </style>
-
-<div class="seminar-container">
-  {#await seminar then seminar}
-    {#if seminar}
-      <div class="header">{seminar.title}</div>
-      <div class="body-container" class:expanded={mobileExpanded}>
-        <!-- TEXT BLOCK #1 -->
-        {#if Array.isArray(get(seminar, 'firstTextBlock.content', false)) && seminar.firstTextBlock.content.length > 0}
-        <div class="text-block">
-          {@html renderBlockText(seminar.firstTextBlock.content)}
-        </div>
-      {/if}
-        <div class="link">
-          <!-- LINK: MORE INFORMATION -->
-          <a href={seminar.moreInformationLink} target="_blank">More information</a>
-          <!-- LINK: BIG BLUE BUTTON -->
-          <a href={seminar.bbbLink} target="_blank">Join on BigBlueButton</a>
-        </div>
-        <!-- PARTICIPANTS LIST -->
-        <div class="participants-list">
-          <div>Participants in seminar:</div>
-          <ParticipantsList participants={loadedParticipants} messaging={true} isSeminar={true}/>
-        </div>
-      </div>
-    {/if}
-  {/await}
-</div>

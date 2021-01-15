@@ -23,6 +23,68 @@
   export let event = {}
 </script>
 
+<!-- METADATA -->
+<!-- <MetaData post={event} /> -->
+
+<div class="event-single" in:fade use:links>
+  <!-- BACK LINK -->
+  <div
+    class="go-back"
+    on:click={e => {
+      window.history.back()
+    }}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="24"
+      viewBox="0 0 24 24"
+      width="24"
+      ><path
+        d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"
+      /></svg
+    >
+  </div>
+  <!-- HEADER -->
+  <div class="main-header">
+    <!-- TITLE -->
+    <div class="title">{event.title}</div>
+
+    <!-- PARTICIPANTS -->
+    <div class="participants">
+      {#if get(event, "moderators", false) && Array.isArray(event.moderators)}
+        <ParticipantsList
+          participants={event.moderators}
+          isModerators
+          messaging={true}
+        />
+      {/if}
+      {#if get(event, "participants", false) && Array.isArray(event.participants)}
+        <ParticipantsList participants={event.participants} messaging={true} />
+      {/if}
+    </div>
+  </div>
+  <div class="divider" />
+
+  <!-- DATE -->
+  <div class="date">{formattedDate(event.startDate)}</div>
+  <div class="divider" />
+
+  <!-- TEXT -->
+  {#if Array.isArray(get(event, "content.content", false)) && event.content.content.length > 0}
+    <div class="text">
+      {@html renderBlockText(event.content.content)}
+    </div>
+    <div class="divider" />
+  {/if}
+
+  <!-- CONNECTED CASE STUDIES -->
+  <div class="connected-case-studies">
+    {#if Array.isArray(get(event, "connectedCaseStudies")) && event.connectedCaseStudies.length > 0}
+      <CaseStudyList caseStudies={event.connectedCaseStudies} related={true} />
+    {/if}
+  </div>
+</div>
+
 <style lang="scss">
   @import "../../variables.scss";
 
@@ -95,60 +157,3 @@
     }
   }
 </style>
-
-<!-- METADATA -->
-<!-- <MetaData post={event} /> -->
-
-<div class="event-single" in:fade use:links>
-  <!-- BACK LINK -->
-  <div
-    class="go-back"
-    on:click={e => {
-      window.history.back()
-    }}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      height="24"
-      viewBox="0 0 24 24"
-      width="24"><path
-        d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z" /></svg>
-  </div>
-  <!-- HEADER -->
-  <div class="main-header">
-    <!-- TITLE -->
-    <div class="title">{event.title}</div>
-
-    <!-- PARTICIPANTS -->
-    <div class="participants">
-      {#if get(event, 'moderators', false) && Array.isArray(event.moderators)}
-        <ParticipantsList
-          participants={event.moderators}
-          isModerators
-          messaging={true} />
-      {/if}
-      {#if get(event, 'participants', false) && Array.isArray(event.participants)}
-        <ParticipantsList participants={event.participants} messaging={true} />
-      {/if}
-    </div>
-  </div>
-  <div class="divider" />
-
-  <!-- DATE -->
-  <div class="date">{formattedDate(event.startDate)}</div>
-  <div class="divider" />
-
-  <!-- TEXT -->
-  {#if Array.isArray(get(event, 'content.content', false)) && event.content.content.length > 0}
-    <div class="text">
-      {@html renderBlockText(event.content.content)}
-    </div>
-    <div class="divider" />
-  {/if}
-
-  <!-- CONNECTED CASE STUDIES -->
-  <div class="connected-case-studies">
-    {#if Array.isArray(get(event, 'connectedCaseStudies')) && event.connectedCaseStudies.length > 0}
-      <CaseStudyList caseStudies={event.connectedCaseStudies} related={true} />
-    {/if}
-  </div>
-</div>

@@ -18,6 +18,34 @@
   let currentIndex = 0
 </script>
 
+<div class="card" use:links>
+  {#each card.slides as slide, index (slide._key)}
+    {#if Array.isArray(get(slide, "content", false)) && currentIndex === index}
+      <div class="slide" in:fade|local>
+        {@html renderBlockText(get(slide, "content", []))}
+      </div>
+    {/if}
+  {/each}
+  {#if card.slides && card.slides.length > 1}
+    <div class="navigation">
+      <div
+        class="nav-button back"
+        class:disabled={currentIndex === 0}
+        on:click={e => {
+          currentIndex -= 1
+        }}
+      >Back</div>
+      <div
+        class="nav-button next"
+        class:disabled={currentIndex === card.slides.length - 1}
+        on:click={e => {
+          currentIndex += 1
+        }}
+      >Next</div>
+    </div>
+  {/if}
+</div>
+
 <style lang="scss">
   @import "./variables.scss";
 
@@ -52,33 +80,3 @@
     }
   }
 </style>
-
-<div class="card" use:links>
-  {#each card.slides as slide, index (slide._key)}
-    {#if Array.isArray(get(slide, 'content', false)) && currentIndex === index}
-      <div class="slide" in:fade|local>
-        {@html renderBlockText(get(slide, 'content', []))}
-      </div>
-    {/if}
-  {/each}
-  {#if card.slides && card.slides.length > 1}
-    <div class="navigation">
-      <div
-        class="nav-button back"
-        class:disabled={currentIndex === 0}
-        on:click={e => {
-          currentIndex -= 1
-        }}>
-        Back
-      </div>
-      <div
-        class="nav-button next"
-        class:disabled={currentIndex === card.slides.length - 1}
-        on:click={e => {
-          currentIndex += 1
-        }}>
-        Next
-      </div>
-    </div>
-  {/if}
-</div>

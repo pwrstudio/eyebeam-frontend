@@ -6,10 +6,10 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
-  import { links, navigate } from "svelte-routing";
-  import { createEventDispatcher } from "svelte";
+  import { links, navigate } from "svelte-routing"
+  import { createEventDispatcher } from "svelte"
   // import get from "lodash/get"
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
   // *** STORES
   // import {
@@ -18,24 +18,24 @@
   // } from "../stores"
 
   // *** PROPS
-  export let section = "";
+  export let section = ""
 
   // *** VARIABLES
-  let chatInputValue = "";
-  let showChatInput = false;
+  let chatInputValue = ""
+  let showChatInput = false
 
   const submitChat = () => {
     dispatch("submit", {
       text: chatInputValue,
-    });
-    chatInputValue = "";
-  };
+    })
+    chatInputValue = ""
+  }
 
   const teleport = () => {
-    dispatch("teleport");
-  };
+    dispatch("teleport")
+  }
 
-  let notificationCount = 0;
+  let notificationCount = 0
 
   // const getNotifications = () => {
   //   if (
@@ -64,6 +64,53 @@
 
   // setInterval(getNotifications, 10000)
 </script>
+
+<div class="toolbar" use:links>
+  <!-- {#if $localUserAuthenticated && !showChatInput} -->
+  <!-- CHAT => open full input -->
+  <!-- <div
+      class="toolbar-item chat"
+      on:click={e => {
+        showChatInput = true
+        navigate('/')
+      }}>
+      Chat
+    </div> -->
+  <!-- SEMINAR -->
+  <!-- <a
+      href="/seminar"
+      class="toolbar-item"
+      class:active={section === 'seminar'}>
+      Seminar</a> -->
+  <!-- MESSAGES -->
+  <!-- <a
+      href="/messages"
+      class="toolbar-item"
+      class:active={section === 'messages'}>Messages{#if notificationCount > 0}
+        ({notificationCount})
+      {/if}</a>
+    <div class="toolbar-item" on:click={teleport}>Support</div>
+  {:else} -->
+  <!-- CHAT -->
+  <input
+    placeholder="Write a message..."
+    type="[text]"
+    maxlength="600"
+    bind:value={chatInputValue}
+    on:keydown={e => {
+      if (e.keyCode == 13) submitChat()
+    }}
+  />
+  <button on:click={submitChat}>Send</button>
+  <!-- {#if $localUserAuthenticated}
+      <button
+        class="close-chat"
+        on:click={e => {
+          showChatInput = false
+        }}>×</button>
+    {/if} -->
+  <!-- {/if} -->
+</div>
 
 <style lang="scss">
   @import "../variables.scss";
@@ -171,49 +218,3 @@
     }
   }
 </style>
-
-<div class="toolbar" use:links>
-  <!-- {#if $localUserAuthenticated && !showChatInput} -->
-  <!-- CHAT => open full input -->
-  <!-- <div
-      class="toolbar-item chat"
-      on:click={e => {
-        showChatInput = true
-        navigate('/')
-      }}>
-      Chat
-    </div> -->
-  <!-- SEMINAR -->
-  <!-- <a
-      href="/seminar"
-      class="toolbar-item"
-      class:active={section === 'seminar'}>
-      Seminar</a> -->
-  <!-- MESSAGES -->
-  <!-- <a
-      href="/messages"
-      class="toolbar-item"
-      class:active={section === 'messages'}>Messages{#if notificationCount > 0}
-        ({notificationCount})
-      {/if}</a>
-    <div class="toolbar-item" on:click={teleport}>Support</div>
-  {:else} -->
-  <!-- CHAT -->
-  <input
-    placeholder="Write a message..."
-    type="[text]"
-    maxlength="600"
-    bind:value={chatInputValue}
-    on:keydown={(e) => {
-      if (e.keyCode == 13) submitChat();
-    }} />
-  <button on:click={submitChat}>Send</button>
-  <!-- {#if $localUserAuthenticated}
-      <button
-        class="close-chat"
-        on:click={e => {
-          showChatInput = false
-        }}>×</button>
-    {/if} -->
-  <!-- {/if} -->
-</div>

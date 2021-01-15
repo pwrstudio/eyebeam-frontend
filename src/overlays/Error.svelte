@@ -9,6 +9,12 @@
   export let message = ""
 </script>
 
+<div class="error-screen">
+  <div class="box">
+    <div class="header">ERROR: {message}</div>
+  </div>
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -34,9 +40,3 @@
     }
   }
 </style>
-
-<div class="error-screen">
-  <div class="box">
-    <div class="header">ERROR: {message}</div>
-  </div>
-</div>

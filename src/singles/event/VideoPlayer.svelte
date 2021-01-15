@@ -6,13 +6,33 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
-  import {fade} from 'svelte/transition'
-  import { quartOut } from 'svelte/easing'
+  import { fade } from "svelte/transition"
+  import { quartOut } from "svelte/easing"
   import getVideoId from "get-video-id"
 
   // *** PROPS
   export let streamUrl = ""
 </script>
+
+<div class="embed" in:fade={{ duration: 300, easing: quartOut }}>
+  {#if streamUrl.includes("vimeo")}
+    <div class="vimeo-container">
+      <iframe
+        width="720"
+        height="480"
+        src={"https://player.vimeo.com/video/" +
+          getVideoId(streamUrl).id +
+          "?autoplay=1"}
+        frameborder="no"
+        scrolling="no"
+        byline="false"
+        color="#ffffff"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      />
+    </div>
+  {/if}
+</div>
 
 <style lang="scss">
   @import "../../variables.scss";
@@ -42,20 +62,3 @@
     }
   }
 </style>
-
-<div class="embed" in:fade={{duration: 300, easing: quartOut}}>
-  {#if streamUrl.includes('vimeo')}
-    <div class="vimeo-container">
-      <iframe
-        width="720"
-        height="480"
-        src={'https://player.vimeo.com/video/' + getVideoId(streamUrl).id + '?autoplay=1'}
-        frameborder="no"
-        scrolling="no"
-        byline="false"
-        color="#ffffff"
-        allow="autoplay; fullscreen"
-        allowfullscreen />
-    </div>
-  {/if}
-</div>

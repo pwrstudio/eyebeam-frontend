@@ -9,6 +9,14 @@
   export let caseStudy = ""
 </script>
 
+<div class="inventory-message">
+  <div class="color-icon {caseStudy.category}" />
+  <div class="inventory-message-inner">
+    You are holding: <strong>{caseStudy.name}</strong>
+  </div>
+  <span class="button">DROP</span>
+</div>
+
 <style lang="scss">
   @import "./variables.scss";
 
@@ -16,16 +24,16 @@
     display: flex;
     align-items: center;
 
-    .inventory-message-inner{
+    .inventory-message-inner {
       margin-right: $SPACE_S;
     }
 
     @include screen-size("small") {
-      font-size:$FONT_SIZE_SMALL;
+      font-size: $FONT_SIZE_SMALL;
       align-items: baseline;
       justify-content: space-between;
 
-      .inventory-message-inner{
+      .inventory-message-inner {
         display: inline-block;
         white-space: nowrap;
         max-width: 55vw;
@@ -33,8 +41,6 @@
         text-overflow: ellipsis;
         margin-right: 0;
       }
-
-      
     }
 
     .color-icon {
@@ -76,11 +82,3 @@
     }
   }
 </style>
-
-<div class="inventory-message">
-  <div class="color-icon {caseStudy.category}" />
-  <div class="inventory-message-inner">
-    You are holding: <strong>{caseStudy.name}</strong>
-  </div>
-  <span class="button">DROP</span>
-</div>

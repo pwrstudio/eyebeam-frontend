@@ -52,6 +52,18 @@
   // setInterval(getPrivateMessages, 10000)
 </script>
 
+<div class="messaging-container">
+  <div class="header">Messaging</div>
+  <div class="message-container" class:expanded={mobileExpanded}>
+    <div class="new-message-container">
+      <NewPrivateMessage />
+    </div>
+    {#each privateMessages as message (message.id)}
+      <PrivateMessageThread {message} />
+    {/each}
+  </div>
+</div>
+
 <style lang="scss">
   @import "../variables.scss";
 
@@ -101,15 +113,3 @@
     }
   }
 </style>
-
-<div class="messaging-container">
-  <div class="header">Messaging</div>
-  <div class="message-container" class:expanded={mobileExpanded}>
-    <div class="new-message-container">
-      <NewPrivateMessage />
-    </div>
-    {#each privateMessages as message (message.id)}
-      <PrivateMessageThread {message} />
-    {/each}
-  </div>
-</div>
