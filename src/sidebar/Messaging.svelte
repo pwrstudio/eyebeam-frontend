@@ -32,7 +32,7 @@
         get($authenticatedUserInformation, "username", false)
       ) {
         let username = $authenticatedUserInformation.username
-        fetch("https://sso.post-rational.org/messages?user=" + username)
+        fetch("https://sso.eyebeamtrust.com/messages?user=" + username)
           .then(response => response.json())
           .then(data => {
             privateMessages = data.messages

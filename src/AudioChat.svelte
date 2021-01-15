@@ -25,7 +25,7 @@
 
   // *** CONSTANTS
   const dispatch = createEventDispatcher()
-  const server = "https://janus.post-rational.org"
+  const server = "https://janus.eyebeamtrust.com"
   const opaqueId = "audiobridgetest-" + Janus.randomString(12)
 
   // *** VARIABLES
