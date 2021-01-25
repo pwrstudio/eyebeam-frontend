@@ -4,6 +4,7 @@
   //  USERNAME DIALOG
   //
   // # # # # # # # # # # # # #
+
   // *** IMPORTS
   import { onMount, createEventDispatcher } from "svelte"
   import { fade } from "svelte/transition"
@@ -51,7 +52,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .username-dialog {
     position: fixed;
@@ -89,7 +91,7 @@
         background: transparent;
         border: 1px solid $COLOR_DARK;
         color: $COLOR_DARK;
-        border-radius: $border_radius;
+        border-radius: $BORDER_RADIUS;
         padding: $SPACE_S $SPACE_M;
         outline: none;
         height: 30px;
@@ -127,7 +129,7 @@
         width: 100px;
         background: transparent;
         color: $COLOR_DARK;
-        border-radius: $border_radius;
+        border-radius: $BORDER_RADIUS;
         outline: none;
         cursor: pointer;
         height: 30px;
@@ -145,7 +147,7 @@
         background: transparent;
         border: 1px solid $COLOR_DARK;
         color: $COLOR_DARK;
-        border-radius: $border_radius;
+        border-radius: $BORDER_RADIUS;
         outline: none;
         cursor: pointer;
         height: 30px;

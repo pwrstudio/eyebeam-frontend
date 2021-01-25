@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Seminar
+  //  SEMINAR
   //
   // # # # # # # # # # # # # #
 
@@ -10,7 +10,7 @@
   import { loadData, renderBlockText } from "../sanity.js"
 
   // *** COMPONENTS
-  import ParticipantsList from "../lists/ParticipantsList.svelte"
+  import ParticipantList from "../lists/ParticipantList.svelte"
 
   // *** GLOBAL
   import { QUERY } from "../global.js"
@@ -79,7 +79,7 @@
         <!-- PARTICIPANTS LIST -->
         <div class="participants-list">
           <div>Participants in seminar:</div>
-          <ParticipantsList
+          <ParticipantList
             participants={loadedParticipants}
             messaging={true}
             isSeminar={true}
@@ -91,7 +91,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .seminar-container {
     position: relative;
@@ -120,7 +121,7 @@
       height: calc(100% - 30px);
       overflow-y: auto;
       padding: $SPACE_S;
-      color: $COLOR_MID_2;
+      color: $COLOR_GREY_2;
       @include hide-scroll;
 
       @include screen-size("small") {
@@ -143,8 +144,8 @@
 
       a {
         color: $COLOR_LIGHT;
-        border: 1px solid $COLOR_MID_2;
-        border-radius: $border_radius;
+        border: 1px solid $COLOR_GREY_2;
+        border-radius: $BORDER_RADIUS;
         padding: $SPACE_S;
         text-decoration: none;
         float: left;

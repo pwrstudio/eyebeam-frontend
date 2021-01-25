@@ -4,20 +4,19 @@
   //  SCROLL-LIST
   //
   // # # # # # # # # # # # # #
+
   // *** IMPORTS
   import { onMount } from "svelte"
   import { tick } from "svelte/internal"
   import Flickity from "flickity"
-  import { navigate } from "svelte-routing"
   import get from "lodash/get"
   import { fade } from "svelte/transition"
 
   // *** GLOBAL
-  import { formattedDate } from "../global.js"
+  import { formatDate } from "../global.js"
 
   // COMPONENTS
-  import ParticipantsList from "./ParticipantsList.svelte"
-  import { window } from "lodash/_freeGlobal"
+  import ParticipantList from "./ParticipantList.svelte"
 
   // *** PROPS
   export let events = []
@@ -137,18 +136,15 @@
         <div class="inner">
           <div class="row">
             <div class="title">{event.title}</div>
-            <div class="date">{formattedDate(event.startDate)}</div>
+            <div class="date">{formatDate(event.startDate)}</div>
           </div>
           <div class="row">
             <div class="participants">
               {#if get(event, "moderators", false) && Array.isArray(event.moderators)}
-                <ParticipantsList
-                  participants={event.moderators}
-                  isModerators
-                />
+                <ParticipantList participants={event.moderators} isModerators />
               {/if}
               {#if get(event, "participants", false) && Array.isArray(event.participants)}
-                <ParticipantsList participants={event.participants} />
+                <ParticipantList participants={event.participants} />
               {/if}
             </div>
           </div>
@@ -160,10 +156,11 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
   .event-scroller {
     height: 80px;
-    border-bottom: 1px solid $COLOR_MID_1;
+    border-bottom: 1px solid $COLOR_GREY_1;
     position: fixed;
     top: 0px;
     width: 100%;
@@ -199,7 +196,7 @@
       display: inline-flex;
       padding: $SPACE_S;
       height: 80px;
-      border-right: 1px solid $COLOR_MID_1;
+      border-right: 1px solid $COLOR_GREY_1;
     }
 
     .fade {
@@ -243,19 +240,19 @@
           white-space: nowrap;
           overflow: hidden;
           flex-shrink: 4;
-          color: $COLOR_MID_2;
+          color: $COLOR_GREY_2;
         }
 
         .date {
           font-size: 90%;
           white-space: nowrap;
-          color: $COLOR_MID_2;
+          color: $COLOR_GREY_2;
           // word-spacing: -0.3em;
         }
 
         .participants {
           pointer-events: none;
-          color: $COLOR_MID_2;
+          color: $COLOR_GREY_2;
           font-size: $FONT_SIZE_SMALL;
         }
       }

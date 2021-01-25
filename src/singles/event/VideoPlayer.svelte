@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Video Player
+  //  VIDEO PLAYER
   //
   // # # # # # # # # # # # # #
 
@@ -16,7 +16,7 @@
 
 <div class="embed" in:fade={{ duration: 300, easing: quartOut }}>
   {#if streamUrl.includes("vimeo")}
-    <div class="vimeo-container">
+    <div class="video-container">
       <iframe
         width="720"
         height="480"
@@ -31,11 +31,25 @@
         allowfullscreen
       />
     </div>
+  {:else if streamUrl.includes("youtube") || streamUrl.includes("youtu.be")}
+    <div class="video-container">
+      <iframe
+        width="720"
+        height="480"
+        src={"https://www.youtube.com/embed/" +
+          getVideoId(streamUrl).id +
+          "?autoplay=1"}
+        frameborder="no"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      />
+    </div>
   {/if}
 </div>
 
 <style lang="scss">
-  @import "../../variables.scss";
+  @import "../../responsive.scss";
+  @import "../../world.theme.scss";
 
   .embed {
     width: 100%;
@@ -44,7 +58,7 @@
     justify-content: center;
     align-items: center;
 
-    .vimeo-container {
+    .video-container {
       position: relative;
       padding-bottom: 56.25%;
       height: 0;

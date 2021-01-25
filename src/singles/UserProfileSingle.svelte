@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Single User Profile
+  //  SINGLE USER PROFILE
   //
   // # # # # # # # # # # # # #
 
@@ -16,7 +16,7 @@
 
   // COMPONENTS
   import EventList from "../lists/EventList.svelte"
-  import CaseStudyList from "../lists/CaseStudyList.svelte"
+  import ProjectList from "../lists/ProjectList.svelte"
   import MetaData from "../MetaData.svelte"
 
   // *** STORES
@@ -26,7 +26,7 @@
   export let user = {}
 
   // *** VARIABLES
-  let relatedCaseStudies = false
+  let relatedProjects = false
   let relatedEvents = false
 
   const relatedContent = loadData(QUERY.CONNECTED_TO_USER, {
@@ -39,9 +39,7 @@
     // __ Filter related content by type
     if (relatedContent && Array.isArray(relatedContent)) {
       relatedEvents = relatedContent.filter(c => c._type == "event")
-      relatedCaseStudies = relatedContent.filter(
-        c => c._type == "caseStudyExhibition"
-      )
+      relatedProjects = relatedContent.filter(c => c._type == "project")
     }
   })
 </script>
@@ -106,16 +104,17 @@
     {/if}
   </div>
 
-  <!-- CONNECTED CASE STUDIES -->
-  <div class="connected-case-studies">
-    {#if relatedCaseStudies && Array.isArray(relatedCaseStudies) && relatedCaseStudies.length > 0}
-      <CaseStudyList caseStudies={relatedCaseStudies} related={true} />
+  <!-- CONNECTED PROJECTS -->
+  <div class="connected-projects">
+    {#if relatedProjects && Array.isArray(relatedProjects) && relatedProjects.length > 0}
+      <ProjectList projects={relatedProjects} related={true} />
     {/if}
   </div>
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .user-profile-single {
     .go-back {
@@ -124,14 +123,14 @@
       cursor: pointer;
       svg {
         path {
-          fill: $COLOR_MID_2;
-          transition: fill 0.3s $transition;
+          fill: $COLOR_GREY_2;
+          transition: fill 0.3s $STANDARD_TRANSITION;
         }
       }
       &:hover {
         svg {
           path {
-            fill: $COLOR_MID_3;
+            fill: $COLOR_GREY_3;
           }
         }
       }
@@ -140,14 +139,14 @@
     .user-profile-message {
       svg {
         path {
-          fill: $COLOR_MID_2;
-          transition: fill 0.3s $transition;
+          fill: $COLOR_GREY_2;
+          transition: fill 0.3s $STANDARD_TRANSITION;
         }
       }
       &:hover {
         svg {
           path {
-            fill: $COLOR_MID_3;
+            fill: $COLOR_GREY_3;
           }
         }
       }
@@ -164,7 +163,7 @@
 
       .participants {
         margin-top: $SPACE_XS;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
         font-family: $MONO_STACK;
         font-size: $FONT_SIZE_SMALL;
         display: inline-block;
@@ -172,7 +171,7 @@
     }
 
     .divider {
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       width: 100%;
     }
 
@@ -182,7 +181,7 @@
       padding: $SPACE_M;
     }
 
-    .connected-case-studies {
+    .connected-projects {
       padding: $SPACE_M;
       padding-top: 0;
     }

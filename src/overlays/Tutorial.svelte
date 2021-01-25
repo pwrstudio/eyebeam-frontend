@@ -1,15 +1,15 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  CARD
+  //  TUTORIAL CARD
   //
   // # # # # # # # # # # # # #
 
   // *** IMPORT
-  import { urlFor, renderBlockText } from "../sanity.js"
-  import get from "lodash/get"
   import { fade } from "svelte/transition"
+  import { urlFor, renderBlockText } from "../sanity.js"
   import { links } from "svelte-routing"
+  import get from "lodash/get"
 
   // *** PROPS
   export let card = {}
@@ -80,7 +80,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .tutorial-wrap-inner {
     top: 0;
@@ -94,7 +95,7 @@
   }
   .tutorial {
     font-size: $FONT_SIZE_MEDIUM;
-    font-family: $HERSHEY_DASHED;
+    font-family: $SANS_STACK;
     padding: $SPACE_L $SPACE_L $SPACE_L * 3 $SPACE_L;
     margin: 0 auto;
     background: $COLOR_LIGHTBLUE;
@@ -185,7 +186,7 @@
     }
 
     .tutorial-slide {
-      font-family: $HERSHEY_DASHED;
+      font-family: $SANS_STACK;
       width: 90%;
       min-height: 30%;
       text-align: left;
@@ -206,8 +207,8 @@
         padding: $SPACE_S $SPACE_M;
         background: $COLOR_LIGHT;
         font-family: $MONO_STACK;
-        transition: background 150ms $transition;
-        border-radius: $border_radius;
+        transition: background 150ms $STANDARD_TRANSITION;
+        border-radius: $BORDER_RADIUS;
         cursor: pointer;
         user-select: none;
         border: 1px solid $COLOR_DARK;
@@ -216,7 +217,7 @@
         letter-spacing: 0.05em;
 
         &:hover {
-          background: $COLOR_MID_15;
+          background: $COLOR_GREY_15;
         }
 
         &.back {
@@ -240,10 +241,10 @@
       position: absolute;
       top: 2px;
       right: $SPACE_XS;
-      fill: $COLOR_MID_2;
+      fill: $COLOR_GREY_2;
       cursor: pointer;
       text-decoration: none;
-      transition: all 0.3s $transition;
+      transition: all 0.3s $STANDARD_TRANSITION;
       z-index: 10000;
 
       @include screen-size("small") {
@@ -256,7 +257,7 @@
       }
 
       &:hover {
-        fill: $COLOR_MID_3;
+        fill: $COLOR_GREY_3;
       }
     }
 

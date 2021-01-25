@@ -11,11 +11,10 @@
   import get from "lodash/get"
 
   // *** GLOBAL
-  import { formattedDate } from "../global.js"
+  import { formatDate } from "../global.js"
 
   // COMPONENTS
-  import ParticipantsList from "./ParticipantsList.svelte"
-  import { window } from "lodash/_freeGlobal"
+  import ParticipantList from "./ParticipantList.svelte"
 
   // *** PROPS
   export let events = []
@@ -43,8 +42,79 @@
   })
 </script>
 
+<div class="eventlist-container" style={"width:" + containerWidth + ";"}>
+  <!-- HEADER -->
+  <div class="event header" class:related>
+    <div class="inner">
+      <div class="row">
+        {#if related}
+          <div>Related Events</div>
+          <a href="/events" class="archive-link">Archived events</a>
+        {:else}
+          <a href="/events">EVENTS</a>
+          <a href="/events" class="archive-link">Archived events</a>
+          <!-- <div on:click={e => {showArchive = !showArchive}} class="archive-link">{showArchive ? 'Upcoming Events' : 'Event Archive'}</div> -->
+        {/if}
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="inner-container">
+    {#each showArchived ? archivedEvents : upcomingEvents as event, index (event._id)}
+      <a
+        class="event"
+        class:related
+        in:fade={{ delay: 100 * index }}
+        href={"/events/" + get(event, "slug.current", "")}>
+        <div class="inner">
+          <div class="row">
+            <div class="title">{event.title}</div>
+            <!-- <div class="elips">
+              .........................................................
+            </div> -->
+            <div class="date">{formatDate(event.startDate)}</div>
+          </div>
+          <div class="row">
+            <div class="participants">
+              {#if get(event, "moderators", false) && Array.isArray(event.moderators)}
+                <ParticipantList participants={event.moderators} isModerators />
+              {/if}
+              {#if get(event, "participants", false) && Array.isArray(event.participants)}
+                <ParticipantList participants={event.participants} />
+              {/if}
+            </div>
+          </div>
+        </div>
+      </a>
+    {/each}
+  </div>
+
+  <!-- FOOTER -->
+  <!-- {#if !related && exhibitions && exhibitions.length > 0}
+    <div class="footer">
+      {#each exhibitions.reverse() as exhibition, index (exhibition._id)}
+        <a
+          href={'/area/' + get(exhibition, 'area.slug.current', '')}
+          class="exhibition">
+          <div class="inner">
+            <div class="row">
+              <div class="title">{exhibition.title}</div>
+              <div class="elips">
+                .........................................................
+              </div>
+              <div class="date">{exhibition.period}</div>
+            </div>
+          </div>
+        </a>
+      {/each}
+    </div>
+  {/if} -->
+</div>
+
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .eventlist-container {
     height: 100%;
@@ -87,7 +157,7 @@
         display: inline-flex;
         padding-top: $SPACE_S;
         height: 80px;
-        border-right: 1px solid $COLOR_MID_1;
+        border-right: 1px solid $COLOR_GREY_1;
       }
 
       &.related {
@@ -126,56 +196,56 @@
             white-space: nowrap;
             overflow: hidden;
             flex-shrink: 4;
-            color: $COLOR_MID_2;
+            color: $COLOR_GREY_2;
           }
 
           .date {
-            font-family: $HERSHEY_SIMPLEX;
+            font-family: $SANS_STACK;
             font-weight: normal;
             font-size: 90%;
             // width: 11ch;
             white-space: nowrap;
-            text-align:right;
-            color: $COLOR_MID_3;
+            text-align: right;
+            color: $COLOR_GREY_3;
           }
 
           .participants {
-            font-family: $HERSHEY_SIMPLEX;
+            font-family: $SANS_STACK;
             font-weight: normal;
             pointer-events: none;
-            color: $COLOR_MID_3;
+            color: $COLOR_GREY_3;
             font-size: $FONT_SIZE_SMALL;
           }
         }
       }
 
-      transition: background 0.5s $transition;
+      transition: background 0.5s $STANDARD_TRANSITION;
 
       &:hover {
-        background: $COLOR_MID_1;
+        background: $COLOR_GREY_1;
       }
 
       &.header {
         height: 45px;
-        border-bottom: 1px solid $COLOR_MID_1;
+        border-bottom: 1px solid $COLOR_GREY_1;
         padding-bottom: $SPACE_S;
         min-height: unset;
         font-weight: bold;
 
-        a{
+        a {
           text-decoration: none;
-          &:hover{
+          &:hover {
             text-decoration: underline;
           }
         }
-        
+
         .archive-link {
           cursor: pointer;
           font-size: 90%;
           // word-spacing: -0.3em;
-          color: $COLOR_MID_2;
+          color: $COLOR_GREY_2;
           text-decoration: underline;
-          transition: color 250ms $transition;
+          transition: color 250ms $STANDARD_TRANSITION;
           &:hover {
             // color: $COLOR_DARK;
             text-decoration: none;
@@ -187,7 +257,7 @@
         }
 
         &.related {
-          border-bottom: 1px dotted $COLOR_MID_1;
+          border-bottom: 1px dotted $COLOR_GREY_1;
           @include screen-size("small") {
             display: block;
             position: static;
@@ -202,7 +272,7 @@
 
     .footer {
       height: $SPACE_S * 6;
-      border-top: 1px solid $COLOR_MID_1;
+      border-top: 1px solid $COLOR_GREY_1;
       padding-bottom: $SPACE_S;
       &:hover {
         background: unset;
@@ -229,7 +299,7 @@
           display: inline-flex;
           padding-top: $SPACE_S;
           height: 80px;
-          border-right: 1px solid $COLOR_MID_1;
+          border-right: 1px solid $COLOR_GREY_1;
         }
 
         .inner {
@@ -259,106 +329,34 @@
               white-space: nowrap;
               overflow: hidden;
               flex-shrink: 999999;
-              color: $COLOR_MID_2;
+              color: $COLOR_GREY_2;
             }
 
             .date {
-              font-family: $HERSHEY_SIMPLEX;
-            font-weight: normal;
-              font-size: 90%; 
+              font-family: $SANS_STACK;
+              font-weight: normal;
+              font-size: 90%;
               white-space: nowrap;
-              color: $COLOR_MID_3;
+              color: $COLOR_GREY_3;
               // word-spacing: -0.3em;
             }
 
             .participants {
-              font-family: $HERSHEY_SIMPLEX;
-            font-weight: normal;
+              font-family: $SANS_STACK;
+              font-weight: normal;
               pointer-events: none;
-              color: $COLOR_MID_3;
+              color: $COLOR_GREY_3;
               font-size: $FONT_SIZE_SMALL;
             }
           }
         }
 
-        transition: background 0.5s $transition;
+        transition: background 0.5s $STANDARD_TRANSITION;
 
         &:hover {
-          background: $COLOR_MID_1;
+          background: $COLOR_GREY_1;
         }
       }
     }
   }
 </style>
-
-<div class="eventlist-container" style={'width:' + containerWidth + ';'}>
-  <!-- HEADER -->
-  <div class="event header" class:related>
-    <div class="inner">
-      <div class="row">
-        {#if related}
-          <div>Related Events</div>
-          <a href="/events" class="archive-link">Archived streams</a>
-        {:else}
-          <a href="/events">EVENTS</a>
-          <a href="/events" class="archive-link">Archived streams</a>
-          <!-- <div on:click={e => {showArchive = !showArchive}} class="archive-link">{showArchive ? 'Upcoming Events' : 'Event Archive'}</div> -->
-        {/if}
-      </div>
-    </div>
-  </div>
-
-  <!-- EVENTS -->
-  <div class="inner-container">
-    {#each showArchived ? archivedEvents : upcomingEvents as event, index (event._id)}
-      <a
-        class="event"
-        class:related
-        in:fade={{ delay: 100 * index }}
-        href={'/events/' + get(event, 'slug.current', '')}>
-        <div class="inner">
-          <div class="row">
-            <div class="title">{event.title}</div>
-            <!-- <div class="elips">
-              .........................................................
-            </div> -->
-            <div class="date">{formattedDate(event.startDate)}</div>
-          </div>
-          <div class="row">
-            <div class="participants">
-              {#if get(event, 'moderators', false) && Array.isArray(event.moderators)}
-                <ParticipantsList
-                  participants={event.moderators}
-                  isModerators />
-              {/if}
-              {#if get(event, 'participants', false) && Array.isArray(event.participants)}
-                <ParticipantsList participants={event.participants} />
-              {/if}
-            </div>
-          </div>
-        </div>
-      </a>
-    {/each}
-  </div>
-
-  <!-- FOOTER -->
-  <!-- {#if !related && exhibitions && exhibitions.length > 0}
-    <div class="footer">
-      {#each exhibitions.reverse() as exhibition, index (exhibition._id)}
-        <a
-          href={'/area/' + get(exhibition, 'area.slug.current', '')}
-          class="exhibition">
-          <div class="inner">
-            <div class="row">
-              <div class="title">{exhibition.title}</div>
-              <div class="elips">
-                .........................................................
-              </div>
-              <div class="date">{exhibition.period}</div>
-            </div>
-          </div>
-        </a>
-      {/each}
-    </div>
-  {/if} -->
-</div>

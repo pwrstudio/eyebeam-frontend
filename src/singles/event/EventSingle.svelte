@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Single Event
+  //  SINGLE EVENT
   //
   // # # # # # # # # # # # # #
 
@@ -12,12 +12,12 @@
   import { links } from "svelte-routing"
 
   // *** COMPONENTS
-  import ParticipantsList from "../../lists/ParticipantsList.svelte"
-  import CaseStudyList from "../../lists/CaseStudyList.svelte"
+  import ParticipantList from "../../lists/ParticipantList.svelte"
+  import ProjectList from "../../lists/ProjectList.svelte"
   import MetaData from "../../MetaData.svelte"
 
   // *** GLOBAL
-  import { formattedDate } from "../../global.js"
+  import { formatDate } from "../../global.js"
 
   // *** PROPS
   export let event = {}
@@ -52,21 +52,21 @@
     <!-- PARTICIPANTS -->
     <div class="participants">
       {#if get(event, "moderators", false) && Array.isArray(event.moderators)}
-        <ParticipantsList
+        <ParticipantList
           participants={event.moderators}
           isModerators
           messaging={true}
         />
       {/if}
       {#if get(event, "participants", false) && Array.isArray(event.participants)}
-        <ParticipantsList participants={event.participants} messaging={true} />
+        <ParticipantList participants={event.participants} messaging={true} />
       {/if}
     </div>
   </div>
   <div class="divider" />
 
   <!-- DATE -->
-  <div class="date">{formattedDate(event.startDate)}</div>
+  <div class="date">{formatDate(event.startDate)}</div>
   <div class="divider" />
 
   <!-- TEXT -->
@@ -78,15 +78,16 @@
   {/if}
 
   <!-- CONNECTED CASE STUDIES -->
-  <div class="connected-case-studies">
-    {#if Array.isArray(get(event, "connectedCaseStudies")) && event.connectedCaseStudies.length > 0}
-      <CaseStudyList caseStudies={event.connectedCaseStudies} related={true} />
+  <div class="connected-projects">
+    {#if Array.isArray(get(event, "connectedProjects")) && event.connectedProjects.length > 0}
+      <ProjectList projects={event.connectedProjects} related={true} />
     {/if}
   </div>
 </div>
 
 <style lang="scss">
-  @import "../../variables.scss";
+  @import "../../responsive.scss";
+  @import "../../world.theme.scss";
 
   .event-single {
     .go-back {
@@ -95,14 +96,14 @@
       cursor: pointer;
       svg {
         path {
-          fill: $COLOR_MID_2;
-          transition: fill 0.3s $transition;
+          fill: $COLOR_GREY_2;
+          transition: fill 0.3s $STANDARD_TRANSITION;
         }
       }
       &:hover {
         svg {
           path {
-            fill: $COLOR_MID_3;
+            fill: $COLOR_GREY_3;
           }
         }
       }
@@ -119,7 +120,7 @@
 
       .participants {
         margin-top: $SPACE_XS;
-        color: $COLOR_MID_3;
+        color: $COLOR_GREY_3;
         font-family: $MONO_STACK;
         font-size: $FONT_SIZE_SMALL;
         display: inline-block;
@@ -127,7 +128,7 @@
     }
 
     .divider {
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       width: 100%;
     }
 
@@ -152,7 +153,7 @@
 
     @include text;
 
-    .connected-case-studies {
+    .connected-projects {
       padding: $SPACE_M;
     }
   }

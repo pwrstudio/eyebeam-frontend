@@ -36,9 +36,9 @@ export const QUERY = {
   GRAPHICS_SETTINGS:
     "*[_id == 'graphics-settings']{..., mapLink->{'mainImage': mainImage,'miniImage': miniImage,'pathfindingGridUrl': pathfindingGrid.asset->url}, activeAvatars[]->{title, _id, notRandom, 'spriteJsonURL': spriteJson.asset->url}}[0]",
   EXHIBITIONS:
-    "*[_type == 'exhibition']{..., area->{slug,name}, participants[]->{slug,name,username}, connectedCaseStudies[]->{...,participants[]->{slug,name,username}}}",
+    "*[_type == 'exhibition']{..., area->{slug,name}, participants[]->{slug,name,username}, connectedProjects[]->{...,participants[]->{slug,name,username}}}",
   EVENTS:
-    "*[_type == 'event']{..., moderators[]->{slug,name,username}, participants[]->{slug,name,username}, connectedCaseStudies[]->{...,participants[]->{slug,name,username}}} | order(startDate asc)",
+    "*[_type == 'event']{..., moderators[]->{slug,name,username}, participants[]->{slug,name,username}, connectedProjects[]->{...,participants[]->{slug,name,username}}} | order(startDate asc)",
   USERS: "*[_type == 'participant']{...,avatarLink->{'iconUrl': rest[0].asset->url}}",
   PAGES: "*[_type == 'page']",
   SEMINAR: "*[_type == 'seminar' && slug.current == $slug][0]",
@@ -47,12 +47,12 @@ export const QUERY = {
     "*[_type == 'participant' && username == $username]{..., seminarLink->{...}}[0]",
   AUDIO_INSTALLATIONS:
     "*[_type == 'audioInstallation']{..., participants[]->{slug,name,username}, 'audioURL': soundFile.asset->url,spriteLink->{spritesheet, 'spriteJsonURL': spriteJson.asset->url}}",
-  CASE_STUDIES:
-    "*[_type in ['caseStudyExhibition']]{..., connectedEvents[]->{...,moderators[]->{slug,name,username}, participants[]->{slug,name,username}}, participants[]->{slug,name,username}, spriteLink->{spritesheet, 'spriteJsonURL': spriteJson.asset->url}}",
+  PROJECTS:
+    "*[_type in ['project']]{..., connectedEvents[]->{...,moderators[]->{slug,name,username}, participants[]->{slug,name,username}}, participants[]->{slug,name,username}, spriteLink->{spritesheet, 'spriteJsonURL': spriteJson.asset->url}}",
   LAND_MARKS:
     "*[_type == 'landmark']{..., 'spriteJsonURL': spriteJson.asset->url}",
   ACTIVE_STREAMS:
-    "*[_id == 'active-streams']{..., mainStreamEvent->{..., moderators[]->{slug,name,username}, participants[]->{slug,name,username}, connectedCaseStudies[]->{...,participants[]->{slug,name,username}}}}[0]",
+    "*[_id == 'active-streams']{..., mainStreamEvent->{..., moderators[]->{slug,name,username}, participants[]->{slug,name,username}, connectedProjects[]->{...,participants[]->{slug,name,username}}}}[0]",
   CONNECTED_TO_USER: "*[participants[]._ref == $id || moderators[]._ref == $id]{..., moderators[]->{...}, participants[]->{...}} | order(startDate asc)",
   GLOBAL_SETTINGS: "*[_id == 'global-settings']{..., welcomeCard->{...}}[0]",
   AREAS: "*[_type == 'area']{..., informationCard->{...}}",
@@ -81,7 +81,7 @@ export const TEXT_STYLE_AVATAR_AUTHENTICATED = {
   wordWrapWidth: 300,
 }
 
-export const TEXT_STYLE_CASE_STUDY = {
+export const TEXT_STYLE_PROJECT = {
   fontFamily: "hersheyduplex",
   fontWeight: "bold",
   fontSize: 14,
@@ -91,10 +91,6 @@ export const TEXT_STYLE_CASE_STUDY = {
   wordWrapWidth: 300,
 }
 
-// const mainFormat = "MMM dd yyyy – HH:mm"
-// const mainFormat = "MMM dd – HH:mm"
-// const mainFormat = "HH:mm 'CET,' EEE MMM dd"
-// const mainFormat = 'HH:mm (z) E MMM dd'
 const mainFormat = 'HH:mm z, dd MMM DD'
 
 const intlFormat = new Intl.DateTimeFormat('en-DE', {
@@ -106,7 +102,7 @@ const intlFormat = new Intl.DateTimeFormat('en-DE', {
   timeZone: 'CET',
 })
 
-export const formattedDate = (start, end) => {
+export const formatDate = (start, end) => {
   try {
     if (!start) {
       return false

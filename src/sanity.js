@@ -114,7 +114,7 @@ const serializers = {
     },
     embedBlock: props => {
       // YOUTUBE
-      if (get(props, "node.url", "").includes("youtube")) {
+      if (get(props, "node.url", "").includes("youtube") || get(props, "node.url", "").includes("youtu.be")) {
         return h("figure", { className: "youtube" }, [
           h(
             "div",

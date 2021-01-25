@@ -16,7 +16,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .error-screen {
     position: fixed;

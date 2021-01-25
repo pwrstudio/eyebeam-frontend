@@ -1,24 +1,25 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Inventory Message
+  //  INVENTORY MESSAGE
   //
   // # # # # # # # # # # # # #
 
   // *** PROPS
-  export let caseStudy = ""
+  export let project = ""
 </script>
 
 <div class="inventory-message">
-  <div class="color-icon {caseStudy.category}" />
+  <div class="color-icon {project.category}" />
   <div class="inventory-message-inner">
-    You are holding: <strong>{caseStudy.name}</strong>
+    You are holding: <strong>{project.name}</strong>
   </div>
   <span class="button">DROP</span>
 </div>
 
 <style lang="scss">
-  @import "./variables.scss";
+  @import "./responsive.scss";
+  @import "./world.theme.scss";
 
   .inventory-message {
     display: flex;
@@ -69,9 +70,9 @@
     .button {
       padding-left: $SPACE_M;
       padding-right: $SPACE_M;
-      border: 1px solid $COLOR_MID_2;
-      color: $COLOR_MID_2;
-      border-radius: $border_radius;
+      border: 1px solid $COLOR_GREY_2;
+      color: $COLOR_GREY_2;
+      border-radius: $BORDER_RADIUS;
       text-align: center;
 
       &:hover {

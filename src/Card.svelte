@@ -47,7 +47,8 @@
 </div>
 
 <style lang="scss">
-  @import "./variables.scss";
+  @import "./responsive.scss";
+  @import "./world.theme.scss";
 
   .card {
     padding: $SPACE_S;
@@ -59,14 +60,14 @@
 
       .nav-button {
         padding: 10px;
-        background: $COLOR_MID_1;
+        background: $COLOR_GREY_1;
 
-        border-radius: $border_radius;
+        border-radius: $BORDER_RADIUS;
         cursor: pointer;
         user-select: none;
 
         &:hover {
-          background: $COLOR_MID_15;
+          background: $COLOR_GREY_15;
         }
 
         &.back {

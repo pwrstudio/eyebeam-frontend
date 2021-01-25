@@ -1,9 +1,10 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Menu
+  //  MENU
   //
   // # # # # # # # # # # # # #
+
   // *** IMPORTS
   import { createEventDispatcher } from "svelte"
 
@@ -27,7 +28,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .menu-container {
     height: 100%;

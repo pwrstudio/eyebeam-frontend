@@ -1,9 +1,18 @@
 <script>
-  // # # # # # # # # # # # # #
+  // # # # # # # # # # # # # # # # # # #
   //
   //  METADATA
   //
-  // # # # # # # # # # # # # #
+  //  Sets page metadata dynamically based
+  //  on current post. For this to work
+  //  properly the site needs to be
+  //  prerendered for social-media bots
+  //  (eg. with prerender.io)
+  //
+  //
+  // # # # # # # # # # # # # # # # # # #
+
+  // *** IMPORTS
   import has from "lodash/has"
   import isArray from "lodash/isArray"
   import isEmpty from "lodash/isEmpty"
@@ -18,6 +27,10 @@
   // *** PROPS
   export let post = {}
 
+  // *** VARIABLES
+  let title = ""
+  let description = ""
+  let image = ""
   let url = window.location
 
   const stripHtml = html => {
@@ -26,10 +39,7 @@
     return tmp.textContent || tmp.innerText || ""
   }
 
-  let title = ""
-  let description = ""
-  let image = ""
-
+  // Set title
   $: {
     if (has(post, "name") && !isEmpty(post.name)) {
       title = stripHtml(post.name) + " | " + $globalSettings.title
@@ -42,6 +52,7 @@
     }
   }
 
+  // Set description
   $: {
     if (has(post, "description") && post.description.length > 0) {
       description = truncate(post.description, {
@@ -71,6 +82,7 @@
     }
   }
 
+  // Set sharing image
   $: {
     image =
       has(post, "mainImage") && post.mainImage

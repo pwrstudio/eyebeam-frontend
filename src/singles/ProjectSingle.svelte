@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Single Case Study
+  //  SINGLE PROJECT
   //
   // # # # # # # # # # # # # #
 
@@ -12,22 +12,22 @@
   import { links } from "svelte-routing"
 
   // *** COMPONENTS
-  import ParticipantsList from "../lists/ParticipantsList.svelte"
+  import ParticipantList from "../lists/ParticipantList.svelte"
   import EventList from "../lists/EventList.svelte"
   import MaterialItem from "./MaterialItem.svelte"
   import MetaData from "../MetaData.svelte"
 
   // *** PROPS
-  export let caseStudy = {}
+  export let project = {}
 </script>
 
 <!-- METADATA -->
-<!-- <MetaData post={caseStudy} /> -->
+<!-- <MetaData post={project} /> -->
 
-<div class="case-study-single" in:fade use:links>
+<div class="project-single" in:fade use:links>
   <!-- HEADER -->
 
-  {#if caseStudy.title}
+  {#if project.title}
     <!-- BACK LINK -->
     <div
       class="go-back"
@@ -47,14 +47,14 @@
     </div>
     <div class="main-header">
       <!-- COLOR CODE  -->
-      <div class="color-icon {caseStudy.category}" />
+      <div class="color-icon {project.category}" />
       <!-- TITLE -->
-      <div class="title">{caseStudy.title}</div>
+      <div class="title">{project.title}</div>
       <!-- PARTICIPANTS -->
-      {#if get(caseStudy, "participants", false) && Array.isArray(caseStudy.participants)}
+      {#if get(project, "participants", false) && Array.isArray(project.participants)}
         <div class="participants">
-          <ParticipantsList
-            participants={caseStudy.participants}
+          <ParticipantList
+            participants={project.participants}
             messaging={true}
           />
         </div>
@@ -64,15 +64,15 @@
   {/if}
 
   <!-- TEXT -->
-  {#if Array.isArray(get(caseStudy, "content.content", false))}
+  {#if Array.isArray(get(project, "content.content", false))}
     <div class="text">
-      {@html renderBlockText(caseStudy.content.content)}
+      {@html renderBlockText(project.content.content)}
     </div>
     <div class="divider" />
   {/if}
 
   <!-- MATERIAL -->
-  {#if Array.isArray(caseStudy.material)}
+  {#if Array.isArray(project.material)}
     <div class="material">
       <div class="material-item header">
         <div class="row">
@@ -80,7 +80,7 @@
           <div class="format">Type</div>
         </div>
       </div>
-      {#each caseStudy.material as item (item._key)}
+      {#each project.material as item (item._key)}
         <MaterialItem {item} />
       {/each}
     </div>
@@ -88,31 +88,32 @@
   {/if}
 
   <!-- RELATED EVENTS -->
-  {#if Array.isArray(get(caseStudy, "connectedEvents", false))}
+  {#if Array.isArray(get(project, "connectedEvents", false))}
     <div class="related-events">
-      <EventList events={caseStudy.connectedEvents} related={true} />
+      <EventList events={project.connectedEvents} related={true} />
     </div>
   {/if}
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
-  .case-study-single {
+  .project-single {
     .go-back {
       padding-top: $SPACE_XS;
       padding-left: $SPACE_S;
       cursor: pointer;
       svg {
         path {
-          fill: $COLOR_MID_2;
-          transition: fill 0.3s $transition;
+          fill: $COLOR_GREY_2;
+          transition: fill 0.3s $STANDARD_TRANSITION;
         }
       }
       &:hover {
         svg {
           path {
-            fill: $COLOR_MID_3;
+            fill: $COLOR_GREY_3;
           }
         }
       }
@@ -152,7 +153,7 @@
 
       .participants {
         margin-top: $SPACE_XS;
-        color: $COLOR_MID_3;
+        color: $COLOR_GREY_3;
         font-family: $MONO_STACK;
         font-size: $FONT_SIZE_SMALL;
         display: inline-block;
@@ -160,7 +161,7 @@
     }
 
     .divider {
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       width: 100%;
     }
 
@@ -177,7 +178,6 @@
 
   .material-item {
     width: 100%;
-    // height: $ITEM_HEIGHT;
     background: $COLOR_LIGHT;
     color: $COLOR_DARK;
     display: block;
@@ -204,30 +204,28 @@
         white-space: nowrap;
         overflow: hidden;
         flex-shrink: 4;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
       }
 
       .format {
         white-space: nowrap;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
       }
     }
 
     cursor: pointer;
 
-    // transition: background 0.5s $transition;
-
     &:hover {
-      background: $COLOR_MID_1;
+      background: $COLOR_GREY_1;
     }
 
     &.header {
       padding-top: 0px;
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       cursor: default;
 
       .archive-link {
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
         text-decoration: underline;
       }
 

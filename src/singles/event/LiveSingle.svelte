@@ -12,8 +12,8 @@
   import { links } from "svelte-routing"
 
   // *** COMPONENTS
-  import ParticipantsList from "../../lists/ParticipantsList.svelte"
-  import CaseStudyList from "../../lists/CaseStudyList.svelte"
+  import ParticipantList from "../../lists/ParticipantList.svelte"
+  import ProjectList from "../../lists/ProjectList.svelte"
   import VideoPlayer from "./VideoPlayer.svelte"
 
   // *** GLOBAL
@@ -25,10 +25,10 @@
 
   let expanded = false
   let showVideo = true
-  let connectedCaseStudies = []
+  let connectedProjects = []
 
   if (event._id) {
-    connectedCaseStudies = loadData(QUERY.CONNECTED_CASE_STUDIES, {
+    connectedProjects = loadData(QUERY.CONNECTED_PROJECTS, {
       id: event._id,
     }).catch(err => {
       console.dir(err)
@@ -112,17 +112,14 @@
       <!-- PARTICIPANTS -->
       <div class="participants">
         {#if get(event, "moderators", false) && Array.isArray(event.moderators)}
-          <ParticipantsList
+          <ParticipantList
             participants={event.moderators}
             messaging={true}
             isModerators
           />
         {/if}
         {#if get(event, "participants", false) && Array.isArray(event.participants)}
-          <ParticipantsList
-            participants={event.participants}
-            messaging={true}
-          />
+          <ParticipantList participants={event.participants} messaging={true} />
         {/if}
       </div>
     </div>
@@ -138,12 +135,9 @@
       {/if}
 
       <!-- CONNECTED CASE STUDIES -->
-      <div class="connected-case-studies">
-        {#if Array.isArray(get(event, "connectedCaseStudies")) && event.connectedCaseStudies.length > 0}
-          <CaseStudyList
-            caseStudies={event.connectedCaseStudies}
-            related={true}
-          />
+      <div class="connected-projects">
+        {#if Array.isArray(get(event, "connectedProjects")) && event.connectedProjects.length > 0}
+          <ProjectList projects={event.connectedProjects} related={true} />
         {/if}
       </div>
     {/if}
@@ -151,7 +145,8 @@
 </div>
 
 <style lang="scss">
-  @import "../../variables.scss";
+  @import "../../responsive.scss";
+  @import "../../world.theme.scss";
 
   .event-single {
     .main-header {
@@ -170,10 +165,10 @@
         position: absolute;
         top: 8px;
         right: 40px + $SPACE_XS;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
         opacity: 0.4;
         cursor: pointer;
-        transition: opacity 0.3s $transition;
+        transition: opacity 0.3s $STANDARD_TRANSITION;
 
         &:hover {
           opacity: 0.7;
@@ -187,7 +182,7 @@
         color: #000000;
         opacity: 0.4;
         cursor: pointer;
-        transition: opacity 0.3s $transition;
+        transition: opacity 0.3s $STANDARD_TRANSITION;
         // font-size: 36px;
         // -webkit-text-stroke: 1px;
 
@@ -197,18 +192,18 @@
       }
 
       .participants {
-        font-family: $HERSHEY_SIMPLEX;
+        font-family: $SANS_STACK;
         font-weight: normal;
 
         margin-top: $SPACE_XS;
-        color: $COLOR_MID_3;
+        color: $COLOR_GREY_3;
         font-size: $FONT_SIZE_SMALL;
         display: inline-block;
       }
     }
 
     .divider {
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       width: 100%;
     }
 
@@ -233,7 +228,7 @@
 
     @include text;
 
-    .connected-case-studies {
+    .connected-projects {
       padding: $SPACE_M;
     }
   }

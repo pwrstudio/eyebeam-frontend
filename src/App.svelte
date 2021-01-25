@@ -1,9 +1,9 @@
 <script>
-  // # # # # # # # # # # # # #
+  // # # # # # # # # # # # # # #
   //
-  //  TSoaP Client
+  //  TRUST ENVIRONMENT CLIENT
   //
-  // # # # # # # # # # # # # #
+  // # # # # # # # # # # # # # #
 
   // IMPORTS
   import { Router, Route } from "svelte-routing"

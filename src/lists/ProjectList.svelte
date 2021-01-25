@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Case Study List
+  //  PROJECTS LIST
   //
   // # # # # # # # # # # # # #
 
@@ -11,10 +11,10 @@
   import { renderBlockText } from "../sanity.js"
 
   // COMPONENTS
-  import ParticipantsList from "./ParticipantsList.svelte"
+  import ParticipantList from "./ParticipantList.svelte"
 
   // *** PROPS
-  export let caseStudies = []
+  export let projects = []
   export let related = false
 
   // *** STORES
@@ -22,15 +22,10 @@
 
   // *** VARIABLES
   let filterTerm = ""
-  let filteredCaseStudies = []
-  let orderedCaseStudies = {}
+  let filteredProjects = []
+  let orderedProjects = {}
   let fuseList = {}
   let sortOrder = "title"
-
-  const fuseOptions = {
-    threshold: 0.2,
-    keys: ["title", "category", "participants.name"],
-  }
 
   const titleSort = (a, b) => {
     const textA = a.title ? a.title.toUpperCase() : "Undefined"
@@ -44,27 +39,34 @@
     return textA < textB ? -1 : textA > textB ? 1 : 0
   }
 
-  orderedCaseStudies["title"] = [...caseStudies].sort(titleSort)
-  orderedCaseStudies["seminar"] = [...caseStudies].sort(seminarSort)
+  // Order project based on title or seminar
+  orderedProjects["title"] = [...projects].sort(titleSort)
+  orderedProjects["seminar"] = [...projects].sort(seminarSort)
 
-  fuseList["title"] = new Fuse(orderedCaseStudies["title"], fuseOptions)
-  fuseList["seminar"] = new Fuse(orderedCaseStudies["seminar"], fuseOptions)
+  // Options for the search library
+  const FUSE_OPTIONS = {
+    threshold: 0.2,
+    keys: ["title", "category", "participants.name"],
+  }
+
+  fuseList["title"] = new Fuse(orderedProjects["title"], FUSE_OPTIONS)
+  fuseList["seminar"] = new Fuse(orderedProjects["seminar"], FUSE_OPTIONS)
 
   // FILTER
   $: {
     if (filterTerm) {
-      filteredCaseStudies = fuseList[sortOrder]
+      filteredProjects = fuseList[sortOrder]
         .search(filterTerm)
         .map(hit => hit.item)
     } else {
-      filteredCaseStudies = orderedCaseStudies[sortOrder]
+      filteredProjects = orderedProjects[sortOrder]
     }
   }
 </script>
 
-<div class="case-study-container">
+<div class="project-container">
   <!-- HEADER -->
-  <div class="case-study-item header" class:related>
+  <div class="project-item header" class:related>
     <div class="inner">
       <div class="row">
         <div>{related ? "Connected Projects" : "Projects"}</div>
@@ -74,9 +76,9 @@
 
   {#if !related}
     <!-- TEXT -->
-    {#if Array.isArray(get($globalSettings, "caseStudyOverview.content", false))}
+    {#if Array.isArray(get($globalSettings, "projectOverview.content", false))}
       <div class="description">
-        {@html renderBlockText($globalSettings.caseStudyOverview.content)}
+        {@html renderBlockText($globalSettings.projectOverview.content)}
       </div>
     {/if}
     <!-- TOOLBAR -->
@@ -103,23 +105,23 @@
     </div>
   {/if}
   <!-- CASE STUDIES -->
-  {#each related ? caseStudies : filteredCaseStudies as caseStudy, index (caseStudy._id)}
+  {#each related ? projects : filteredProjects as project, index (project._id)}
     <a
-      class="case-study-item"
+      class="project-item"
       class:related
-      href={"/projects/" + get(caseStudy, "slug.current", "")}>
+      href={"/projects/" + get(project, "slug.current", "")}>
       <div class="inner">
-        <div class="color-icon {caseStudy.category}" />
+        <div class="color-icon {project.category}" />
         <div class="mid-section">
-          <div class="title">{caseStudy.title}</div>
+          <div class="title">{project.title}</div>
           <div class="participants">
-            {#if get(caseStudy, "participants", false) && Array.isArray(caseStudy.participants)}
-              <ParticipantsList participants={caseStudy.participants} />
+            {#if get(project, "participants", false) && Array.isArray(project.participants)}
+              <ParticipantList participants={project.participants} />
             {/if}
           </div>
         </div>
         <div class="date">
-          {#if caseStudy.category}{caseStudy.category}{/if}
+          {#if project.category}{project.category}{/if}
         </div>
       </div>
     </a>
@@ -127,21 +129,21 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
-  .case-study-container {
+  .project-container {
     height: 100%;
     color: $COLOR_DARK;
     font-family: $MONO_STACK;
     font-size: $FONT_SIZE_BASE;
     background: $COLOR_LIGHT;
 
-    .case-study-item {
+    .project-item {
       padding: 0px $SPACE_S;
       padding-top: $SPACE_S;
       padding-bottom: $SPACE_S;
       width: 100%;
-      // min-height: $ITEM_HEIGHT;
       background: $COLOR_LIGHT;
       color: $COLOR_DARK;
       display: inline-block;
@@ -186,27 +188,27 @@
           .participants {
             font-family: $MONO_STACK;
             pointer-events: none;
-            color: $COLOR_MID_2;
+            color: $COLOR_GREY_2;
             font-size: $FONT_SIZE_SMALL;
           }
         }
 
         .date {
           white-space: nowrap;
-          color: $COLOR_MID_2;
+          color: $COLOR_GREY_2;
           float: right;
         }
       }
 
-      transition: background 0.5s $transition;
+      transition: background 0.5s $STANDARD_TRANSITION;
 
       &:hover {
-        background: $COLOR_MID_1;
+        background: $COLOR_GREY_1;
       }
 
       &.header {
         height: 45px;
-        border-bottom: 1px solid $COLOR_MID_1;
+        border-bottom: 1px solid $COLOR_GREY_1;
         background-color: white;
         // word-spacing: -0.3em;
         &:hover {
@@ -219,7 +221,7 @@
           }
         }
         .archive-link {
-          color: $COLOR_MID_2;
+          color: $COLOR_GREY_2;
           text-decoration: underline;
         }
 
@@ -251,7 +253,7 @@
       height: 45px;
       padding: $SPACE_S;
       font-size: $FONT_SIZE_SMALL;
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       margin-bottom: $SPACE_S;
 
       .sort {
@@ -277,7 +279,7 @@
         svg {
           margin-right: $SPACE_XS;
           path {
-            color: $COLOR_MID_1;
+            color: $COLOR_GREY_1;
           }
         }
         input {

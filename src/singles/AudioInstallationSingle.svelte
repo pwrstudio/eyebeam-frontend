@@ -1,9 +1,9 @@
 <script>
-  // # # # # # # # # # # # # #
+  // # # # # # # # # # # # # # #
   //
-  //  Single Audio Installation
+  //  SINGLE AUDIO INSTALLATION
   //
-  // # # # # # # # # # # # # #
+  // # # # # # # # # # # # # # #
 
   // *** IMPORTS
   import get from "lodash/get"
@@ -12,7 +12,7 @@
   import { links } from "svelte-routing"
 
   // *** COMPONENTS
-  import ParticipantsList from "../lists/ParticipantsList.svelte"
+  import ParticipantList from "../lists/ParticipantList.svelte"
   import MetaData from "../MetaData.svelte"
 
   // *** PROPS
@@ -77,7 +77,7 @@
         <!-- PARTICIPANTS -->
         {#if get(audioInstallation, "participants", false) && Array.isArray(audioInstallation.participants)}
           <div class="participants">
-            <ParticipantsList
+            <ParticipantList
               participants={audioInstallation.participants}
               messaging={true}
             />
@@ -132,7 +132,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .audio-single {
     .main-header {
@@ -156,15 +157,15 @@
         position: absolute;
         top: $SPACE_S;
         right: $SPACE_S;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
         opacity: 0.4;
         cursor: pointer;
-        transition: opacity 0.3s $transition;
+        transition: opacity 0.3s $STANDARD_TRANSITION;
 
         // svg {
-        //   color: $COLOR_MID_2;
+        //   color: $COLOR_GREY_2;
         //   path {
-        //     stroke: $COLOR_MID_2;
+        //     stroke: $COLOR_GREY_2;
         //   }
         // }
 
@@ -175,8 +176,8 @@
 
       .participants {
         margin-top: $SPACE_XS;
-        color: $COLOR_MID_2;
-        font-family: $HERSHEY_SIMPLEX;
+        color: $COLOR_GREY_2;
+        font-family: $SANS_STACK;
         font-weight: normal;
         font-size: $FONT_SIZE_SMALL;
         display: inline-block;
@@ -184,7 +185,7 @@
     }
 
     .divider {
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       width: 100%;
     }
 
@@ -209,7 +210,7 @@
 
     @include text;
 
-    .connected-case-studies {
+    .connected-projects {
       padding: $SPACE_M;
     }
   }

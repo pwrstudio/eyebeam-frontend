@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Messaging
+  //  MESSAGING
   //
   // # # # # # # # # # # # # #
 
@@ -65,7 +65,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .messaging-container {
     position: relative;
@@ -97,7 +98,7 @@
       padding-top: $SPACE_S;
       padding-left: $SPACE_S;
       padding-right: $SPACE_S;
-      color: $COLOR_MID_2;
+      color: $COLOR_GREY_2;
       @include hide-scroll;
 
       @include screen-size("small") {

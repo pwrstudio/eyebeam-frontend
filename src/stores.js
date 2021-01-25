@@ -23,13 +23,8 @@ export const currentAreaObject = derived(
     ([$currentArea, $areaList]) => {
         let obj = {}
         if($areaList && Array.isArray($areaList)) {
-            // console.log('___ currentArea => color', HEX_MAP[COLORMAP[$currentArea]])
             obj = $areaList.find(a => a.color === HEX_MAP[COLORMAP[$currentArea]]) 
         }
-        // console.dir(obj)
-        // if(obj) {
-        //     console.log('___ currentArea =>', obj.title)
-        // }
         return obj
     }
   )
@@ -38,7 +33,6 @@ export const currentAreaObject = derived(
     [currentAreaObject],
     ([$currentAreaObject]) => {
         if($currentAreaObject) {
-            // console.log('___ $currentAudioRoom', parseInt(get($currentAreaObject, 'audioRoom', "1")))
             return parseInt(get($currentAreaObject, 'audioRoom', "1"))
         } else {
             return 0
@@ -50,7 +44,6 @@ export const currentAreaObject = derived(
     [currentAreaObject],
     ([$currentAreaObject]) => {
         if($currentAreaObject) {
-            // console.log('___ $currentTextRoom', parseInt(get($currentAreaObject, 'textRoom', "2")))
             return parseInt(get($currentAreaObject, 'textRoom', "2"))
         } else {
             return 0
@@ -62,7 +55,6 @@ export const currentAreaObject = derived(
     [currentAreaObject],
     ([$currentAreaObject]) => {
         if($currentAreaObject) {
-            // console.log('___ $currentVideoRoom', get($currentAreaObject, 'videoRoom', "none"))
             return get($currentAreaObject, 'videoRoom', "none")
         } else {
             return 0

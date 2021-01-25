@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Minimap
+  //  MINIMAP
   //
   // # # # # # # # # # # # # #
 
@@ -28,7 +28,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .map-container {
     height: 200px;
@@ -45,7 +46,7 @@
     .map-marker {
       height: 10px;
       width: 10px;
-      border-radius: $border_radius;
+      border-radius: $BORDER_RADIUS;
       background: white;
       position: absolute;
       top: 0;

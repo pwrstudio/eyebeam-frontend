@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  TSoaP World View
+  //  World View
   //
   // # # # # # # # # # # # # #
 
@@ -33,10 +33,10 @@
   // lists
   import EventList from "./lists/EventList.svelte"
   import EventListFull from "./lists/EventListFull.svelte"
-  import CaseStudyList from "./lists/CaseStudyList.svelte"
   import EventListSliderMobile from "./lists/EventListSliderMobile.svelte"
+  import ProjectList from "./lists/ProjectList.svelte"
   // singles
-  import CaseStudySingle from "./singles/CaseStudySingle.svelte"
+  import ProjectSingle from "./singles/ProjectSingle.svelte"
   import PageSingle from "./singles/PageSingle.svelte"
   import UserProfileSingle from "./singles/UserProfileSingle.svelte"
   import EventSingle from "./singles/event/EventSingle.svelte"
@@ -54,6 +54,9 @@
   import MetaData from "./MetaData.svelte"
   import Card from "./Card.svelte"
 
+  // *** CONFIGURATION
+  import { GAME_SERVER_URL, LINK_OUT, LINK_OUT_TEXT } from "./world.config.js"
+
   // *** GLOBAL
   import {
     nanoid,
@@ -64,8 +67,7 @@
     TEXT_ROOMS,
     TEXT_STYLE_AVATAR,
     TEXT_STYLE_AVATAR_AUTHENTICATED,
-    TEXT_STYLE_CASE_STUDY,
-    GAME_SERVER_URL,
+    TEXT_STYLE_PROJECT,
   } from "./global.js"
 
   // *** STORES
@@ -192,7 +194,7 @@
   const exhibitions = loadData(QUERY.EXHIBITIONS).catch(err => {
     console.log(err)
   })
-  const caseStudies = loadData(QUERY.CASE_STUDIES).catch(err => {
+  const projects = loadData(QUERY.PROJECTS).catch(err => {
     console.log(err)
   })
   const audioInstallations = loadData(QUERY.AUDIO_INSTALLATIONS).catch(err => {
@@ -399,7 +401,7 @@
           if (key === $localUserSessionID) {
             hideTarget()
             checkAudioProximity()
-            // User was walking towards a case study
+            // User was walking towards a project
             // if (intentToPickUp) {
             //   pickUpCaseStudy(intentToPickUp)
             // }
@@ -950,7 +952,7 @@
             // }
 
             // CASE STUDY => ADD
-            // gameRoom.state.caseStudies.onAdd = (caseStudy, sessionId) => {
+            // gameRoom.state.projects.onAdd = (caseStudy, sessionId) => {
             //   // console.log('loadingTimestamp', loadingTimestamp)
             //   // console.log('caseStudy.timestamp', caseStudy.timestamp)
             //   if (get(caseStudy, "timestamp", Date.now()) > loadingTimestamp) {
@@ -979,7 +981,7 @@
             // }
 
             // CASE STUDY => REMOVE
-            // gameRoom.state.caseStudies.onRemove = (caseStudy, sessionId) => {
+            // gameRoom.state.projects.onRemove = (caseStudy, sessionId) => {
             //   // !! TODO: PROPERLY REMOVE CASE STUDY
             // }
 
@@ -1035,13 +1037,13 @@
           })
       })
 
-      // __ Add exhibition (static) case studies
-      caseStudies.then(caseStudies => {
-        caseStudies
-          .filter(cs => cs._type === "caseStudyExhibition")
+      // __ Add exhibition (static) projects
+      projects.then(projects => {
+        projects
+          .filter(cs => cs._type === "project")
           .forEach((cs, i) => {
             const spriteUrl = get(cs, "spriteLink.spriteJsonURL", "")
-            const spriteId = "caseStudy-" + cs._id
+            const spriteId = "project-" + cs._id
             const csLoader = new PIXI.Loader()
             csLoader.add(spriteId, spriteUrl).load((loader, resources) => {
               const frames = new PIXI.AnimatedSprite(
@@ -1062,14 +1064,14 @@
               textContainer.addChild(txtBG, textSprite)
               textContainer.name = "text"
 
-              const caseStudyLocation = new PIXI.Container()
-              caseStudyLocation.addChild(frames)
-              caseStudyLocation.x = cs.x
-              caseStudyLocation.y = cs.y
-              caseStudyLocation.pivot.x = caseStudyLocation.width / 2
-              caseStudyLocation.pivot.y = caseStudyLocation.height / 2
-              caseStudyLocation.title = cs.title
-              caseStudyLocation.interactive = true
+              const projectLocation = new PIXI.Container()
+              projectLocation.addChild(frames)
+              projectLocation.x = cs.x
+              projectLocation.y = cs.y
+              projectLocation.pivot.x = projectLocation.width / 2
+              projectLocation.pivot.y = projectLocation.height / 2
+              projectLocation.title = cs.title
+              projectLocation.interactive = true
 
               const onDown = e => {
                 navigate("/projects/" + get(cs, "slug.current", false))
@@ -1079,23 +1081,23 @@
               const onEnter = e => {
                 gameContainer.style.cursor = "pointer"
                 textContainer.y =
-                  caseStudyLocation.height / 2 - textContainer.height / 2
+                  projectLocation.height / 2 - textContainer.height / 2
                 textContainer.x =
-                  -(textContainer.width / 2) + caseStudyLocation.width / 2
-                caseStudyLocation.addChild(textContainer)
+                  -(textContainer.width / 2) + projectLocation.width / 2
+                projectLocation.addChild(textContainer)
               }
 
               const onLeave = e => {
                 gameContainer.style.cursor = "crosshair"
-                caseStudyLocation.removeChild(textContainer)
+                projectLocation.removeChild(textContainer)
               }
 
-              caseStudyLocation.on("mousedown", onDown)
-              caseStudyLocation.on("touchstart", onDown)
-              caseStudyLocation.on("mouseover", onEnter)
-              caseStudyLocation.on("mouseout", onLeave)
+              projectLocation.on("mousedown", onDown)
+              projectLocation.on("touchstart", onDown)
+              projectLocation.on("mouseover", onEnter)
+              projectLocation.on("mouseout", onLeave)
 
-              exhibitionLayer.addChild(caseStudyLocation)
+              exhibitionLayer.addChild(projectLocation)
             })
           })
       })
@@ -1290,9 +1292,11 @@
         <div class="clock">
           <Clock />
         </div>
-        <div class="link-to-ac">
-          <a href="http://pohflepp.de/" target="_blank">to Sascha's website</a>
-        </div>
+        {#if LINK_OUT}
+          <div class="link-to-ac">
+            <a href={LINK_OUT} target="_blank">{LINK_OUT_TEXT}</a>
+          </div>
+        {/if}
         <div class="minimap">
           <MiniMap {miniImage} player={localPlayers[$localUserSessionID]} />
         </div>
@@ -1452,16 +1456,16 @@
         </svg>
       </a>
       <!-- CASE STUDIES -->
-      {#await caseStudies then caseStudies}
+      {#await projects then projects}
         {#if section === "projects"}
           {#if slug}
-            <!-- SINGLE CASE STUDY -->
-            <CaseStudySingle
-              caseStudy={caseStudies.find(cs => cs.slug.current === slug)}
+            <!-- SINGLE PROJECT-->
+            <ProjectSingle
+              project={projects.find(cs => cs.slug.current === slug)}
             />
           {:else}
-            <!-- LIST CASE STUDY -->
-            <CaseStudyList {caseStudies} />
+            <!-- LIST PROJECT -->
+            <ProjectList {projects} />
           {/if}
         {/if}
       {/await}
@@ -1721,7 +1725,8 @@
 {/if}
 
 <style lang="scss">
-  @import "./variables.scss";
+  @import "./responsive.scss";
+  @import "./world.theme.scss";
 
   * {
     box-sizing: border-box;
@@ -1739,7 +1744,7 @@
     bottom: $SPACE_S;
     left: $SPACE_S;
     padding: $SPACE_S;
-    border-radius: $border_radius;
+    border-radius: $BORDER_RADIUS;
     font-size: $FONT_SIZE_BASE;
     cursor: pointer;
     padding-left: $SPACE_M;
@@ -1764,7 +1769,7 @@
     top: $SPACE_S;
     left: $SPACE_S;
     padding: $SPACE_S;
-    border-radius: $border_radius;
+    border-radius: $BORDER_RADIUS;
     font-size: $FONT_SIZE_BASE;
     display: flex;
 
@@ -1792,7 +1797,7 @@
       display: none;
       font-size: $FONT_SIZE_SMALL;
       align-items: center;
-      // color: $COLOR_MID_2;
+      // color: $COLOR_GREY_2;
       svg {
         margin-left: $SPACE_S;
         fill: $COLOR_DARK;
@@ -1811,12 +1816,12 @@
       position: relative;
       top: -3px;
 
-      border: 1px solid $COLOR_MID_2;
-      color: $COLOR_MID_2;
+      border: 1px solid $COLOR_GREY_2;
+      color: $COLOR_GREY_2;
       font-size: $FONT_SIZE_SMALL;
       // transform: translate(4px, -4px);
 
-      border-radius: $border_radius;
+      border-radius: $BORDER_RADIUS;
       text-align: center;
 
       &:hover {
@@ -1866,16 +1871,16 @@
     line-height: 36px;
     font-size: 22px;
     text-align: center;
-    border-radius: $border_radius;
-    color: $COLOR_MID_2;
+    border-radius: $BORDER_RADIUS;
+    color: $COLOR_GREY_2;
     background: $COLOR_LIGHT;
     user-select: none;
     cursor: pointer;
-    transition: background 0.3s $transition;
+    transition: background 0.3s $STANDARD_TRANSITION;
     z-index: 1000;
 
     &:hover {
-      background: $COLOR_MID_1;
+      background: $COLOR_GREY_1;
     }
     @include screen-size("small") {
       display: none;
@@ -1892,7 +1897,7 @@
     overflow: hidden;
     z-index: 100;
     transform: translateX(0);
-    transition: transform 0.5s $transition;
+    transition: transform 0.5s $STANDARD_TRANSITION;
 
     @include screen-size("small") {
       width: 100vw;
@@ -1959,7 +1964,7 @@
     overflow-y: auto;
     font-size: $FONT_SIZE_BASE;
     color: $COLOR_DARK;
-    transition: transform 0.5s $transition;
+    transition: transform 0.5s $STANDARD_TRANSITION;
 
     &.pushed {
       transform: translatex(360px);
@@ -2007,15 +2012,15 @@
         top: 2px;
         right: $SPACE_XS;
         // font-size: 38px;
-        fill: $COLOR_MID_2;
+        fill: $COLOR_GREY_2;
         cursor: pointer;
         text-decoration: none;
-        transition: color 0.3s $transition;
+        transition: color 0.3s $STANDARD_TRANSITION;
         z-index: 5;
 
         &:hover {
           // transform: scale(1.1);
-          color: $COLOR_MID_3;
+          color: $COLOR_GREY_3;
         }
       }
 
@@ -2047,7 +2052,7 @@
     z-index: 10;
     pointer-events: none;
 
-    transition: height 250ms $transition;
+    transition: height 250ms $STANDARD_TRANSITION;
 
     .toolbar {
       height: 40px;
@@ -2056,11 +2061,11 @@
     }
 
     &.expanded {
-      transition: height 250ms $transition;
+      transition: height 250ms $STANDARD_TRANSITION;
       pointer-events: all;
-      background: $COLOR_DARK_OPACITY;
+      background: $COLOR_DARK_TRANSPARENT;
       height: 50%;
-      box-shadow: 0 0 15px 15px $COLOR_DARK_OPACITY;
+      box-shadow: 0 0 15px 15px $COLOR_DARK_TRANSPARENT;
       .toolbar {
         background: transparent;
       }
@@ -2071,15 +2076,15 @@
       bottom: calc(50% + 15px);
       right: $SPACE_S;
       font-size: 38px;
-      fill: $COLOR_MID_2;
-      color: $COLOR_MID_2;
+      fill: $COLOR_GREY_2;
+      color: $COLOR_GREY_2;
       cursor: pointer;
       text-decoration: none;
-      transition: all 0.3s $transition;
+      transition: all 0.3s $STANDARD_TRANSITION;
       z-index: 10000;
 
       &:hover {
-        fill: $COLOR_MID_3;
+        fill: $COLOR_GREY_3;
       }
     }
   }
@@ -2094,7 +2099,7 @@
     z-index: 1000;
     overflow-x: auto;
     @include hide-scroll;
-    border-bottom: 1px solid $COLOR_MID_1;
+    border-bottom: 1px solid $COLOR_GREY_1;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   }
 
@@ -2118,25 +2123,16 @@
     }
   }
 
-  // .debug {
-  //   position: fixed;
-  //   bottom: $SPACE_S;
-  //   right: 420px;
-  //   padding: $SPACE_S;
-  //   font-size: 8px;
-  // }
-
   .link-to-ac {
     font-family: $MONO_STACK;
     font-size: $FONT_SIZE_SMALL;
-    background: $COLOR_DARK_OPACITY;
-    color: $COLOR_MID_1;
+    background: $COLOR_DARK_TRANSPARENT;
+    color: $COLOR_GREY_1;
     z-index: 1001;
     position: absolute;
     top: 170px;
     right: 0;
     padding: $SPACE_XS;
-    // word-spacing: -0.3em;
 
     a {
       color: white;

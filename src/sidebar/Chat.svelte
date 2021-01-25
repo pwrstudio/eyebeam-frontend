@@ -1,16 +1,18 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Chat
+  //  CHAT
   //
   // # # # # # # # # # # # # #
 
-  // *** COMPONENTS
+  // *** IMPORT
   import { afterUpdate, onMount } from "svelte"
   import { fade } from "svelte/transition"
-  import ChatMessage from "./ChatMessage.svelte"
   import { renderBlockText, loadData, client } from "../sanity"
   import get from "lodash/get"
+
+  // *** COMPONENTS
+  import ChatMessage from "./ChatMessage.svelte"
 
   // *** DOM REFERENCES
   let messageContainerEl = {}
@@ -68,12 +70,10 @@
 
   afterUpdate(() => {
     if (messageContainerEl) {
-      // if(messageContainerEl.scrollHeight - messageContainerEl.scrollTop < 300) {
       messageContainerEl.scrollTo({
         top: messageContainerEl.scrollHeight,
         left: 0,
       })
-      // }
     }
   })
 
@@ -117,7 +117,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .chat-container {
     position: relative;
@@ -163,7 +164,7 @@
       color: $COLOR_LIGHT;
       font-size: $FONT_SIZE_SMALL;
       user-select: none;
-      border-bottom: 1px solid $COLOR_MID_2;
+      border-bottom: 1px solid $COLOR_GREY_2;
       pointer-events: all;
 
       @include screen-size("small") {

@@ -36,19 +36,11 @@
     </div>
     <div class="divider" />
   {/if}
-
-  <!-- RELATED pageS -->
-  <!-- <div class="related-case-studies"> -->
-  <!-- {await relatedpages then relatedpages} -->
-  <!-- {#if Array.isArray(get(page, 'connectedpages', false))}
-      <Calendar pages={page.connectedpages} related={true} />
-    {/if} -->
-  <!-- {/await} -->
-  <!-- </div> -->
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .page-single {
     .main-header {
@@ -62,7 +54,7 @@
 
       .participants {
         margin-top: $SPACE_XS;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
         font-family: $MONO_STACK;
         font-size: $FONT_SIZE_SMALL;
         display: inline-block;
@@ -70,7 +62,7 @@
     }
 
     .divider {
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       width: 100%;
     }
 

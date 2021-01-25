@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  AUDIO CHAT
+  //  AUDIOCHAT
   //
   // # # # # # # # # # # # # #
 
@@ -13,19 +13,18 @@
   // *** COMPONENTS
   import AudioChatUser from "./AudioChatUser.svelte"
 
+  // *** CONFIGURATION
+  import { JANUS_SERVER_URL } from "./world.config.js"
+
   // *** PROPS
   export let user = {}
   export let userName = ""
   export let roomName = ""
   export let roomId = 4
 
-  // console.log("____ USERNAME", userName)
-  // console.log("____ ROOM NAME", roomName)
-  // console.log("____ ROOM ID", roomId)
-
   // *** CONSTANTS
   const dispatch = createEventDispatcher()
-  const server = "https://eyebeam-janus.post-rational.org"
+  const server = JANUS_SERVER_URL
   const opaqueId = "audiobridgetest-" + Janus.randomString(12)
 
   // *** VARIABLES
@@ -187,9 +186,6 @@
   })
 
   onDestroy(async () => {
-    // console.log("--- Revoke microphone permissions")
-    // const microphone = navigator.permissions.query({ name: 'microphone' })
-    // navigator.permissions.revoke(microphone)
     janus.destroy()
   })
 </script>
@@ -293,7 +289,8 @@
 </div>
 
 <style lang="scss">
-  @import "./variables.scss";
+  @import "./responsive.scss";
+  @import "./world.theme.scss";
 
   .audioChatContainer {
     line-height: 1;
@@ -312,7 +309,7 @@
     top: $SPACE_S;
     left: $SPACE_S;
     padding: $SPACE_S;
-    border-radius: $border_radius;
+    border-radius: $BORDER_RADIUS;
     font-size: $FONT_SIZE_BASE;
     font-family: $MONO_STACK;
 
@@ -340,15 +337,14 @@
     .button {
       text-transform: uppercase;
       font-weight: bold;
-      // letter-spacing: 0.05em;
       padding: 4px $SPACE_M 2px $SPACE_M;
       display: inline-table;
-      border: 1px solid $COLOR_MID_2;
-      color: $COLOR_MID_2;
+      border: 1px solid $COLOR_GREY_2;
+      color: $COLOR_GREY_2;
       font-size: $FONT_SIZE_SMALL;
       transform: translate(4px, -4px);
 
-      border-radius: $border_radius;
+      border-radius: $BORDER_RADIUS;
       text-align: center;
 
       &:hover {

@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Toolbar
+  //  TOOLBAR
   //
   // # # # # # # # # # # # # #
 
@@ -113,7 +113,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .toolbar {
     width: 100%;
@@ -131,9 +132,9 @@
       width: calc(100% - 60px);
       display: block;
       background: transparent;
-      border: 1px solid $COLOR_MID_2;
+      border: 1px solid $COLOR_GREY_2;
       color: $COLOR_LIGHT;
-      border-radius: $border_radius;
+      border-radius: $BORDER_RADIUS;
       padding: $SPACE_S;
       outline: none;
       height: 30px;
@@ -166,9 +167,9 @@
       float: right;
       display: block;
       background: transparent;
-      border: 1px solid $COLOR_MID_2;
+      border: 1px solid $COLOR_GREY_2;
       color: $COLOR_LIGHT;
-      border-radius: $border_radius;
+      border-radius: $BORDER_RADIUS;
       outline: none;
       cursor: pointer;
       height: 30px;
@@ -203,8 +204,8 @@
       }
 
       &.chat {
-        border: 1px solid $COLOR_MID_2;
-        border-radius: $border_radius;
+        border: 1px solid $COLOR_GREY_2;
+        border-radius: $BORDER_RADIUS;
         padding: 5px;
 
         text-decoration: none;

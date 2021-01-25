@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  New Private Message
+  //  NEW PRIVATE MESSAGE
   //
   // # # # # # # # # # # # # #
 
@@ -16,7 +16,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .new-message {
     margin-bottom: $SPACE_XS;
@@ -27,11 +28,11 @@
 
     .header {
       cursor: pointer;
-      border: 1px solid $COLOR_MID_2;
+      border: 1px solid $COLOR_GREY_2;
       padding: $SPACE_XS;
       padding-right: $SPACE_S;
       padding-left: $SPACE_S;
-      border-radius: $border_radius;
+      border-radius: $BORDER_RADIUS;
       width: auto;
       display: inline-block;
       color: $COLOR_LIGHT;
@@ -45,7 +46,7 @@
     .inner {
       padding-bottom: $SPACE_S;
       margin-top: $SPACE_S;
-      border-bottom: 1px solid $COLOR_MID_2;
+      border-bottom: 1px solid $COLOR_GREY_2;
 
       .row {
         display: inline-block;
@@ -65,9 +66,9 @@
         float: left;
         width: 100%;
         background: $COLOR_DARK;
-        border: 1px solid $COLOR_MID_2;
+        border: 1px solid $COLOR_GREY_2;
         color: $COLOR_LIGHT;
-        border-radius: $border_radius;
+        border-radius: $BORDER_RADIUS;
         padding: $SPACE_S;
         outline: none;
         height: 30px;
@@ -93,9 +94,9 @@
         width: 100%;
         display: block;
         background: $COLOR_DARK;
-        border: 1px solid $COLOR_MID_2;
+        border: 1px solid $COLOR_GREY_2;
         color: $COLOR_LIGHT;
-        border-radius: $border_radius;
+        border-radius: $BORDER_RADIUS;
         padding: $SPACE_S;
         outline: none;
         resize: none;
@@ -112,9 +113,9 @@
         width: 60px;
         display: block;
         background: $COLOR_DARK;
-        border: 1px solid $COLOR_MID_2;
+        border: 1px solid $COLOR_GREY_2;
         color: $COLOR_LIGHT;
-        border-radius: $border_radius;
+        border-radius: $BORDER_RADIUS;
         outline: none;
         cursor: pointer;
         height: 30px;

@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Chat Message
+  //  CHAT MESSAGE
   //
   // # # # # # # # # # # # # #
 
@@ -37,7 +37,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .chat-message {
     margin-bottom: $SPACE_XS;
@@ -52,13 +53,13 @@
     .meta {
       width: 100%;
       display: inline-block;
-      color: $COLOR_MID_2;
+      color: $COLOR_GREY_2;
 
       .name {
         float: left;
         svg {
           path {
-            fill: $COLOR_MID_2;
+            fill: $COLOR_GREY_2;
           }
           &:hover {
             path {
@@ -69,14 +70,14 @@
       }
 
       .date {
-        font-family: $HERSHEY_SIMPLEX;
+        font-family: $SANS_STACK;
         font-weight: normal;
         float: right;
       }
     }
 
     .body {
-      border-left: 1px solid $COLOR_MID_2;
+      border-left: 1px solid $COLOR_GREY_2;
       padding-left: $SPACE_S;
       padding-right: $SPACE_XS;
     }

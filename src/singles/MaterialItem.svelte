@@ -59,7 +59,8 @@
 </a>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .material-item {
     width: 100%;
@@ -97,29 +98,29 @@
         white-space: nowrap;
         overflow: hidden;
         flex-shrink: 99999;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
       }
 
       .format {
         white-space: nowrap;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
       }
     }
 
     cursor: pointer;
 
-    // transition: background 0.5s $transition;
+    // transition: background 0.5s $STANDARD_TRANSITION;
 
     &:hover {
-      background: $COLOR_MID_1;
+      background: $COLOR_GREY_1;
     }
 
     &.header {
-      border-bottom: 1px dotted $COLOR_MID_1;
+      border-bottom: 1px dotted $COLOR_GREY_1;
       cursor: default;
 
       .archive-link {
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
         text-decoration: underline;
       }
 

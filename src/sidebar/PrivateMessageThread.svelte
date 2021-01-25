@@ -1,7 +1,7 @@
 <script>
   // # # # # # # # # # # # # #
   //
-  //  Private Message Thread
+  //  PRIVATE MESSAGE THREAD
   //
   // # # # # # # # # # # # # #
 
@@ -10,7 +10,7 @@
   import { slide } from "svelte/transition"
 
   // *** GLOBAL
-  import { formattedDate } from "../global.js"
+  import { formatDate } from "../global.js"
 
   // COMPONENTS
   import NewPrivateMessage from "./NewPrivateMessage.svelte"
@@ -34,7 +34,7 @@
   >
     <div class="meta">
       <div class="title">{message.title}</div>
-      <div class="date">{formattedDate(message.last_posted_at)}</div>
+      <div class="date">{formatDate(message.last_posted_at)}</div>
     </div>
     <div class="participants">
       {#each get(message, "details.allowed_users", []).filter(p => p.username != get($authenticatedUserInformation, "username", "")) as participant (participant.id)}
@@ -48,7 +48,7 @@
         <div class="post">
           <div class="meta">
             <div class="sender">{post.name}</div>
-            <div class="date">{formattedDate(post.created_at)}</div>
+            <div class="date">{formatDate(post.created_at)}</div>
           </div>
           <div class="content">
             {@html post.cooked}
@@ -67,7 +67,8 @@
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .message-container {
     margin-bottom: $SPACE_XS;
@@ -75,7 +76,7 @@
     color: $COLOR_LIGHT;
     font-size: $FONT_SIZE_SMALL;
     user-select: none;
-    border-bottom: 1px solid $COLOR_MID_2;
+    border-bottom: 1px solid $COLOR_GREY_2;
 
     .header {
       cursor: pointer;
@@ -84,7 +85,7 @@
       padding-bottom: $SPACE_M;
 
       &.expanded {
-        border-bottom: 1px solid $COLOR_MID_2;
+        border-bottom: 1px solid $COLOR_GREY_2;
       }
 
       .meta {
@@ -97,12 +98,12 @@
 
         .date {
           float: right;
-          color: $COLOR_MID_2;
+          color: $COLOR_GREY_2;
         }
       }
 
       .participants {
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
       }
     }
 
@@ -113,9 +114,9 @@
       .meta {
         width: 100%;
         display: inline-block;
-        color: $COLOR_MID_2;
+        color: $COLOR_GREY_2;
         padding-left: $SPACE_S;
-        border-left: 1px solid $COLOR_MID_2;
+        border-left: 1px solid $COLOR_GREY_2;
 
         .sender {
           float: left;
@@ -123,12 +124,12 @@
 
         .date {
           float: right;
-          color: $COLOR_MID_2;
+          color: $COLOR_GREY_2;
         }
       }
 
       .content {
-        border-left: 1px solid $COLOR_MID_2;
+        border-left: 1px solid $COLOR_GREY_2;
         padding-left: $SPACE_S;
       }
     }

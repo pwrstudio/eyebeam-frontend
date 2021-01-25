@@ -7,11 +7,14 @@
 </script>
 
 <div class="loading-screen">
-  <div class="box"><img src="/1.gif" /></div>
+  <div class="box">
+    <img src="/img/loading.gif" />
+  </div>
 </div>
 
 <style lang="scss">
-  @import "../variables.scss";
+  @import "../responsive.scss";
+  @import "../world.theme.scss";
 
   .loading-screen {
     position: fixed;
