@@ -6,22 +6,23 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
-  import { createEventDispatcher } from "svelte"
+  import { createEventDispatcher } from "svelte";
 
   // *** CONSTANTS
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher();
 </script>
 
 <div class="menu-container">
   <div>
+    <a href="/pages/schedule" class="menu-item">Schedule</a>
     <a href="/projects" class="menu-item">Projects</a>
     <a href="/pages/guide" class="menu-item">Guide</a>
     <a href="/pages/about" class="menu-item">About</a>
   </div>
 
   <span
-    on:click={e => {
-      dispatch("username")
+    on:click={(e) => {
+      dispatch("username");
     }}
     class="menu-item login">Change name</span
   >

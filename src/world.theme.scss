@@ -1,6 +1,6 @@
 // TYPOGRAPHY
 $SANS_STACK: "WorkSans", sans-serif;
-$MONO_STACK: 'Space Mono', monospace;
+$MONO_STACK: "Space Mono", monospace;
 $SERIF_STACK: serif;
 
 $FONT_SIZE_SMALL: 12px;
@@ -44,11 +44,11 @@ $STANDARD_TRANSITION: cubic-bezier(0.23, 1, 0.32, 1);
     padding: $SPACE_M $SPACE_M 0 $SPACE_M;
     font-family: $SANS_STACK;
     font-size: $FONT_SIZE_BASE;
-    font-weight: normal;
+    font-weight: 500;
     line-height: 1.4em;
     letter-spacing: 0.02em;
     @include screen-size("small") {
-      padding-bottom: $SPACE_M ;
+      padding-bottom: $SPACE_M;
     }
   }
 }
