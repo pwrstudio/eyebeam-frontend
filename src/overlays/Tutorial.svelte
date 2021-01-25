@@ -40,11 +40,7 @@
     {#each card.slides as slide, index (slide._key)}
       {#if Array.isArray(get(slide, "content.content", false)) && currentIndex === index}
         <div class="tutorial-slide" in:fade|local>
-          <img
-            height="300"
-            src={urlFor(get(slide, "topImage", "")).url()}
-            alt="The Shape of a Practice"
-          />
+          <img height="300" src={urlFor(get(slide, "topImage", "")).url()} />
           {@html renderBlockText(get(slide, "content.content", []))}
         </div>
       {/if}

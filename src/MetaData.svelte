@@ -9,7 +9,6 @@
   //  prerendered for social-media bots
   //  (eg. with prerender.io)
   //
-  //
   // # # # # # # # # # # # # # # # # # #
 
   // *** IMPORTS

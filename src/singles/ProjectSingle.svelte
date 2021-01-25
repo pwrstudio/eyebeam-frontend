@@ -22,7 +22,7 @@
 </script>
 
 <!-- METADATA -->
-<!-- <MetaData post={project} /> -->
+<MetaData post={project} />
 
 <div class="project-single" in:fade use:links>
   <!-- HEADER -->

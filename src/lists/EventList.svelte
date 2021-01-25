@@ -91,25 +91,27 @@
   </div>
 
   <!-- FOOTER -->
-  <!-- {#if !related && exhibitions && exhibitions.length > 0}
+  {#if !related && exhibitions && exhibitions.length > 0}
     <div class="footer">
       {#each exhibitions.reverse() as exhibition, index (exhibition._id)}
         <a
-          href={'/area/' + get(exhibition, 'area.slug.current', '')}
+          href={"/area/" + get(exhibition, "area.slug.current", "")}
           class="exhibition">
           <div class="inner">
             <div class="row">
               <div class="title">{exhibition.title}</div>
-              <div class="elips">
-                .........................................................
-              </div>
-              <div class="date">{exhibition.period}</div>
+              {#if exhibition.period}
+                <div class="elips">
+                  .........................................................
+                </div>
+                <div class="date">{exhibition.period}</div>
+              {/if}
             </div>
           </div>
         </a>
       {/each}
     </div>
-  {/if} -->
+  {/if}
 </div>
 
 <style lang="scss">
@@ -126,7 +128,6 @@
     overflow: hidden;
 
     @include screen-size("small") {
-      // display: none;
       padding-top: 0;
     }
 
@@ -142,7 +143,6 @@
 
     .event {
       padding: $SPACE_S;
-      // padding-top: $SPACE_S;
       width: 100%;
       min-height: $ITEM_HEIGHT;
       background: $COLOR_LIGHT;
@@ -167,7 +167,6 @@
         @include screen-size("small") {
           display: block;
           width: 100%;
-          // height: $ITEM_HEIGHT;
           border-right: unset;
         }
       }
@@ -182,8 +181,8 @@
           align-items: baseline;
 
           .title {
-            font-size: $FONT_SIZE_MEDIUM;
-            font-family: $SANS_STACK;
+            font-size: $FONT_SIZE_BASE;
+            font-family: $MONO_STACK;
             font-weight: bold;
             max-width: 70%;
             margin-bottom: $SPACE_XS / 2;
@@ -200,17 +199,16 @@
           }
 
           .date {
-            font-family: $SANS_STACK;
+            font-family: $MONO_STACK;
             font-weight: normal;
             font-size: 90%;
-            // width: 11ch;
             white-space: nowrap;
             text-align: right;
             color: $COLOR_GREY_3;
           }
 
           .participants {
-            font-family: $SANS_STACK;
+            font-family: $MONO_STACK;
             font-weight: normal;
             pointer-events: none;
             color: $COLOR_GREY_3;
@@ -242,12 +240,10 @@
         .archive-link {
           cursor: pointer;
           font-size: 90%;
-          // word-spacing: -0.3em;
           color: $COLOR_GREY_2;
           text-decoration: underline;
           transition: color 250ms $STANDARD_TRANSITION;
           &:hover {
-            // color: $COLOR_DARK;
             text-decoration: none;
           }
         }
@@ -271,9 +267,8 @@
     }
 
     .footer {
-      height: $SPACE_S * 6;
+      height: $SPACE_S * 5;
       border-top: 1px solid $COLOR_GREY_1;
-      padding-bottom: $SPACE_S;
       &:hover {
         background: unset;
       }
@@ -312,9 +307,9 @@
             align-items: baseline;
 
             .title {
-              font-size: $FONT_SIZE_MEDIUM;
-              font-family: $SANS_STACK;
-              font-weight: 500;
+              font-size: $FONT_SIZE_BASE;
+              font-family: $MONO_STACK;
+              font-weight: bold;
               white-space: nowrap;
               max-width: 70%;
               text-overflow: ellipsis;
@@ -333,16 +328,15 @@
             }
 
             .date {
-              font-family: $SANS_STACK;
+              font-family: $MONO_STACK;
               font-weight: normal;
               font-size: 90%;
               white-space: nowrap;
               color: $COLOR_GREY_3;
-              // word-spacing: -0.3em;
             }
 
             .participants {
-              font-family: $SANS_STACK;
+              font-family: $MONO_STACK;
               font-weight: normal;
               pointer-events: none;
               color: $COLOR_GREY_3;

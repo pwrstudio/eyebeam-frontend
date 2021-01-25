@@ -45,7 +45,7 @@
 </script>
 
 <!-- METADATA -->
-<!-- <MetaData post={user} /> -->
+<MetaData post={user} />
 
 <div class="user-profile-single" in:fade use:links>
   <!-- BACK LINK -->

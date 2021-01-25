@@ -47,7 +47,6 @@
     padding-right: $SPACE_S;
     color: $COLOR_LIGHT;
     font-size: $FONT_SIZE_SMALL;
-    font-weight: bold;
     user-select: none;
 
     .meta {
@@ -70,7 +69,7 @@
       }
 
       .date {
-        font-family: $SANS_STACK;
+        font-family: $MONO_STACK;
         font-weight: normal;
         float: right;
       }

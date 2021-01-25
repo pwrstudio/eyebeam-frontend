@@ -19,7 +19,7 @@
 </script>
 
 <!-- METADATA -->
-<!-- <MetaData post={page} /> -->
+<MetaData post={page} />
 
 <div class="page-single" in:fade use:links>
   <!-- HEADER -->

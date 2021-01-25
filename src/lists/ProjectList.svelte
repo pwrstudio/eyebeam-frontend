@@ -182,7 +182,7 @@
 
           .title {
             font-family: $SANS_STACK;
-            font-weight: 500;
+            font-weight: bold;
           }
 
           .participants {
@@ -210,7 +210,6 @@
         height: 45px;
         border-bottom: 1px solid $COLOR_GREY_1;
         background-color: white;
-        // word-spacing: -0.3em;
         &:hover {
           background: white !important;
         }

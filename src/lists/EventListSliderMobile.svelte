@@ -225,7 +225,7 @@
 
         .title {
           font-family: $SANS_STACK;
-          font-weight: 500;
+          font-weight: bold;
           white-space: nowrap;
           max-width: 70%;
           text-overflow: ellipsis;

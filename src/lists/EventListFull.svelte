@@ -139,18 +139,18 @@
     </div>
 
     <!-- EXHIBITIONS -->
-    <!-- <div class="section"> -->
-    <!-- SUBHEADER -->
-    <!-- <div class="event header">
+    <div class="section">
+      <!-- SUBHEADER -->
+      <div class="event header">
         <div class="inner">
           <div class="row">
             <div>Ongoing</div>
           </div>
         </div>
-      </div> -->
-    <!-- {#each exhibitions.reverse() as exhibition, index (exhibition._id)}
+      </div>
+      {#each exhibitions.reverse() as exhibition, index (exhibition._id)}
         <a
-          href={'/area/' + get(exhibition, 'area.slug.current', '')}
+          href={"/area/" + get(exhibition, "area.slug.current", "")}
           class="exhibition">
           <div class="inner">
             <div class="row">
@@ -162,8 +162,8 @@
             </div>
           </div>
         </a>
-      {/each} -->
-    <!-- </div> -->
+      {/each}
+    </div>
   </div>
 </div>
 
@@ -210,11 +210,8 @@
       user-select: none;
 
       @include screen-size("small") {
-        // width: 80vw;
         display: inline-flex;
         padding-top: $SPACE_S;
-        // height: 80px;
-        // border-right: 1px solid $COLOR_GREY_1;
       }
 
       .inner {
@@ -226,8 +223,8 @@
           justify-content: space-between;
 
           .title {
-            font-size: $FONT_SIZE_MEDIUM;
-            font-family: $SANS_STACK;
+            font-size: $FONT_SIZE_BASE;
+            font-family: $MONO_STACK;
             font-weight: bold;
             max-width: 70%;
             margin-bottom: $SPACE_XS / 2;
@@ -245,16 +242,15 @@
 
           .date {
             color: $COLOR_GREY_2;
-            font-family: $SANS_STACK;
+            font-family: $MONO_STACK;
             font-weight: normal;
             font-size: 90%;
-            // width: 11ch;
             white-space: nowrap;
             text-align: right;
           }
 
           .participants {
-            font-family: $SANS_STACK;
+            font-family: $MONO_STACK;
             font-weight: normal;
             pointer-events: none;
             color: $COLOR_GREY_3;
@@ -320,11 +316,8 @@
     overflow: hidden;
 
     @include screen-size("small") {
-      // width: 80vw;
       display: inline-flex;
       padding-top: $SPACE_S;
-      // height: 80px;
-      // border-right: 1px solid $COLOR_GREY_1;
     }
 
     .inner {
@@ -337,8 +330,8 @@
         align-items: baseline;
 
         .title {
-          font-size: $FONT_SIZE_MEDIUM;
-          font-family: $SANS_STACK;
+          font-size: $FONT_SIZE_BASE;
+          font-family: $MONO_STACK;
           font-weight: bold;
           max-width: 70%;
           margin-bottom: $SPACE_XS / 2;
@@ -355,16 +348,15 @@
         }
 
         .date {
-          font-family: $SANS_STACK;
+          font-family: $MONO_STACK;
           font-weight: normal;
           font-size: 90%;
           white-space: nowrap;
           color: $COLOR_GREY_3;
-          // word-spacing: -0.3em;
         }
 
         .participants {
-          font-family: $SANS_STACK;
+          font-family: $MONO_STACK;
           font-weight: normal;
           pointer-events: none;
           color: $COLOR_GREY_3;
@@ -385,7 +377,6 @@
       .date {
         font-size: 90%;
         color: $COLOR_GREY_2;
-        // width: 11ch;
         white-space: nowrap;
         text-align: right;
       }

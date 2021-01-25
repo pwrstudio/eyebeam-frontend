@@ -24,7 +24,7 @@
 </script>
 
 <!-- METADATA -->
-<!-- <MetaData post={event} /> -->
+<MetaData post={event} />
 
 <div class="event-single" in:fade use:links>
   <!-- BACK LINK -->
@@ -135,7 +135,7 @@
     .date {
       padding: $SPACE_M;
       text-align: center;
-      font-weight: 500;
+      font-weight: bold;
       font-family: $SANS_STACK;
     }
 

@@ -46,10 +46,7 @@
     }
   }
 
-  // setTimeout(() => {
   getPrivateMessages()
-  // }, 500)
-  // setInterval(getPrivateMessages, 10000)
 </script>
 
 <div class="messaging-container">

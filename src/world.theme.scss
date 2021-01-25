@@ -44,7 +44,7 @@ $STANDARD_TRANSITION: cubic-bezier(0.23, 1, 0.32, 1);
     padding: $SPACE_M $SPACE_M 0 $SPACE_M;
     font-family: $SANS_STACK;
     font-size: $FONT_SIZE_BASE;
-    font-weight: 400;
+    font-weight: normal;
     line-height: 1.4em;
     letter-spacing: 0.02em;
     @include screen-size("small") {

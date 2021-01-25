@@ -192,7 +192,7 @@
     .date {
       padding: $SPACE_M;
       text-align: center;
-      font-weight: 500;
+      font-weight: bold;
       font-family: $SANS_STACK;
     }
 
