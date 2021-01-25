@@ -3,11 +3,11 @@ import { format, getYear } from "date-fns"
 export const SANITY_PROJECT_ID = "1hwmqt2a"
 export const GAME_SERVER_URL = "wss://eyebeam-gameserver.post-rational.org";
 
-export const VIDEO_ROOMS = {MAIN: "main", SUPPORT: "support"}
-export const AUDIO_ROOMS= [1,2,3,4,5,6,7]
-export const TEXT_ROOMS = [1,2,3,4]
+export const VIDEO_ROOMS = { MAIN: "main", SUPPORT: "support" }
+export const AUDIO_ROOMS = [1, 2, 3, 4, 5, 6, 7]
+export const TEXT_ROOMS = [1, 2, 3, 4]
 export const AREA = { YELLOW: 2, RED: 3, GREEN: 4, BLUE: 5, MAGENTA: 6, CYAN: 7, PURPLE: 8, TEAL: 9 }
-export const REVERSE_HEX_MAP = { '#FFFF00': 'yellow','#FF0000':'red','#00FF00': 'green', '#0000FF': 'blue', '#FF00FF': 'magenta', '#00FFFF': 'cyan', '#880088': 'purple',  '#008888': 'teal' }
+export const REVERSE_HEX_MAP = { '#FFFF00': 'yellow', '#FF0000': 'red', '#00FF00': 'green', '#0000FF': 'blue', '#FF00FF': 'magenta', '#00FFFF': 'cyan', '#880088': 'purple', '#008888': 'teal' }
 export const HEX_MAP = { YELLOW: '#FFFF00', RED: '#FF0000', GREEN: '#00FF00', BLUE: '#0000FF', MAGENTA: '#FF00FF', CYAN: '#00FFFF', PURPLE: '#880088', TEAL: '#008888' }
 export const COLORMAP = ["WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "MAGENTA", "CYAN", "PURPLE", "TEAL"]
 export const TINTMAP = [
@@ -99,7 +99,7 @@ const intlFormat = new Intl.DateTimeFormat('en-DE', {
   weekday: 'short',
   month: 'short',
   day: '2-digit',
-  timeZone: 'CET',
+  timeZone: 'EST',
 })
 
 export const formatDate = (start, end) => {
@@ -109,7 +109,7 @@ export const formatDate = (start, end) => {
     }
     const startDate = Date.parse(start)
     const dateParts = intlFormat.formatToParts(startDate);
-    const startDateFormatted = dateParts[6].value + dateParts[7].value + dateParts[8].value + ' CET, ' + dateParts[0].value + ' ' + dateParts[4].value + ' ' + dateParts[2].value;
+    const startDateFormatted = dateParts[6].value + dateParts[7].value + dateParts[8].value + ' EST, ' + dateParts[0].value + ' ' + dateParts[4].value + ' ' + dateParts[2].value;
     // const startDateCETFormatted = startDateCET + 'CET';
 
     if (!startDate) {
@@ -126,7 +126,7 @@ export const formatDate = (start, end) => {
     const endDate = Date.parse(end)
     // const startDate = Date.parse(start)
     const endDateParts = intlFormat.formatToParts(endDate);
-    const endDateFormatted = endDateParts[6].value + endDateParts[7].value + endDateParts[8].value + ' CET, ' + endDateParts[0].value + ' ' + endDateParts[4].value + ' ' + endDateParts[2].value;
+    const endDateFormatted = endDateParts[6].value + endDateParts[7].value + endDateParts[8].value + ' EST, ' + endDateParts[0].value + ' ' + endDateParts[4].value + ' ' + endDateParts[2].value;
 
 
     if (startDateFormatted == endDateFormatted) {
@@ -155,16 +155,16 @@ export const formattedChatDate = start => {
 export const nanoid = (t = 21) => {
   let e = "",
     r = crypto.getRandomValues(new Uint8Array(t))
-  for (; t--; ) {
+  for (; t--;) {
     let n = 63 & r[t]
     e +=
       n < 36
         ? n.toString(36)
         : n < 62
-        ? (n - 26).toString(36).toUpperCase()
-        : n < 63
-        ? "_"
-        : "-"
+          ? (n - 26).toString(36).toUpperCase()
+          : n < 63
+            ? "_"
+            : "-"
   }
   return e
 }
