@@ -93,7 +93,16 @@ export const TEXT_STYLE_PROJECT = {
 
 const mainFormat = 'HH:mm z, dd MMM DD'
 
-const intlFormat = new Intl.DateTimeFormat('en-DE', {
+// const intlFormat = new Intl.DateTimeFormat('en-DE', {
+//   hour: 'numeric',
+//   minute: 'numeric',
+//   weekday: 'short',
+//   month: 'short',
+//   day: '2-digit',
+//   timeZone: 'CET',
+// })
+
+const intlFormat = new Intl.DateTimeFormat('en-US', {
   hour: 'numeric',
   minute: 'numeric',
   weekday: 'short',
