@@ -108,6 +108,7 @@ const serializers = {
             .quality(90)
             .auto("format")
             .url(),
+            alt: has(props, "node.caption.content") ?  toPlainText(props.node.caption.content) : ''
         }),
         ...prepareTextElements(props),
       ])

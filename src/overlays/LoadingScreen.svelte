@@ -8,7 +8,7 @@
 
 <div class="loading-screen">
   <div class="box">
-    <img src="/img/loading.gif" />
+    <img src="/img/loading.gif" alt="Site is loading..." />
   </div>
 </div>
 
