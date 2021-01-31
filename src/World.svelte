@@ -1053,7 +1053,7 @@
               frames.play()
 
               // __ Name graphics (shown on hover)
-              const textSprite = new PIXI.Text(cs.title, TEXT_STYLE_CASE_STUDY)
+              const textSprite = new PIXI.Text(cs.title, TEXT_STYLE_PROJECT)
               const txtBG = new PIXI.Sprite(PIXI.Texture.WHITE)
               txtBG.tint = 0x000000
               txtBG.width = textSprite.width + 10
