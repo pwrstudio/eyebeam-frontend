@@ -12,6 +12,7 @@
 
   // *** PROPS
   export let streamUrl = ""
+  export let eventTitle = false
 </script>
 
 <div class="embed" in:fade={{ duration: 300, easing: quartOut }}>
@@ -20,7 +21,7 @@
       <iframe
         width="720"
         height="480"
-        title="Livestream"
+        title={eventTitle ? eventTitle : "Livestream"}
         src={"https://player.vimeo.com/video/" +
           getVideoId(streamUrl).id +
           "?autoplay=1"}
@@ -37,7 +38,7 @@
       <iframe
         width="720"
         height="480"
-        title="Livestream"
+        title={eventTitle ? eventTitle : "Livestream"}
         src={"https://www.youtube.com/embed/" +
           getVideoId(streamUrl).id +
           "?autoplay=1"}
