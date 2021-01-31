@@ -31,9 +31,11 @@
 
 <div
   class="username-dialog"
+  aria-modal="true"
+  role="dialog"
   transition:fade={{ duration: 400, easing: quartOut }}
 >
-  <div class="box" aria-modal="true" role="dialog">
+  <div class="box">
     <input
       type="text"
       aria-required="true"
