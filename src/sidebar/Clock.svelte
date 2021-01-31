@@ -6,37 +6,37 @@
   // # # # # # # # # # # # # #
 
   const berlinTime = () => {
-    const d = new Date();
+    const d = new Date()
     const cet = new Intl.DateTimeFormat("de-DE", {
       timeZone: "CET",
       hour: "numeric",
       minute: "numeric",
-    }).format(d);
-    return cet;
-  };
+    }).format(d)
+    return cet
+  }
 
   const newYorkTime = () => {
-    const d = new Date();
+    const d = new Date()
     const est = new Intl.DateTimeFormat("en-US", {
       timeZone: "EST",
       hour: "numeric",
       minute: "numeric",
-    }).format(d);
-    return est;
-  };
+    }).format(d)
+    return est
+  }
 
-  let time = newYorkTime();
+  let time = newYorkTime()
 
   window.setInterval(() => {
-    time = newYorkTime();
-  }, 10000);
+    time = newYorkTime()
+  }, 10000)
 </script>
 
 <!-- 
 <div class="clock-berlin">
   {time}&nbsp;CET
 </div> -->
-<div class="clock-new-york">
+<div class="clock-new-york" aria-label="Current time">
   {time}&nbsp;EST
 </div>
 

@@ -6,7 +6,7 @@
   // # # # # # # # # # # # # #
 </script>
 
-<div class="loading-screen">
+<div class="loading-screen" aria-modal="true" role="dialog">
   <div class="box">
     <img src="/img/loading.gif" alt="Site is loading..." />
   </div>

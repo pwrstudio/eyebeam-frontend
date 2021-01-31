@@ -10,7 +10,7 @@
   export let disconnectionCode = 0
 </script>
 
-<div class="reconnection">
+<div class="reconnection" aria-modal="true" role="dialog">
   <div class="box">
     <div class="header">
       You have been disconnected from the gameserver. (Error: {disconnectionCode})

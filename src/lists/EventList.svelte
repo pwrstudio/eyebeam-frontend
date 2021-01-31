@@ -66,7 +66,8 @@
         class="event"
         class:related
         in:fade={{ delay: 100 * index }}
-        href={"/events/" + get(event, "slug.current", "")}>
+        href={"/events/" + get(event, "slug.current", "")}
+      >
         <div class="inner">
           <div class="row">
             <div class="title">{event.title}</div>
@@ -96,12 +97,13 @@
       {#each exhibitions.reverse() as exhibition, index (exhibition._id)}
         <a
           href={"/area/" + get(exhibition, "area.slug.current", "")}
-          class="exhibition">
+          class="exhibition"
+        >
           <div class="inner">
             <div class="row">
               <div class="title">{exhibition.title}</div>
               {#if exhibition.period}
-                <div class="elips">
+                <div class="elips" role="presentation">
                   .........................................................
                 </div>
                 <div class="date">{exhibition.period}</div>

@@ -9,7 +9,7 @@
   export let message = ""
 </script>
 
-<div class="error-screen">
+<div class="error-screen" aria-modal="true" role="dialog">
   <div class="box">
     <div class="header">ERROR: {message}</div>
   </div>

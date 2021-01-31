@@ -1548,11 +1548,15 @@
   {#if matches}
     <Clock />
 
-    <div class="link-to-ac">
-      <a href="https://library.trust.support/" target="_blank"
-        >to Cybernetics Library</a
-      >
-    </div>
+    {#if LINK_OUT}
+      <div class="link-to-ac">
+        <a
+          href={LINK_OUT}
+          target="_blank"
+          aria-label="Open external link in new tab">{LINK_OUT_TEXT}</a
+        >
+      </div>
+    {/if}
 
     {#if localPlayers[$localUserSessionID]}
       <!-- MOBILE CALENDAR-->
