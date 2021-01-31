@@ -30,18 +30,28 @@
     <div class="navigation">
       <div
         class="nav-button back"
+        aria-label="Previous card"
+        role="button"
+        tabindex="0"
         class:disabled={currentIndex === 0}
         on:click={e => {
           currentIndex -= 1
         }}
-      >Back</div>
+      >
+        Back
+      </div>
       <div
         class="nav-button next"
+        aria-label="Next card"
+        role="button"
+        tabindex="0"
         class:disabled={currentIndex === card.slides.length - 1}
         on:click={e => {
           currentIndex += 1
         }}
-      >Next</div>
+      >
+        Next
+      </div>
     </div>
   {/if}
 </div>

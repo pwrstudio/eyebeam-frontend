@@ -36,6 +36,7 @@
         target="_blanks"
       >
         <svg
+          role="presentation"
           width="13"
           height="9"
           viewBox="0 0 13 9"

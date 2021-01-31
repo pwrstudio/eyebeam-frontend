@@ -70,7 +70,7 @@
         color: $COLOR_LIGHT;
         border-radius: $BORDER_RADIUS;
         padding: $SPACE_S;
-        outline: none;
+        // outline: none;
         height: 30px;
         margin-right: $SPACE_S;
 
@@ -98,7 +98,7 @@
         color: $COLOR_LIGHT;
         border-radius: $BORDER_RADIUS;
         padding: $SPACE_S;
-        outline: none;
+        // outline: none;
         resize: none;
         height: 6em;
 
@@ -116,7 +116,7 @@
         border: 1px solid $COLOR_GREY_2;
         color: $COLOR_LIGHT;
         border-radius: $BORDER_RADIUS;
-        outline: none;
+        // outline: none;
         cursor: pointer;
         height: 30px;
         line-height: 20px;

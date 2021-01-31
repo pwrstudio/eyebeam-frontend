@@ -6,23 +6,26 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from "svelte"
 
   // *** CONSTANTS
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 </script>
 
 <div class="menu-container">
-  <div>
+  <nav>
     <a href="/pages/schedule" class="menu-item">Schedule</a>
     <a href="/projects" class="menu-item">Projects</a>
     <a href="/pages/guide" class="menu-item">Guide</a>
     <a href="/pages/about" class="menu-item">About</a>
-  </div>
+  </nav>
 
   <span
-    on:click={(e) => {
-      dispatch("username");
+    aria-label="Change username"
+    role="button"
+    tabindex="0"
+    on:click={e => {
+      dispatch("username")
     }}
     class="menu-item login">Change name</span
   >

@@ -101,7 +101,7 @@ const serializers = {
       return h("p", { className: style }, props.children)
     },
     image: props => {
-      return h("figure", { className: "image" }, [
+      return h("figure", { className: "image", role: "none" }, [
         h("img", {
           src: urlFor(get(props, "node.asset", ""))
             .width(800)
@@ -116,13 +116,14 @@ const serializers = {
     embedBlock: props => {
       // YOUTUBE
       if (get(props, "node.url", "").includes("youtube") || get(props, "node.url", "").includes("youtu.be")) {
-        return h("figure", { className: "youtube" }, [
+        return h("figure", { className: "youtube", role: "none" }, [
           h(
             "div",
             { className: "embed-container" },
             h("iframe", {
               width: "720",
               height: "480",
+              title: "youtube video",
               src:
                 "https://www.youtube.com/embed/" +
                 getVideoId(props.node.url).id,
@@ -137,13 +138,14 @@ const serializers = {
       }
       // VIMEO
       if (get(props, "node.url", "").includes("vimeo")) {
-        return h("figure", { className: "vimeo" }, [
+        return h("figure", { className: "vimeo", role: "none" }, [
           h(
             "div",
             { className: "embed-container" },
             h("iframe", {
               width: "720",
               height: "480",
+              title: "vimeo video",
               src:
                 "https://player.vimeo.com/video/" +
                 getVideoId(props.node.url).id,
@@ -159,13 +161,14 @@ const serializers = {
       }
       // SOUNDCLOUD
       if (get(props, "node.url", "").includes("soundcloud")) {
-        return h("figure", { className: "soundcloud" }, [
+        return h("figure", { className: "soundcloud", role: "none" }, [
           h(
             "div",
             { className: "soundcloud-container" },
             h("iframe", {
               width: "100%",
               height: "300",
+              title: "soundcloud player",
               src:
                 "https://w.soundcloud.com/player/?url=" +
                 get(props, "node.url", "") +
@@ -187,7 +190,7 @@ const serializers = {
         get(props, "node.videoFile.asset._ref", "")
           .replace("file-", "")
           .replace("-mp4", ".mp4")
-      return h("figure", { className: "video" }, [
+      return h("figure", { className: "video", role: "none" }, [
         h("video", {
           src: videoUrl,
           controls: true,
@@ -205,7 +208,7 @@ const serializers = {
         get(props, "node.audioFile.asset._ref", "")
           .replace("file-", "")
           .replace("-mp3", ".mp3")
-      return h("figure", { className: "audio" }, [
+      return h("figure", { className: "audio", role: "none" }, [
         h("audio", { src: audioUrl, controls: true }),
         ...prepareTextElements(props),
       ])

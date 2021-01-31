@@ -49,18 +49,27 @@
     <!-- HEADER -->
     <div class="main-header">
       <!-- CONTROLS -->
-      <div class="controls" on:click={togglePlay}>
+      <div
+        class="controls"
+        aria-label="Toggle audioplayer"
+        role="button"
+        tabindex="0"
+        on:click={togglePlay}
+      >
         {#if playing}
           <svg
+            role="presentation"
             xmlns="http://www.w3.org/2000/svg"
             height="24"
             viewBox="0 0 24 24"
-            width="24">
+            width="24"
+          >
             <path d="M0 0h24v24H0z" fill="none" />
             <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
           </svg>
         {:else}
           <svg
+            role="presentation"
             xmlns="http://www.w3.org/2000/svg"
             height="24"
             viewBox="0 0 24 24"
@@ -88,12 +97,16 @@
       <!-- ARROW DOWN -->
       <div
         class="expand"
+        aria-label="Toggle information"
+        role="button"
+        tabindex="0"
         on:click={() => {
           expanded = !expanded
         }}
       >
         {#if expanded}
           <svg
+            role="presentation"
             xmlns="http://www.w3.org/2000/svg"
             height="40"
             width="40"
@@ -103,6 +116,7 @@
           >
         {:else}
           <svg
+            role="presentation"
             height="40"
             width="40"
             id="Layer_1"

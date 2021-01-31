@@ -95,13 +95,16 @@
   <input
     placeholder="Write a message..."
     type="[text]"
+    aria-label="Chat message"
     maxlength="600"
     bind:value={chatInputValue}
     on:keydown={e => {
       if (e.keyCode == 13) submitChat()
     }}
   />
-  <button on:click={submitChat}>Send</button>
+  <button aria-label="Send chat message" type="submit" on:click={submitChat}
+    >Send</button
+  >
   <!-- {#if $localUserAuthenticated}
       <button
         class="close-chat"
@@ -136,7 +139,7 @@
       color: $COLOR_LIGHT;
       border-radius: $BORDER_RADIUS;
       padding: $SPACE_S;
-      outline: none;
+      // outline: none;
       height: 30px;
       margin-right: $SPACE_S;
 
@@ -170,7 +173,7 @@
       border: 1px solid $COLOR_GREY_2;
       color: $COLOR_LIGHT;
       border-radius: $BORDER_RADIUS;
-      outline: none;
+      // outline: none;
       cursor: pointer;
       height: 30px;
       line-height: 20px;

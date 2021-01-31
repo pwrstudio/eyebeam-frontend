@@ -23,15 +23,20 @@
   <div class="tutorial" use:links>
     <div
       class="close"
+      aria-label="Close card"
+      role="button"
+      tabindex="0"
       on:click={e => {
         showWelcomeCard = false
       }}
     >
       <svg
+        role="presentation"
         width="40"
         height="40"
         viewBox="0 0 40 40"
-        xmlns="http://www.w3.org/2000/svg">
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           d="M28.9 11.1C28.6 10.8 28.2 10.8 27.9 11.1L20 19L12.1 11.1C11.8 10.8 11.4 10.8 11.1 11.1C10.8 11.4 10.8 11.8 11.1 12.1L19 20L11.1 27.9C10.8 28.2 10.8 28.6 11.1 28.9C11.4 29.2 11.8 29.2 12.1 28.9L20 21L27.9 28.9C28.2 29.2 28.6 29.2 28.9 28.9C29.2 28.6 29.2 28.2 28.9 27.9L21 20L28.9 12.1C29.2 11.8 29.2 11.4 28.9 11.1Z"
         />
@@ -50,25 +55,40 @@
         <div
           class="nav-button back"
           class:disabled={currentIndex === 0}
+          aria-label="Previous card"
+          role="button"
+          tabindex="0"
           on:click={e => {
             currentIndex -= 1
           }}
-        >Back</div>
+        >
+          Back
+        </div>
         {#if currentIndex != card.slides.length - 1}
           <div
             class="nav-button next"
+            aria-label="Next card"
+            role="button"
+            tabindex="0"
             class:disabled={currentIndex === card.slides.length - 1}
             on:click={e => {
               currentIndex += 1
             }}
-          >Next</div>
+          >
+            Next
+          </div>
         {:else}
           <div
             class="nav-button enter"
+            aria-label="Enter"
+            role="button"
+            tabindex="0"
             on:click={e => {
               showWelcomeCard = false
             }}
-          >Enter</div>
+          >
+            Enter
+          </div>
         {/if}
       </div>
     {/if}

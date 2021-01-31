@@ -104,10 +104,15 @@
         {@html renderBlockText(pinnedText)}
         <div
           class="close-pinned-message"
+          aria-label="Close pinned message"
+          role="button"
+          tabindex="0"
           on:click={e => {
             pinnedMessageClosed = true
           }}
-        >×</div>
+        >
+          ×
+        </div>
       </div>
     {/if}
     {#each chatMessages as message (message.msgId)}

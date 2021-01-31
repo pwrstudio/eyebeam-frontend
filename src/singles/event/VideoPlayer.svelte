@@ -20,6 +20,7 @@
       <iframe
         width="720"
         height="480"
+        title="Livestream"
         src={"https://player.vimeo.com/video/" +
           getVideoId(streamUrl).id +
           "?autoplay=1"}
@@ -36,6 +37,7 @@
       <iframe
         width="720"
         height="480"
+        title="Livestream"
         src={"https://www.youtube.com/embed/" +
           getVideoId(streamUrl).id +
           "?autoplay=1"}

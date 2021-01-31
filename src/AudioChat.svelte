@@ -204,6 +204,8 @@
   <div class="header">
     <div
       class="text"
+      aria-label="Toggle userlist"
+      role="button"
       on:click={() => {
         minimized = !minimized
       }}
@@ -213,13 +215,20 @@
       <strong>{roomName}</strong>
     </div>
     <div class="controls">
-      <div class="volume" on:click={togglevolume}>
+      <div
+        class="volume"
+        aria-label="Toggle sound"
+        role="button"
+        on:click={togglevolume}
+      >
         {#if volumeOn}
           <svg
+            role="presentation"
             xmlns="http://www.w3.org/2000/svg"
             height="20"
             viewBox="0 0 24 24"
-            width="20">
+            width="20"
+          >
             <path d="M0 0h24v24H0z" fill="none" />
             <path
               d="M3 9v6h4l5 5V4L7 9H3zm13.5
@@ -230,10 +239,12 @@
           </svg>
         {:else}
           <svg
+            role="presentation"
             xmlns="http://www.w3.org/2000/svg"
             height="20"
             viewBox="0 0 24 24"
-            width="20">
+            width="20"
+          >
             <path d="M0 0h24v24H0z" fill="none" />
             <path
               d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45
@@ -246,9 +257,16 @@
           </svg>
         {/if}
       </div>
-      <div class="microphone" on:click={toggleaudio}>
+      <div
+        class="microphone"
+        aria-label="Toggle your microphone"
+        role="button"
+        tabindex="0"
+        on:click={toggleaudio}
+      >
         {#if audioenabled}
           <svg
+            role="presentation"
             xmlns="http://www.w3.org/2000/svg"
             height="20"
             viewBox="0 0 24 24"
@@ -260,6 +278,7 @@
           >
         {:else}
           <svg
+            role="presentation"
             xmlns="http://www.w3.org/2000/svg"
             height="20"
             viewBox="0 0 24 24"
@@ -273,10 +292,15 @@
       </div>
       <div
         class="button leave"
+        aria-label="Leave audioroom"
+        role="button"
+        tabindex="0"
         on:click={e => {
           dispatch("close")
         }}
-      >Leave</div>
+      >
+        Leave
+      </div>
     </div>
   </div>
 

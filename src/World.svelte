@@ -1262,6 +1262,14 @@
   <MetaData />
 {/if} -->
 
+<!-- GAME WORLD -->
+<div
+  class="game"
+  class:disabled={UI.state == STATE.DISCONNECTED}
+  class:expanded={sidebarHidden}
+  bind:this={gameContainer}
+/>
+
 <!-- SIDEBAR -->
 <!-- Show on desktop only -->
 <MediaQuery query="(min-width: 800px)" let:matches>
@@ -1270,16 +1278,24 @@
       {#if !sidebarHidden}
         <div
           class="hide-button"
+          aria-label="hide sidebar"
+          role="button"
+          tabindex="0"
           in:scale={{ delay: 500 }}
           on:click={() => {
             sidebarHidden = !sidebarHidden
             window.dispatchEvent(new Event("resize"))
           }}
-        >»</div>
+        >
+          »
+        </div>
       {/if}
       <div
         class="sidebar"
         use:links
+        aria-label="Show sidebar"
+        role="button"
+        tabindex="0"
         class:hidden={sidebarHidden}
         on:click={() => {
           if (sidebarHidden) {
@@ -1289,12 +1305,16 @@
         }}
       >
         <!-- MINIMAP -->
-        <div class="clock">
+        <div class="clock" aria-label="Clock">
           <Clock />
         </div>
         {#if LINK_OUT}
           <div class="link-to-ac">
-            <a href={LINK_OUT} target="_blank">{LINK_OUT_TEXT}</a>
+            <a
+              href={LINK_OUT}
+              target="_blank"
+              aria-label="Open external link in new tab">{LINK_OUT_TEXT}</a
+            >
           </div>
         {/if}
         <div class="minimap">
@@ -1362,31 +1382,33 @@
   {/if}
 </MediaQuery>
 
-<!-- GAME WORLD -->
-<div
-  class="game"
-  class:disabled={UI.state == STATE.DISCONNECTED}
-  class:expanded={sidebarHidden}
-  bind:this={gameContainer}
-/>
-
 <!-- MAIN CONTENT -->
-<div class="main-content-slot" class:pushed={sidebarHidden}>
+<main class="main-content-slot" class:pushed={sidebarHidden}>
   <!-- INFORMATION BOX -->
   {#if get($currentAreaObject, "informationCard", false) && !closedAreaCards.includes($currentAreaObject.areaIndex)}
-    <div class="content-item active" transition:fly={{ y: -200 }}>
+    <div
+      class="content-item active"
+      aria-modal="true"
+      role="dialog"
+      transition:fly={{ y: -200 }}
+    >
       <div
         class="close"
+        role="button"
+        aria-label="Close information card"
+        tabindex="0"
         on:click={e => {
           closedAreaCards.push($currentAreaObject.areaIndex)
           closedAreaCards = closedAreaCards
         }}
       >
         <svg
+          role="presentation"
           width="40"
           height="40"
           viewBox="0 0 40 40"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M28.9 11.1C28.6 10.8 28.2 10.8 27.9 11.1L20 19L12.1 11.1C11.8 10.8 11.4 10.8 11.1 11.1C10.8 11.4 10.8 11.8 11.1 12.1L19 20L11.1 27.9C10.8 28.2 10.8 28.6 11.1 28.9C11.4 29.2 11.8 29.2 12.1 28.9L20 21L27.9 28.9C28.2 29.2 28.6 29.2 28.9 28.9C29.2 28.6 29.2 28.2 28.9 27.9L21 20L28.9 12.1C29.2 11.8 29.2 11.4 28.9 11.1Z"
           />
@@ -1398,7 +1420,12 @@
 
   <!-- AUDIOZONE -->
   {#if inAudioZone}
-    <div class="content-item active" transition:fly={{ y: -200 }}>
+    <div
+      class="content-item active"
+      aria-modal="true"
+      role="dialog"
+      transition:fly={{ y: -200 }}
+    >
       {#await audioInstallations then audioInstallations}
         <AudioInstallationSingle
           {audioInstallationLayer}
@@ -1414,13 +1441,18 @@
   {#await activeStreams then activeStreams}
     <!-- MAIN AREA -->
     {#if $currentVideoRoom == "main" && currentStreamUrl && !activeContentClosed && $localUserName}
-      <div class="content-item active" transition:fly={{ y: -200 }}>
+      <div
+        class="content-item active"
+        aria-modal="true"
+        role="dialog"
+        transition:fly={{ y: -200 }}
+      >
         <LiveSingle event={currentStreamEvent} url={currentStreamUrl} />
       </div>
     {/if}
     <!-- SUPPORT AREA -->
     <!-- {#if $currentVideoRoom == 'support' && supportStreamUrl && !supportStreamClosed}
-      <div class="content-item active" transition:fly={{ y: -200 }}>
+      <div class="content-item active" aria-modal="true" role="dialog" transition:fly={{ y: -200 }}>
         <div
           class="close"
           on:click={e => {
@@ -1440,16 +1472,20 @@
   {#if ["projects", "profiles", "profiles", "events", "pages"].includes(section)}
     <div
       class="content-item passive"
+      aria-modal="true"
+      role="dialog"
       class:pushed={!activeContentClosed}
       use:links
       transition:fly={{ y: 200, duration: 400, easing: quartOut }}
     >
-      <a class="close" href="/">
+      <a class="close" role="button" aria-label="Close" href="/">
         <svg
+          role="presentation"
           width="40"
           height="40"
           viewBox="0 0 40 40"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M28.9 11.1C28.6 10.8 28.2 10.8 27.9 11.1L20 19L12.1 11.1C11.8 10.8 11.4 10.8 11.1 11.1C10.8 11.4 10.8 11.8 11.1 12.1L19 20L11.1 27.9C10.8 28.2 10.8 28.6 11.1 28.9C11.4 29.2 11.8 29.2 12.1 28.9L20 21L27.9 28.9C28.2 29.2 28.6 29.2 28.9 28.9C29.2 28.6 29.2 28.2 28.9 27.9L21 20L28.9 12.1C29.2 11.8 29.2 11.4 28.9 11.1Z"
           />
@@ -1505,7 +1541,7 @@
       {/await}
     </div>
   {/if}
-</div>
+</main>
 
 <!-- MOBILE -->
 <MediaQuery query="(max-width: 800px)" let:matches>
@@ -1531,6 +1567,9 @@
           class="mobile-toolkit"
           use:links
           class:expanded={mobileExpanded}
+          aria-label="Show toolkit"
+          role="button"
+          tabindex="0"
           on:click={e => {
             if (
               (!mobileExpanded && e.target.nodeName == "INPUT") ||
@@ -1543,6 +1582,9 @@
           {#if mobileExpanded}
             <div
               class="close"
+              role="button"
+              aria-label="Close toolkit"
+              tabindex="0"
               on:click={e => {
                 mobileExpanded = false
                 e.stopPropagation()
@@ -1550,10 +1592,12 @@
               }}
             >
               <svg
+                role="presentation"
                 width="40"
                 height="40"
                 viewBox="0 0 40 40"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M28.9 11.1C28.6 10.8 28.2 10.8 27.9 11.1L20 19L12.1 11.1C11.8 10.8 11.4 10.8 11.1 11.1C10.8 11.4 10.8 11.8 11.1 12.1L19 20L11.1 27.9C10.8 28.2 10.8 28.6 11.1 28.9C11.4 29.2 11.8 29.2 12.1 28.9L20 21L27.9 28.9C28.2 29.2 28.6 29.2 28.9 28.9C29.2 28.6 29.2 28.2 28.9 27.9L21 20L28.9 12.1C29.2 11.8 29.2 11.4 28.9 11.1Z"
                 />
@@ -1642,16 +1686,21 @@
 
       <div
         class="mob-message"
+        aria-label="Join audioroom"
+        role="button"
+        tabindex="0"
         on:click={e => {
           audioChatActive = true
         }}
       >
         Join Audio
         <svg
+          role="presentation"
           width="23"
           height="20"
           viewBox="0 0 23 20"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M7.3672 11.4041C8.52696 11.4041 9.49643 11.019 10.2756 10.2489C11.0549 9.47872 11.4445 8.51378 11.4445 7.35402C11.4445 6.19426 11.0549 5.22932 10.2756 4.45917C9.49643 3.68902 8.52696 3.30395 7.3672 3.30395C6.20745 3.30395 5.24251 3.68902 4.47235 4.45917C3.7022 5.22932 3.31713 6.19426 3.31713 7.35402C3.31713 8.51378 3.7022 9.47872 4.47235 10.2489C5.24251 11.019 6.20745 11.4041 7.3672 11.4041ZM8.53602 12.5185H6.22557C5.42824 12.5185 4.67622 12.6635 3.96949 12.9534C3.26277 13.2615 2.64665 13.6783 2.12114 14.2038C1.59562 14.7293 1.17884 15.3454 0.87078 16.0522C0.56272 16.7589 0.408691 17.5109 0.408691 18.3082V19.4771H14.3257V18.3082C14.3257 17.5109 14.1807 16.7589 13.8908 16.0522C13.5827 15.3454 13.166 14.7293 12.6405 14.2038C12.1149 13.6783 11.4988 13.2615 10.7921 12.9534C10.0854 12.6635 9.33335 12.5185 8.53602 12.5185ZM19.4087 0.477051L17.7506 2.13513C18.5117 2.89622 19.1006 3.77056 19.5174 4.75817C19.9342 5.74577 20.1426 6.7832 20.1426 7.87047C20.1426 8.95774 19.9342 9.99517 19.5174 10.9828C19.1006 11.9704 18.5117 12.8447 17.7506 13.6058L19.4087 15.2639C20.3872 14.2672 21.1393 13.1347 21.6648 11.8662C22.1903 10.5977 22.453 9.2658 22.453 7.87047C22.453 6.47514 22.1903 5.14325 21.6648 3.87476C21.1393 2.60628 20.3872 1.47372 19.4087 0.477051ZM16.1197 3.76603L14.4616 5.42412C14.8059 5.7503 15.0642 6.12178 15.2363 6.53857C15.4085 6.95536 15.4945 7.39932 15.4945 7.87047C15.4945 8.34162 15.4085 8.78558 15.2363 9.20237C15.0642 9.61916 14.8059 9.99064 14.4616 10.3168L16.1197 11.9749C16.6633 11.4313 17.0801 10.8061 17.3701 10.0994C17.66 9.39264 17.805 8.64968 17.805 7.87047C17.805 7.09126 17.66 6.3483 17.3701 5.64157C17.0801 4.93484 16.6633 4.30967 16.1197 3.76603Z"
           />
@@ -1663,10 +1712,15 @@
 
       <div
         class="button"
+        aria-label="Join audioroom"
+        role="button"
+        tabindex="0"
         on:click={e => {
           audioChatActive = true
         }}
-      >Join</div>
+      >
+        Join
+      </div>
     </div>
   {/if}
 
@@ -1696,6 +1750,9 @@
       <Tutorial card={tutorialCard} bind:showWelcomeCard />
       <div
         class="background-hittable"
+        aria-label="Close card"
+        role="button"
+        tabindex="0"
         on:click={e => {
           showWelcomeCard = false
         }}

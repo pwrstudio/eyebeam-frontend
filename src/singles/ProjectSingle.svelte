@@ -31,11 +31,15 @@
     <!-- BACK LINK -->
     <div
       class="go-back"
+      aria-label="Go back"
+      role="button"
+      tabindex="0"
       on:click={e => {
         window.history.back()
       }}
     >
       <svg
+        role="presentation"
         xmlns="http://www.w3.org/2000/svg"
         height="24"
         viewBox="0 0 24 24"

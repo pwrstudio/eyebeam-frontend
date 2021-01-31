@@ -33,9 +33,11 @@
   class="username-dialog"
   transition:fade={{ duration: 400, easing: quartOut }}
 >
-  <div class="box">
+  <div class="box" aria-modal="true" role="dialog">
     <input
       type="text"
+      aria-required="true"
+      aria-label="Username"
       bind:this={inputEl}
       bind:value={username}
       placeholder="Choose your username"
@@ -44,6 +46,8 @@
       }}
     />
     <button
+      aria-label="Enter"
+      type="submit"
       on:click={e => {
         dispatch("username", { username: username })
       }}>Enter</button
@@ -93,7 +97,7 @@
         color: $COLOR_DARK;
         border-radius: $BORDER_RADIUS;
         padding: $SPACE_S $SPACE_M;
-        outline: none;
+        // outline: none;
         height: 30px;
         margin-right: $SPACE_L;
 
@@ -130,7 +134,7 @@
         background: transparent;
         color: $COLOR_DARK;
         border-radius: $BORDER_RADIUS;
-        outline: none;
+        // outline: none;
         cursor: pointer;
         height: 30px;
         line-height: 20px;
@@ -148,7 +152,7 @@
         border: 1px solid $COLOR_DARK;
         color: $COLOR_DARK;
         border-radius: $BORDER_RADIUS;
-        outline: none;
+        // outline: none;
         cursor: pointer;
         height: 30px;
         line-height: 20px;

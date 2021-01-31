@@ -27,6 +27,9 @@
 <div class="message-container">
   <div
     class="header"
+    aria-label="Toggle message thread"
+    role="button"
+    tabindex="0"
     class:expanded
     on:click={e => {
       expanded = !expanded
