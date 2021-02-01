@@ -171,7 +171,7 @@
       .title {
         font-family: $SANS_STACK;
         font-size: $FONT_SIZE_LARGE;
-        font-weight: bold;
+        font-weight: 600;
         max-width: calc(100% - 40px);
       }
 
@@ -224,7 +224,7 @@
     .date {
       padding: $SPACE_M;
       text-align: center;
-      font-weight: bold;
+      font-weight: 600;
       font-family: $SANS_STACK;
     }
 

@@ -185,7 +185,7 @@
           .title {
             font-size: $FONT_SIZE_BASE;
             font-family: $MONO_STACK;
-            font-weight: bold;
+            font-weight: 600;
             max-width: 70%;
             margin-bottom: $SPACE_XS / 2;
           }
@@ -230,7 +230,7 @@
         border-bottom: 1px solid $COLOR_GREY_1;
         padding-bottom: $SPACE_S;
         min-height: unset;
-        font-weight: bold;
+        font-weight: 600;
 
         a {
           text-decoration: none;
@@ -311,7 +311,7 @@
             .title {
               font-size: $FONT_SIZE_BASE;
               font-family: $MONO_STACK;
-              font-weight: bold;
+              font-weight: 600;
               white-space: nowrap;
               max-width: 70%;
               text-overflow: ellipsis;

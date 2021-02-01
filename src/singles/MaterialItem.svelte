@@ -84,7 +84,7 @@
 
       .title {
         font-family: $SANS_STACK;
-        font-weight: bold;
+        font-weight: 600;
         white-space: nowrap;
         max-width: 80%;
         overflow: hidden;
