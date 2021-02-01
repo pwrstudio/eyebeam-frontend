@@ -24,7 +24,7 @@
     <span class="name">{message.name}</span>
     <span class="date">{formattedChatDate(message.timestamp)}</span>
   </div>
-  <div class="body">
+  <p class="body">
     {@html anchorme({
       input: message.text,
       options: {
@@ -33,7 +33,7 @@
         },
       },
     })}
-  </div>
+  </p>
 </div>
 
 <style lang="scss">
@@ -76,9 +76,11 @@
     }
 
     .body {
+      display: block;
       border-left: 1px solid $COLOR_GREY_2;
       padding-left: $SPACE_S;
       padding-right: $SPACE_XS;
+      margin: 0;
     }
 
     &.broadcast {

@@ -82,7 +82,7 @@
 
       <div class="mid-section">
         <!-- TITLE -->
-        <div class="title">{audioInstallation.title}</div>
+        <h2 class="title">{audioInstallation.title}</h2>
         <!-- PARTICIPANTS -->
         {#if get(audioInstallation, "participants", false) && Array.isArray(audioInstallation.participants)}
           <div class="participants">

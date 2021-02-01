@@ -36,7 +36,7 @@
     }}
   >
     <div class="meta">
-      <div class="title">{message.title}</div>
+      <h2 class="title">{message.title}</h2>
       <div class="date">{formatDate(message.last_posted_at)}</div>
     </div>
     <div class="participants">

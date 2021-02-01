@@ -51,7 +51,7 @@
   <!-- HEADER -->
   <div class="main-header">
     <!-- TITLE -->
-    <div class="title">{event.title}</div>
+    <h2 class="title">{event.title}</h2>
 
     <!-- PARTICIPANTS -->
     <div class="participants">
@@ -71,14 +71,14 @@
 
   <!-- DATE -->
   <div class="date">{formatDate(event.startDate)}</div>
-  <div class="divider" />
+  <div class="divider" role="presentation" />
 
   <!-- TEXT -->
   {#if Array.isArray(get(event, "content.content", false)) && event.content.content.length > 0}
     <div class="text">
       {@html renderBlockText(event.content.content)}
     </div>
-    <div class="divider" />
+    <div class="divider" role="presentation" />
   {/if}
 
   <!-- CONNECTED CASE STUDIES -->

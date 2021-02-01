@@ -46,8 +46,8 @@
 
 <a href={url} target="_blank" class="material-item">
   <div class="row">
-    <div class="title">{item.title}</div>
-    <div class="elips">
+    <h2 class="title">{item.title}</h2>
+    <div class="elips" role="presentation">
       ....................................................................
     </div>
     <div class="format">

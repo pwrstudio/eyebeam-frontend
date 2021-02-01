@@ -70,7 +70,7 @@
       >
         <div class="inner">
           <div class="row">
-            <div class="title">{event.title}</div>
+            <h2 class="title">{event.title}</h2>
             <!-- <div class="elips">
               .........................................................
             </div> -->
@@ -101,7 +101,7 @@
         >
           <div class="inner">
             <div class="row">
-              <div class="title">{exhibition.title}</div>
+              <h2 class="title">{exhibition.title}</h2>
               {#if exhibition.period}
                 <div class="elips" role="presentation">
                   .........................................................

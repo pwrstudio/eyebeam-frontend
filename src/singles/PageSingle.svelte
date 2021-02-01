@@ -25,7 +25,7 @@
   <!-- HEADER -->
   <div class="main-header">
     <!-- TITLE -->
-    <div class="title">{page.title}</div>
+    <h2 class="title">{page.title}</h2>
   </div>
   <div class="divider" />
 

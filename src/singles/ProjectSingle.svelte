@@ -51,9 +51,9 @@
     </div>
     <div class="main-header">
       <!-- COLOR CODE  -->
-      <div class="color-icon {project.category}" />
+      <div class="color-icon {project.category}" role="presentation" />
       <!-- TITLE -->
-      <div class="title">{project.title}</div>
+      <h2 class="title">{project.title}</h2>
       <!-- PARTICIPANTS -->
       {#if get(project, "participants", false) && Array.isArray(project.participants)}
         <div class="participants">
@@ -80,7 +80,7 @@
     <div class="material">
       <div class="material-item header">
         <div class="row">
-          <div class="title">Material</div>
+          <h2 class="title">Material</h2>
           <div class="format">Type</div>
         </div>
       </div>

@@ -224,6 +224,7 @@
 
   loadData(QUERY.GLOBAL_SETTINGS)
     .then(gS => {
+      console.dir(gS)
       globalSettings.set(gS)
     })
     .catch(err => {
@@ -1258,9 +1259,13 @@
 
 <!-- <MetaData /> -->
 <!-- Show default if not in special section -->
-<!-- {#if !['projects', 'profiles', 'profiles', 'events', 'pages'].includes(section) && !inAudioZone}
+{#if !["projects", "profiles", "profiles", "events", "pages"].includes(section) && !inAudioZone}
   <MetaData />
-{/if} -->
+{/if}
+
+{#if $globalSettings && $globalSettings.title}
+  <h1>{$globalSettings.title}</h1>
+{/if}
 
 <!-- GAME WORLD -->
 <div
@@ -1290,7 +1295,7 @@
           »
         </div>
       {/if}
-      <div
+      <aside
         class="sidebar"
         use:links
         aria-label="Show sidebar"
@@ -1313,7 +1318,8 @@
             <a
               href={LINK_OUT}
               target="_blank"
-              aria-label="Open external link in new tab">{LINK_OUT_TEXT}</a
+              aria-label={LINK_OUT_TEXT + ", open in new tab."}
+              >{LINK_OUT_TEXT}</a
             >
           </div>
         {/if}
@@ -1377,7 +1383,7 @@
             }}
           />
         </div>
-      </div>
+      </aside>
     {/if}
   {/if}
 </MediaQuery>
@@ -1553,7 +1559,7 @@
         <a
           href={LINK_OUT}
           target="_blank"
-          aria-label="Open external link in new tab">{LINK_OUT_TEXT}</a
+          aria-label={LINK_OUT_TEXT + ", open in new tab."}>{LINK_OUT_TEXT}</a
         >
       </div>
     {/if}

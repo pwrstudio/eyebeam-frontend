@@ -131,11 +131,12 @@
         class="event"
         class:related
         in:fade={{ delay: 100 * index }}
-        href={"/events/" + get(event, "slug.current", "")}>
+        href={"/events/" + get(event, "slug.current", "")}
+      >
         <div class="fade" />
         <div class="inner">
           <div class="row">
-            <div class="title">{event.title}</div>
+            <h2 class="title">{event.title}</h2>
             <div class="date">{formatDate(event.startDate)}</div>
           </div>
           <div class="row">

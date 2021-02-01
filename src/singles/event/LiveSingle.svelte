@@ -45,7 +45,7 @@
     <!-- HEADER -->
     <div class="main-header">
       <!-- TITLE -->
-      <div class="title">{event.title}</div>
+      <h2 class="title">{event.title}</h2>
       <!-- ARROW DOWN -->
       <div
         class="expand"
@@ -137,7 +137,7 @@
         {/if}
       </div>
     </div>
-    <div class="divider" />
+    <div class="divider" role="presentation" />
 
     {#if expanded}
       <!-- TEXT -->
@@ -145,7 +145,7 @@
         <div class="text">
           {@html renderBlockText(event.content.content)}
         </div>
-        <div class="divider" />
+        <div class="divider" role="presentation" />
       {/if}
 
       <!-- CONNECTED CASE STUDIES -->

@@ -13,8 +13,8 @@
   export let player = false
 </script>
 
-<div class="map-container">
-  {#if miniImage}<img src={miniImage} alt="minimap" />{/if}
+<div class="map-container" role="presentation">
+  {#if miniImage}<img src={miniImage} alt="" />{/if}
   {#if get(player, "avatar.y", false) && get(player, "avatar.x", false)}
     <div
       class="map-marker"

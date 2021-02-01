@@ -108,7 +108,7 @@ const serializers = {
             .quality(90)
             .auto("format")
             .url(),
-            alt: has(props, "node.caption.content") ?  toPlainText(props.node.caption.content) : ''
+            alt: has(props, "node.altText") ?  props.node.altText : ''
         }),
         ...prepareTextElements(props),
       ])
@@ -123,7 +123,7 @@ const serializers = {
             h("iframe", {
               width: "720",
               height: "480",
-              title: "youtube video",
+              title: has(props, "node.altText") ?  props.node.altText : "youtube video",
               src:
                 "https://www.youtube.com/embed/" +
                 getVideoId(props.node.url).id,
@@ -145,7 +145,7 @@ const serializers = {
             h("iframe", {
               width: "720",
               height: "480",
-              title: "vimeo video",
+              title: has(props, "node.altText") ?  props.node.altText : "vimeo video",
               src:
                 "https://player.vimeo.com/video/" +
                 getVideoId(props.node.url).id,
@@ -168,7 +168,7 @@ const serializers = {
             h("iframe", {
               width: "100%",
               height: "300",
-              title: "soundcloud player",
+              title: has(props, "node.altText") ?  props.node.altText : "soundcloud player",
               src:
                 "https://w.soundcloud.com/player/?url=" +
                 get(props, "node.url", "") +

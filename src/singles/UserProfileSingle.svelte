@@ -72,7 +72,7 @@
   <!-- HEADER -->
   <div class="main-header">
     <!-- TITLE -->
-    <div class="title">
+    <h2 class="title">
       {user.name}
       <!-- {#if $localUserAuthenticated && user.username}
         <a
@@ -90,9 +90,9 @@
           </svg>
         </a>
       {/if} -->
-    </div>
+    </h2>
   </div>
-  <div class="divider" />
+  <div class="divider" role="presentation" />
 
   <!-- BIOGRAPHY -->
   {#if Array.isArray(get(user, "biography.content", false))}
