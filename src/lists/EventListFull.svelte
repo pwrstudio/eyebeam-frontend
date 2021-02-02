@@ -228,7 +228,7 @@
           .title {
             font-size: $FONT_SIZE_BASE;
             font-family: $MONO_STACK;
-            font-weight: bold;
+            font-weight: 600;
             max-width: 70%;
             margin-bottom: $SPACE_XS / 2;
           }
@@ -335,7 +335,7 @@
         .title {
           font-size: $FONT_SIZE_BASE;
           font-family: $MONO_STACK;
-          font-weight: bold;
+          font-weight: 600;
           max-width: 70%;
           margin-bottom: $SPACE_XS / 2;
         }

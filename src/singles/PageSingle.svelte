@@ -49,7 +49,7 @@
       .title {
         font-family: $SANS_STACK;
         font-size: $FONT_SIZE_LARGE;
-        font-weight: bold;
+        font-weight: 600;
       }
 
       .participants {

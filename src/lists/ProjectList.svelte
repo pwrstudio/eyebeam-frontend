@@ -190,7 +190,7 @@
 
           .title {
             font-family: $SANS_STACK;
-            font-weight: bold;
+            font-weight: 600;
           }
 
           .participants {

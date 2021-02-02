@@ -1883,8 +1883,8 @@
       position: relative;
       top: -3px;
 
-      border: 1px solid $COLOR_GREY_2;
-      color: $COLOR_GREY_2;
+      border: 1px solid $COLOR_GREY_4;
+      color: $COLOR_GREY_4;
       font-size: $FONT_SIZE_SMALL;
       // transform: translate(4px, -4px);
 
