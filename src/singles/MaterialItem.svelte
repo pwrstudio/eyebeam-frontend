@@ -9,6 +9,9 @@
   import get from "lodash/get"
   import { urlFor } from "../sanity.js"
 
+  // *** COMPONENTS
+  import InlineSiteOverlay from "../overlays/InlineSiteOverlay.svelte"
+
   // *** GLOBAL
   import { FORMATMAP } from "../global.js"
 
@@ -17,9 +20,10 @@
 
   // *** VARIABLES
   let url = ""
+  let inlineSiteActive = false
 
   const makeUrl = ref =>
-    "https://shape.anthropocene-curriculum.org/material/files/bu5rnal5/production/" +
+    "https://cdn.sanity.io/files/1hwmqt2a/production/" +
     ref.substring(5).replace("-", ".")
 
   switch (item._type) {
@@ -38,25 +42,67 @@
     case "videoBlock":
       url = makeUrl(get(item, "videoFile.asset._ref", ""))
       break
+    case "inlineSiteBlock":
+      url = get(item, "url", "")
+      break
     case "linkBlock":
       url = get(item, "url", "")
       break
   }
 </script>
 
-<a href={url} target="_blank" class="material-item">
-  <div class="row">
-    <h2 class="title">{item.title}</h2>
-    <div class="elips" role="presentation">
-      ....................................................................
-    </div>
-    <div class="format">
-      {item._type === "fileBlock" || item._type === "linkBlock"
-        ? item.fileType
-        : FORMATMAP[item._type]}
+{#if item._type == "inlineSiteBlock"}
+  <div
+    aria-label={item.title + ", open site in popup window"}
+    class="material-item"
+    role="button"
+    tabindex="0"
+    on:click={e => {
+      inlineSiteActive = true
+    }}
+  >
+    <div class="row">
+      <h2 class="title">{item.title}</h2>
+      <div class="elips" role="presentation">
+        ....................................................................
+      </div>
+      <div class="format">
+        {item._type === "fileBlock" || item._type === "linkBlock"
+          ? item.fileType
+          : FORMATMAP[item._type]}
+      </div>
     </div>
   </div>
-</a>
+{:else}
+  <a
+    href={url}
+    target="_blank"
+    download
+    aria-label={item.title}
+    class="material-item"
+  >
+    <div class="row">
+      <h2 class="title">{item.title}</h2>
+      <div class="elips" role="presentation">
+        ....................................................................
+      </div>
+      <div class="format">
+        {item._type === "fileBlock" || item._type === "linkBlock"
+          ? item.fileType
+          : FORMATMAP[item._type]}
+      </div>
+    </div>
+  </a>
+{/if}
+
+{#if inlineSiteActive}
+  <InlineSiteOverlay
+    {url}
+    on:close={e => {
+      inlineSiteActive = false
+    }}
+  />
+{/if}
 
 <style lang="scss">
   @import "../responsive.scss";

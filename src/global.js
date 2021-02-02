@@ -28,6 +28,7 @@ export const FORMATMAP = {
   videoBlock: "VIDEO",
   audioBlock: "AUDIO",
   imageBlock: "IMAGE",
+  inlineSiteBlock: "INLINE WEBSITE",
 }
 
 export const MAP = { WIDTH: 4000, HEIGHT: 4000 }
