@@ -1863,13 +1863,14 @@
     text-align: center;
     top: $SPACE_S;
     left: $SPACE_S;
-    padding: $SPACE_S;
+    padding: $SPACE_M;
     border-radius: $BORDER_RADIUS;
     font-size: $FONT_SIZE_BASE;
     display: flex;
+    align-items: center;
 
-    padding-left: $SPACE_M;
-    padding-right: $SPACE_M;
+    padding-left: $SPACE_S;
+    padding-right: $SPACE_S;
 
     user-select: none;
 
@@ -1908,8 +1909,6 @@
       // letter-spacing: 0.05em;
       padding: 4px $SPACE_M 2px $SPACE_M;
       display: inline-table;
-      position: relative;
-      top: -3px;
 
       border: 1px solid $COLOR_GREY_4;
       color: $COLOR_GREY_4;
@@ -1920,8 +1919,9 @@
       text-align: center;
 
       &:hover {
-        border: 1px solid $COLOR_DARK;
-        color: $COLOR_DARK;
+        border: 1px solid $COLOR_GREY_1;
+        background: $COLOR_DARK;
+        color: $COLOR_LIGHT;
         cursor: pointer;
       }
 
@@ -1960,7 +1960,7 @@
     font-family: "IBM Plex Sans", sans-serif;
     position: fixed;
     top: $SPACE_S;
-    right: 350px;
+    right: 410px;
     width: 40px;
     height: 40px;
     line-height: 36px;
@@ -2225,7 +2225,7 @@
     color: $COLOR_GREY_1;
     z-index: 1001;
     position: absolute;
-    top: 170px;
+    top: 165px;
     right: 0;
     padding: $SPACE_XS;
 
