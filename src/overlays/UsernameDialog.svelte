@@ -90,7 +90,7 @@
 
       input {
         font-family: $MONO_STACK;
-        font-size: $FONT_SIZE_MEDIUM;
+        font-size: $FONT_SIZE_SMALL;
         float: left;
         width: calc(100% - 60px);
         display: block;
