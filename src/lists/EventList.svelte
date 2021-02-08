@@ -188,6 +188,7 @@
             font-weight: 600;
             max-width: 70%;
             margin-bottom: $SPACE_XS / 2;
+            margin-right: $SPACE_XS / 2;
           }
 
           .elips {
