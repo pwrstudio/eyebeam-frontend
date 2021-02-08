@@ -23,7 +23,7 @@ export const currentAreaObject = derived(
     ([$currentArea, $areaList]) => {
         let obj = {}
         if($areaList && Array.isArray($areaList)) {
-            obj = $areaList.find(a => a.color === HEX_MAP[COLORMAP[$currentArea]]) 
+            obj = $areaList.find(a => a.color.value === HEX_MAP[COLORMAP[$currentArea]]) 
         }
         return obj
     }
