@@ -220,7 +220,9 @@
 
       .row {
         width: 100%;
+        height: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: baseline;
 
@@ -228,7 +230,7 @@
           font-family: $SANS_STACK;
           font-weight: bold;
           white-space: nowrap;
-          max-width: 70%;
+          max-width: 100%;
           text-overflow: ellipsis;
           overflow: hidden;
           margin-bottom: $SPACE_XS / 2;
