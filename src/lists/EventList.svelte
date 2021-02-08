@@ -184,7 +184,7 @@
 
           .title {
             font-size: $FONT_SIZE_BASE;
-            font-family: $MONO_STACK;
+            font-family: $SANS_STACK;
             font-weight: 600;
             max-width: 70%;
             margin-bottom: $SPACE_XS / 2;
@@ -202,7 +202,7 @@
           }
 
           .date {
-            font-family: $MONO_STACK;
+            font-family: $SANS_STACK;
             font-weight: normal;
             font-size: 90%;
             white-space: nowrap;
@@ -211,7 +211,7 @@
           }
 
           .participants {
-            font-family: $MONO_STACK;
+            font-family: $SANS_STACK;
             font-weight: normal;
             pointer-events: none;
             color: $COLOR_GREY_3;
@@ -311,7 +311,7 @@
 
             .title {
               font-size: $FONT_SIZE_BASE;
-              font-family: $MONO_STACK;
+              font-family: $SANS_STACK;
               font-weight: 600;
               white-space: nowrap;
               max-width: 70%;
@@ -331,7 +331,7 @@
             }
 
             .date {
-              font-family: $MONO_STACK;
+              font-family: $SANS_STACK;
               font-weight: normal;
               font-size: 90%;
               white-space: nowrap;
@@ -339,7 +339,7 @@
             }
 
             .participants {
-              font-family: $MONO_STACK;
+              font-family: $SANS_STACK;
               font-weight: normal;
               pointer-events: none;
               color: $COLOR_GREY_3;

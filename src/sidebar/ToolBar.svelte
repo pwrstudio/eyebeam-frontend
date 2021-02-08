@@ -129,7 +129,7 @@
     user-select: none;
 
     input {
-      font-family: $MONO_STACK;
+      font-family: $SANS_STACK;
       font-size: $FONT_SIZE_BASE;
       float: left;
       width: calc(100% - 60px);
@@ -164,7 +164,7 @@
     }
 
     button {
-      font-family: $MONO_STACK;
+      font-family: $SANS_STACK;
       font-size: $FONT_SIZE_BASE;
       width: 60px;
       float: right;

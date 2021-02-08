@@ -1825,7 +1825,7 @@
 
   * {
     box-sizing: border-box;
-    font-family: $MONO_STACK;
+    font-family: $SANS_STACK;
   }
 
   .inventory {
