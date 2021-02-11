@@ -61,7 +61,7 @@
       }
 
       input {
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         font-size: $FONT_SIZE_SMALL;
         float: left;
         width: 100%;
@@ -88,7 +88,7 @@
       }
 
       textarea {
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         font-size: $FONT_SIZE_BASE;
         float: left;
         width: 100%;
@@ -108,7 +108,7 @@
       }
 
       button {
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         font-size: $FONT_SIZE_BASE;
         width: 60px;
         display: block;

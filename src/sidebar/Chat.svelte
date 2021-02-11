@@ -192,7 +192,7 @@
 
   .close-pinned-message {
     position: absolute;
-    top: -2px;
+    top: 0px;
     right: 10px;
     font-size: 22px;
     cursor: pointer;

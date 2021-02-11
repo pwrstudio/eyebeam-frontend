@@ -36,7 +36,7 @@
 <div class="clock-berlin">
   {time}&nbsp;CET
 </div> -->
-<div class="clock-new-york" aria-label="Current time">
+<div class="clock-new-york" aria-label="Current time" aria-hidden="true">
   <span>{time}</span>EST
 </div>
 

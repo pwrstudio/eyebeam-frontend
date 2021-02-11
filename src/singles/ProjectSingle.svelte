@@ -80,7 +80,7 @@
     <div class="material">
       <div class="material-item header">
         <div class="row">
-          <h2 class="title">Material</h2>
+          <h2 class="title">Artist Media</h2>
           <div class="format">Type</div>
         </div>
       </div>

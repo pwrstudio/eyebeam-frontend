@@ -222,7 +222,7 @@
         font-size: $FONT_SIZE_SMALL;
         padding: $SPACE_S $SPACE_M;
         background: $COLOR_LIGHT;
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         transition: background 150ms $STANDARD_TRANSITION;
         border-radius: $BORDER_RADIUS;
         cursor: pointer;

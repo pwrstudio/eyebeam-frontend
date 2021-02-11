@@ -1264,7 +1264,7 @@
 {/if}
 
 {#if $globalSettings && $globalSettings.title}
-  <h1>{$globalSettings.title}</h1>
+  <h1 aria-hidden="true">{$globalSettings.title}</h1>
 {/if}
 
 <!-- GAME WORLD -->
@@ -1394,8 +1394,7 @@
   {#if get($currentAreaObject, "informationCard", false) && !closedAreaCards.includes($currentAreaObject.areaIndex)}
     <div
       class="content-item active"
-      aria-modal="true"
-      role="dialog"
+      
       transition:fly={{ y: -200 }}
     >
       <div
@@ -1578,6 +1577,7 @@
           use:links
           class:expanded={mobileExpanded}
           aria-label="Show toolkit"
+          aria-hidden="true"
           role="button"
           tabindex="0"
           on:click={e => {
@@ -1594,6 +1594,7 @@
               class="close"
               role="button"
               aria-label="Close toolkit"
+              aria-hidden="true"
               tabindex="0"
               on:click={e => {
                 mobileExpanded = false
@@ -1740,7 +1741,7 @@
         href={$globalSettings.zoomLink}
         target="_blank"
         class="mob-message"
-        aria-label="Join audioroom"
+        aria-label="Join Zoom Louge"
       >
         Join
         <svg
@@ -1788,7 +1789,7 @@
       <Tutorial card={tutorialCard} bind:showWelcomeCard />
       <div
         class="background-hittable"
-        aria-label="Close card"
+        aria-label="Close tutorial"
         role="button"
         tabindex="0"
         on:click={e => {
@@ -1917,6 +1918,7 @@
 
       border-radius: $BORDER_RADIUS;
       text-align: center;
+      text-decoration: none !important;
 
       &:hover {
         border: 1px solid $COLOR_GREY_1;
@@ -2136,7 +2138,7 @@
   .mobile-toolkit {
     background: linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.6054796918767507) 0%,
+      rgba(0, 0, 0, .9) 75%,
       rgba(0, 0, 0, 0) 100%
     );
     position: fixed;
@@ -2219,7 +2221,7 @@
   }
 
   .link-to-ac {
-    font-family: $MONO_STACK;
+    font-family: $SANS_STACK;
     font-size: $FONT_SIZE_SMALL;
     background: $COLOR_DARK_TRANSPARENT;
     color: $COLOR_GREY_1;
@@ -2237,7 +2239,7 @@
     }
 
     @include screen-size("small") {
-      background: transparent;
+      background: $COLOR_DARK_TRANSPARENT;
       top: 80px;
       right: unset;
       left: 0;

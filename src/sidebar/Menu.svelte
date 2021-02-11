@@ -15,13 +15,13 @@
 <div class="menu-container">
   <nav>
     <!-- <a href="/pages/schedule" class="menu-item">Schedule</a> -->
-    <a href="/projects" class="menu-item">Projects</a>
+    <a href="/projects" class="menu-item">Artist Projects</a>
     <a href="/pages/guide" class="menu-item">Guide</a>
     <a href="/pages/about" class="menu-item">About</a>
   </nav>
 
   <span
-    aria-label="Change username"
+    aria-label="Change your name for interaction"
     role="button"
     tabindex="0"
     on:click={e => {

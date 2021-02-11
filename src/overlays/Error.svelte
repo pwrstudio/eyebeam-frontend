@@ -33,7 +33,7 @@
     z-index: 100000;
 
     .box {
-      font-family: $MONO_STACK;
+      font-family: $SANS_STACK;
       padding: 20px;
       font-size: $FONT_SIZE_LARGE;
       text-align: center;

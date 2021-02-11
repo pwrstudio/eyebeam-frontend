@@ -64,7 +64,7 @@
     <div class="row">
       <h2 class="title">{item.title}</h2>
       <div class="elips" role="presentation">
-        ....................................................................
+        
       </div>
       <div class="format">
         {item._type === "fileBlock" || item._type === "linkBlock"
@@ -84,7 +84,7 @@
     <div class="row">
       <h2 class="title">{item.title}</h2>
       <div class="elips" role="presentation">
-        ....................................................................
+        
       </div>
       <div class="format">
         {item._type === "fileBlock" || item._type === "linkBlock"
@@ -127,6 +127,7 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       .title {
         font-family: $SANS_STACK;
@@ -141,15 +142,19 @@
         margin-left: $SPACE_XS;
         margin-right: $SPACE_XS;
         width: 90%;
+        height: 1px;
         white-space: nowrap;
         overflow: hidden;
         flex-shrink: 99999;
         color: $COLOR_GREY_2;
+        border-bottom: 1px dotted $COLOR_GREY_2;
       }
 
       .format {
         white-space: nowrap;
         color: $COLOR_GREY_2;
+        display: flex;
+        align-items: center;
       }
     }
 

@@ -38,7 +38,7 @@
     }
 
     .box {
-      font-family: $MONO_STACK;
+      font-family: $SANS_STACK;
       padding: 20px;
       background: white;
       color: black;

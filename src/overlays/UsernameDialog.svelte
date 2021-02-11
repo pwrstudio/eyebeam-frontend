@@ -39,7 +39,7 @@
     <input
       type="text"
       aria-required="true"
-      aria-label="Username"
+      aria-label="Choose a name for interaction"
       bind:this={inputEl}
       bind:value={username}
       placeholder="Choose your username"
@@ -48,7 +48,7 @@
       }}
     />
     <button
-      aria-label="Enter"
+      aria-label="Submit username"
       type="submit"
       on:click={e => {
         dispatch("username", { username: username })
@@ -75,7 +75,7 @@
     z-index: 100000;
 
     .box {
-      font-family: $MONO_STACK;
+      font-family: $SANS_STACK;
       padding: 40px;
       font-size: 18px;
       text-align: center;
@@ -89,7 +89,7 @@
       }
 
       input {
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         font-size: $FONT_SIZE_SMALL;
         float: left;
         width: calc(100% - 60px);
@@ -128,7 +128,7 @@
       }
 
       div {
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         font-size: $FONT_SIZE_MEDIUM;
         float: right;
         display: block;
@@ -144,7 +144,7 @@
       }
 
       button {
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         font-size: 90%;
         text-transform: uppercase;
         float: right;
