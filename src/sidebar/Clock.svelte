@@ -37,7 +37,7 @@
   {time}&nbsp;CET
 </div> -->
 <div class="clock-new-york" aria-label="Current time">
-  {time}&nbsp;EST
+  <span>{time}</span>EST
 </div>
 
 <style lang="scss">
@@ -45,7 +45,7 @@
   @import "../world.theme.scss";
 
   .clock-new-york {
-    font-family: $MONO_STACK;
+    font-family: $SANS_STACK;
     font-size: $FONT_SIZE_SMALL;
     background: $COLOR_DARK_TRANSPARENT;
     color: $COLOR_LIGHT;
@@ -59,6 +59,10 @@
     a {
       color: white;
       text-decoration: none;
+    }
+
+    span {
+      margin-right: 3px;
     }
 
     @include screen-size("small") {

@@ -69,7 +69,7 @@
       }
 
       .date {
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         font-weight: normal;
         float: right;
       }
