@@ -92,7 +92,7 @@ export const TEXT_STYLE_PROJECT = {
   wordWrapWidth: 300,
 }
 
-const mainFormat = 'HH:mm z, dd MMM DD'
+const mainFormat = 'hh:mm z, dd MMM DD'
 
 // const intlFormat = new Intl.DateTimeFormat('en-DE', {
 //   hour: 'numeric',
@@ -156,7 +156,7 @@ export const formatDate = (start, end) => {
 export const formattedChatDate = start => {
   try {
     const startDate = start ? start : Date.now()
-    return format(startDate, "HH:mm EEE")
+    return format(startDate, "hh:mm EEE")
   } catch (err) {
     console.dir(err)
   }
