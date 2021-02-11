@@ -760,6 +760,50 @@
               })
             })
 
+            // Keyboard navigation (ASDW)
+            document.addEventListener('keydown', event => {
+              console.log(event.key);
+
+              if(!moveQ[$localUserSessionID] && ['a', 's', 'd', 'w'].includes(get(event, 'key', '').toLowerCase())) {
+
+                let targetX = 0
+                let targetY = 0 
+
+                const STEP_SIZE = 50
+
+                switch(event.key) {
+                  case 'd':
+                    targetX = localPlayers[$localUserSessionID].avatar.x + STEP_SIZE
+                    targetY = localPlayers[$localUserSessionID].avatar.y
+                    break;
+                  case 'a':
+                    targetX = localPlayers[$localUserSessionID].avatar.x - STEP_SIZE
+                    targetY = localPlayers[$localUserSessionID].avatar.y
+                    break;
+                  case 'w':
+                    targetX = localPlayers[$localUserSessionID].avatar.x 
+                    targetY = localPlayers[$localUserSessionID].avatar.y - STEP_SIZE
+                    break;
+                  case 's':
+                    targetX = localPlayers[$localUserSessionID].avatar.x 
+                    targetY = localPlayers[$localUserSessionID].avatar.y + STEP_SIZE
+                    break;
+                  default:
+                    targetX = localPlayers[$localUserSessionID].avatar.x 
+                    targetY = localPlayers[$localUserSessionID].avatar.y
+                }
+  
+                showTarget(targetX, targetY)
+
+                gameRoom.send("go", {
+                  x: targetX,
+                  y: targetY,
+                  originX: localPlayers[$localUserSessionID].avatar.x,
+                  originY: localPlayers[$localUserSessionID].avatar.y,
+                })
+              }
+            });
+
             // PLAYER => TOUCH END
             viewport.on("touchend", e => {
               // __ Convert screen coordinates to world coordinates
