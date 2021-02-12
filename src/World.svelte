@@ -434,6 +434,7 @@
 
   // *** GLOBAL FUNCTIONS
   let teleportTo = () => {}
+  let moveTo = () => {}
   let submitChat = () => {}
   // let dropCaseStudy = () => {}
   // let pickUpCaseStudy = () => {}
@@ -832,6 +833,22 @@
                 area: area,
               })
             }
+
+            // PLAYER => MOVETO
+            moveTo = (x, y) => {
+              // __ Cancel current movement
+              delete moveQ[$localUserSessionID]
+              hideTarget()
+              showTarget(x, y)
+              gameRoom.send("go", {
+                x: x,
+                y: y,
+                originX: localPlayers[$localUserSessionID].avatar.x,
+                originY: localPlayers[$localUserSessionID].avatar.y,
+              })
+            }
+
+
 
             // *******
             // MESSAGE
@@ -1547,6 +1564,10 @@
             <!-- SINGLE PROJECT-->
             <ProjectSingle
               project={projects.find(cs => cs.slug.current === slug)}
+              on:goToProject={e => {
+                console.dir(e)
+                moveTo(e.detail.x, e.detail.y)
+              }}
             />
           {:else}
             <!-- LIST PROJECT -->

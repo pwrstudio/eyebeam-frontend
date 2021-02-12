@@ -10,6 +10,7 @@
   import { fade } from "svelte/transition"
   import { renderBlockText } from "../sanity.js"
   import { links } from "svelte-routing"
+  import { createEventDispatcher } from "svelte"
 
   // *** COMPONENTS
   import ParticipantList from "../lists/ParticipantList.svelte"
@@ -19,6 +20,9 @@
 
   // *** PROPS
   export let project = {}
+
+  const dispatch = createEventDispatcher()
+
 </script>
 
 <!-- METADATA -->
@@ -63,6 +67,22 @@
           />
         </div>
       {/if}
+      <!-- GO TO PROJECT-->
+      <div class="go-to-project">
+        <svg
+          aria-label="Go to project loaction on map"
+          role="button"
+          on:click={e => {
+            dispatch("goToProject", {x: project.x, y: project.y})
+          }}
+          xmlns="http://www.w3.org/2000/svg" 
+          enable-background="new 0 0 24 24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          width="24">
+            <rect fill="none" height="24" width="24"/><path d="M20,9.42V12h2V6h-6v2h2.58l-4.46,4.46c-0.39,0.39-1.02,0.39-1.41,0l-1.17-1.17c-1.17-1.17-3.07-1.17-4.24,0L2,16.59L3.41,18 l5.29-5.29c0.39-0.39,1.02-0.39,1.41,0l1.17,1.17c1.17,1.17,3.07,1.17,4.24,0L20,9.42z"/>
+          </svg>  
+      </div>
     </div>
     <div class="divider" />
   {/if}
@@ -107,6 +127,26 @@
     .go-back {
       padding-top: $SPACE_XS;
       padding-left: $SPACE_S;
+      cursor: pointer;
+      svg {
+        path {
+          fill: $COLOR_GREY_2;
+          transition: fill 0.3s $STANDARD_TRANSITION;
+        }
+      }
+      &:hover {
+        svg {
+          path {
+            fill: $COLOR_GREY_3;
+          }
+        }
+      }
+    }
+
+    .go-to-project {
+      padding-top: $SPACE_S;
+      padding-left: $SPACE_S;
+      float: right;
       cursor: pointer;
       svg {
         path {
