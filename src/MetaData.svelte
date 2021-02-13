@@ -27,9 +27,9 @@
   export let post = {}
 
   // *** VARIABLES
-  let title = ""
-  let description = ""
-  let image = ""
+  let title = "EYEBEAM: From the Rupture"
+  let description = "Eyebeam presents a 4-day, multi-venue arts & ideas festival that is free and open to all, featuring today's most radical artists and thinkers."
+  let image = "/img/from-the-rupture.png"
   let url = window.location
 
   const stripHtml = html => {
@@ -47,7 +47,7 @@
     } else if ($globalSettings.title) {
       title = $globalSettings.title
     } else {
-      title = "The Shape of a Practice"
+      title = "EYEBEAM: From the Rupture"
     }
   }
 
