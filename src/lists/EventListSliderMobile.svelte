@@ -111,6 +111,12 @@
 </script>
 
 <div class="event-scroller">
+  <a class="hidden-link" href="/pages/guide" aria-label="Show The Guide"
+      >Show the guide</a>  
+      <a class="hidden-link" href="/projects" aria-label="Show All Projects"
+        >Show all projects</a>  
+      <a class="hidden-link" href="/events" aria-label="Show All Events"
+        >Show all events</a> 
   <div
     class:loaded
     class="main-carousel event-scroller__slideshow
@@ -186,6 +192,21 @@
     &__slideshow {
       height: 80px;
       width: 100%;
+    }
+
+    .hidden-link {
+      opacity: 0;
+      transform: scale(1.2);
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      background-color: $COLOR_LIGHT;
+      z-index: 10000;
+      padding: 1rem;
+      border: 1px solid $COLOR_DARK;
+      &:focus {
+        opacity: 1;
+      }
     }
 
     .event {
