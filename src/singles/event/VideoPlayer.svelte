@@ -16,6 +16,12 @@
 </script>
 
 <div class="embed" in:fade={{ duration: 300, easing: quartOut }}>
+  <a class="hidden-link" href="/pages/guide" aria-label="Show The Guide"
+    >Show the guide</a>  
+  <a class="hidden-link" href="/projects" aria-label="Show All Projects"
+    >Show all projects</a>  
+  <a class="hidden-link" href="/events" aria-label="Show All Events"
+    >Show all events</a>  
   {#if streamUrl.includes("vimeo")}
     <div class="video-container">
       <iframe
@@ -53,6 +59,19 @@
 <style lang="scss">
   @import "../../responsive.scss";
   @import "../../world.theme.scss";
+
+  .hidden-link {
+      opacity: 0;
+      transform: scale(1.2);
+      position: absolute;
+      background-color: $COLOR_LIGHT;
+      z-index: 10000;
+      padding: 1rem;
+      border: 1px solid $COLOR_DARK;
+      &:focus {
+        opacity: 1;
+      }
+    }
 
   .embed {
     width: 100%;
