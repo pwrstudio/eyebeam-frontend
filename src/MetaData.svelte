@@ -29,7 +29,7 @@
   // *** VARIABLES
   let title = "EYEBEAM: From the Rupture"
   let description = "Eyebeam presents a 4-day, multi-venue arts & ideas festival that is free and open to all, featuring today's most radical artists and thinkers."
-  let image = "/img/from-the-rupture.png"
+  let image = "https://eyebeam-frontend.netlify.app/img/from-the-rupture.jpg"
   let url = window.location
 
   const stripHtml = html => {
