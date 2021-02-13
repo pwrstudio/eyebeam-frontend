@@ -60,19 +60,6 @@
   @import "../../responsive.scss";
   @import "../../world.theme.scss";
 
-  .hidden-link {
-      opacity: 0;
-      transform: scale(1.2);
-      position: absolute;
-      background-color: $COLOR_LIGHT;
-      z-index: 10000;
-      padding: 1rem;
-      border: 1px solid $COLOR_DARK;
-      &:focus {
-        opacity: 1;
-      }
-    }
-
   .embed {
     width: 100%;
     background: black;
