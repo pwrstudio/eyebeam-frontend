@@ -16,12 +16,6 @@
 </script>
 
 <div class="embed" in:fade={{ duration: 300, easing: quartOut }}>
-  <a class="hidden-link" href="/pages/guide" aria-label="Show The Guide"
-    >Show the guide</a>  
-  <a class="hidden-link" href="/projects" aria-label="Show All Projects"
-    >Show all projects</a>  
-  <a class="hidden-link" href="/events" aria-label="Show All Events"
-    >Show all events</a>  
   {#if streamUrl.includes("vimeo")}
     <div class="video-container">
       <iframe
