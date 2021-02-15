@@ -498,8 +498,8 @@
             )
             sprite.name = ms
             sprite.visible = ms === "rest" ? true : false
-            sprite.height = 60
-            sprite.width = 60
+            sprite.height = 40
+            sprite.width = 40
             sprite.animationSpeed = ms === "rest" ? 0.02 : 0.1
             sprite.play()
             return sprite
@@ -1346,7 +1346,6 @@
           class="hide-button"
           aria-label="hide sidebar"
           role="button"
-          tabindex="0"
           in:scale={{ delay: 500 }}
           on:click={() => {
             sidebarHidden = !sidebarHidden
@@ -1361,7 +1360,6 @@
         use:links
         aria-label="Show sidebar"
         role="button"
-        tabindex="0"
         class:hidden={sidebarHidden}
         on:click={() => {
           if (sidebarHidden) {
@@ -1371,17 +1369,12 @@
         }}
       >
 
-      <a class="hidden-link" href="/pages/guide" aria-label="Show The Guide"
-      >Show the guide</a>  
-      <a class="hidden-link" href="/projects" aria-label="Show All Projects"
-        >Show all projects</a>  
-      <a class="hidden-link" href="/events" aria-label="Show All Events"
-        >Show all events</a> 
+      <!-- <a class="hidden-link" aria-label="Skip to the Menu">Skip to the Menu</a>   -->
       
         <!-- MINIMAP -->
         <div class="clock" aria-label="Clock">
           <Clock />
-        </div>
+        </div>      
         {#if LINK_OUT}
           <div class="link-to-ac">
             <a
@@ -1443,7 +1436,7 @@
             </div>
           </div>
         </div>
-        <!-- MENUBAR -->
+        <!-- MENUBAR --> 
         <div class="menu">
           <Menu
             on:username={e => {
