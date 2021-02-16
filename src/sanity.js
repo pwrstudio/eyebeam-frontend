@@ -184,12 +184,13 @@ const serializers = {
     },
     videoBlock: props => {
       const videoUrl =
-        "https://shape.anthropocene-curriculum.org/material/files/" +
+        "https://cdn.sanity.io/files/" +
         SANITY_PROJECT_ID +
         "/production/" +
         get(props, "node.videoFile.asset._ref", "")
           .replace("file-", "")
           .replace("-mp4", ".mp4")
+          .replace("-mov", ".mov")
       return h("figure", { className: "video", role: "none" }, [
         h("video", {
           src: videoUrl,
@@ -202,8 +203,8 @@ const serializers = {
     },
     audioBlock: props => {
       const audioUrl =
-        "https://shape.anthropocene-curriculum.org/material/files/" +
-        SANITY_PROJECT_ID +
+      "https://cdn.sanity.io/files/" +
+      SANITY_PROJECT_ID +
         "/production/" +
         get(props, "node.audioFile.asset._ref", "")
           .replace("file-", "")
