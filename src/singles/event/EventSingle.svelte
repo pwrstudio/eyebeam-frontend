@@ -6,7 +6,7 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
-  import { onMount } from "svelte"
+  import { afterUpdate, onMount } from "svelte"
   import get from "lodash/get"
   import { fade } from "svelte/transition"
   import { renderBlockText } from "../../sanity.js"
@@ -28,6 +28,11 @@
 
   // *** ON MOUNT
   onMount(async () => {
+    el.querySelector('h2').focus()
+  })
+
+  // ** AFTER UPDATE
+  afterUpdate(async () => {
     el.querySelector('h2').focus()
   })
 </script>
