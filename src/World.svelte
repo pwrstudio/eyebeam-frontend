@@ -1466,8 +1466,10 @@
   {#await activeStreams then activeStreams}
     <!-- MAIN AREA -->
     {#if $currentVideoRoom == "main" && currentStreamUrl && !activeContentClosed && $localUserName}
+    <div aria-label="The following item is a youtube embed of the livestream of our festival"></div>
       <div
         class="content-item active"
+        aria-label="Livestream"
         aria-modal="true"
         role="dialog"
         transition:fly={{ y: -200 }}
@@ -1487,7 +1489,7 @@
       use:links
       transition:fly={{ y: 200, duration: 400, easing: quartOut }}
     >
-      <a class="close" role="button" aria-label="Close" href="/">
+      <a class="close" role="button" aria-label={slug ? `Close ${slug}` : `Close section`} href="/">
         <svg
           role="presentation"
           width="40"
@@ -1688,8 +1690,7 @@
         />
       </svg>
     </a>
-
-    <a href={$globalSettings.zoomLink} target="_blank" class="button">
+    <a href={$globalSettings.zoomLink} aria-label="Join Zoom Lounge" target="_blank" class="button">
       Join
     </a>
   </div>

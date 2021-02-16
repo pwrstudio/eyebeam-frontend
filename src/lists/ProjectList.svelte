@@ -143,7 +143,7 @@
   .project-container {
     height: 100%;
     color: $COLOR_DARK;
-    font-family: $MONO_STACK;
+    font-family: $SANS_STACK;
     font-size: $FONT_SIZE_BASE;
     background: $COLOR_LIGHT;
 
@@ -194,7 +194,7 @@
           }
 
           .participants {
-            font-family: $MONO_STACK;
+            font-family: $SANS_STACK;
             pointer-events: none;
             color: $COLOR_GREY_2;
             font-size: $FONT_SIZE_SMALL;
@@ -272,7 +272,7 @@
           margin-left: $SPACE_XS;
           font-size: $FONT_SIZE_SMALL;
           color: $COLOR_DARK;
-          font-family: $MONO_STACK;
+          font-family: $SANS_STACK;
           border: none;
           background: $COLOR_LIGHT;
         }
@@ -295,7 +295,7 @@
           // outline: none;
           font-size: $FONT_SIZE_SMALL;
           color: $COLOR_DARK;
-          font-family: $MONO_STACK;
+          font-family: $SANS_STACK;
           background: $COLOR_LIGHT;
 
           input[type="text"] {
