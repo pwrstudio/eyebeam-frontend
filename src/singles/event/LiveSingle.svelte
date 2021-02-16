@@ -38,7 +38,7 @@
 
 <div class="event-single" in:fade use:links>
   {#if showVideo}
-    <VideoPlayer aria-hidden="true" streamUrl={url} eventTitle={event.title} />
+    <VideoPlayer streamUrl={url} eventTitle={event.title} />
   {/if}
 
   {#if event.title}
