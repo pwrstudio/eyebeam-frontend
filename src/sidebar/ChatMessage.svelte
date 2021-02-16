@@ -16,7 +16,7 @@
   export let message = {}
 
   // *** STORES
-  import { localUserName } from "../stores"
+  // import { localUserName } from "../stores"
 </script>
 
 <div class="chat-message" transition:fade|local>

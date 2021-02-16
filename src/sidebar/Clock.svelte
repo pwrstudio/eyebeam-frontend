@@ -5,15 +5,15 @@
   //
   // # # # # # # # # # # # # #
 
-  const berlinTime = () => {
-    const d = new Date()
-    const cet = new Intl.DateTimeFormat("de-DE", {
-      timeZone: "CET",
-      hour: "numeric",
-      minute: "numeric",
-    }).format(d)
-    return cet
-  }
+  // const berlinTime = () => {
+  //   const d = new Date()
+  //   const cet = new Intl.DateTimeFormat("de-DE", {
+  //     timeZone: "CET",
+  //     hour: "numeric",
+  //     minute: "numeric",
+  //   }).format(d)
+  //   return cet
+  // }
 
   const newYorkTime = () => {
     const d = new Date()

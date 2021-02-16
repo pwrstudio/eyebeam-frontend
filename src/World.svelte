@@ -16,7 +16,6 @@
   import { quartOut } from "svelte/easing"
   import { urlFor, loadData, client } from "./sanity.js"
   import { links, navigate } from "svelte-routing"
-  import { Howl } from "howler"
   import MediaQuery from "svelte-media-query"
   import Tweener from "tweener"
   import Cookies from "js-cookie"
@@ -27,8 +26,6 @@
   import MiniMap from "./sidebar/MiniMap.svelte"
   import Menu from "./sidebar/Menu.svelte"
   import ToolBar from "./sidebar/ToolBar.svelte"
-  // import Seminar from "./sidebar/Seminar.svelte"
-  // import Messaging from "./sidebar/Messaging.svelte"
   import Clock from "./sidebar/Clock.svelte"
   // lists
   import EventList from "./lists/EventList.svelte"
@@ -41,7 +38,7 @@
   import UserProfileSingle from "./singles/UserProfileSingle.svelte"
   import EventSingle from "./singles/event/EventSingle.svelte"
   import LiveSingle from "./singles/event/LiveSingle.svelte"
-  import AudioInstallationSingle from "./singles/AudioInstallationSingle.svelte"
+  // import AudioInstallationSingle from "./singles/AudioInstallationSingle.svelte"
   // overlays
   import LoadingScreen from "./overlays/LoadingScreen.svelte"
   import Error from "./overlays/Error.svelte"
@@ -49,8 +46,6 @@
   import Tutorial from "./overlays/Tutorial.svelte"
   import UsernameDialog from "./overlays/UsernameDialog.svelte"
   // ...
-  import AudioChat from "./AudioChat.svelte"
-  // import InventoryMessage from "./InventoryMessage.svelte"
   import MetaData from "./MetaData.svelte"
   import Card from "./Card.svelte"
 
@@ -82,7 +77,7 @@
     currentArea,
     currentAreaObject,
     currentTextRoom,
-    currentAudioRoom,
+    // currentAudioRoom,
     currentVideoRoom,
     globalUserList,
   } from "./stores.js"
@@ -197,21 +192,21 @@
   const projects = loadData(QUERY.PROJECTS).catch(err => {
     console.log(err)
   })
-  const audioInstallations = loadData(QUERY.AUDIO_INSTALLATIONS).catch(err => {
-    console.log(err)
-  })
-  const landMarks = loadData(QUERY.LAND_MARKS).catch(err => {
-    console.log(err)
-  })
+  // const audioInstallations = loadData(QUERY.AUDIO_INSTALLATIONS).catch(err => {
+  //   console.log(err)
+  // })
+  // const landMarks = loadData(QUERY.LAND_MARKS).catch(err => {
+  //   console.log(err)
+  // })
   const users = loadData(QUERY.USERS).catch(err => {
     console.log(err)
   })
   const pages = loadData(QUERY.PAGES).catch(err => {
     console.log(err)
   })
-  const audioRoomNames = loadData(QUERY.AUDIOROOM_NAMES).catch(err => {
-    console.log(err)
-  })
+  // const audioRoomNames = loadData(QUERY.AUDIOROOM_NAMES).catch(err => {
+  //   console.log(err)
+  // })
   const tutorialCard = loadData(QUERY.TUTORIAL_CARD).catch(err => {
     console.log(err)
   })
@@ -330,35 +325,35 @@
   // let cull = {}
   // const cull = new Cull.Simple();
 
-  const checkAudioProximity = () => {
-    audioInstallationLayer.children.forEach(a => {
-      // Get distance between user and audio installation
-      const dist = Math.sqrt(
-        Math.pow(a.x - localPlayers[$localUserSessionID].avatar.x, 2) +
-          Math.pow(a.y - localPlayers[$localUserSessionID].avatar.y, 2)
-      )
-      // Check if user is within range of audio installation
-      if (dist < a.radius) {
-        inAudioZone = a.slug
-        if (!a.audio.playing() && !a.noAutoplay) {
-          a.audio.play()
-        }
-        // Set volume proportionally to distance
-        // Formula to translate ranges:
-        // NewValue = ((OldValue - OldMin) * NewRange) / OldRange + NewMin;
-        a.audio.volume(1 - dist / a.radius)
-      }
-      if (dist > a.radius) {
-        if (inAudioZone == a.slug) {
-          inAudioZone = false
-        }
-        if (a.audio.playing()) {
-          a.audio.pause()
-          a.audio.volume(0)
-        }
-      }
-    })
-  }
+  // const checkAudioProximity = () => {
+  //   audioInstallationLayer.children.forEach(a => {
+  //     // Get distance between user and audio installation
+  //     const dist = Math.sqrt(
+  //       Math.pow(a.x - localPlayers[$localUserSessionID].avatar.x, 2) +
+  //         Math.pow(a.y - localPlayers[$localUserSessionID].avatar.y, 2)
+  //     )
+  //     // Check if user is within range of audio installation
+  //     if (dist < a.radius) {
+  //       inAudioZone = a.slug
+  //       if (!a.audio.playing() && !a.noAutoplay) {
+  //         a.audio.play()
+  //       }
+  //       // Set volume proportionally to distance
+  //       // Formula to translate ranges:
+  //       // NewValue = ((OldValue - OldMin) * NewRange) / OldRange + NewMin;
+  //       a.audio.volume(1 - dist / a.radius)
+  //     }
+  //     if (dist > a.radius) {
+  //       if (inAudioZone == a.slug) {
+  //         inAudioZone = false
+  //       }
+  //       if (a.audio.playing()) {
+  //         a.audio.pause()
+  //         a.audio.volume(0)
+  //       }
+  //     }
+  //   })
+  // }
 
   // __ Game loop
   // __ Called at approximately 60fps by pixi.ticker
@@ -380,7 +375,7 @@
             localPlayers[key].area = step.area
             moveQ[key] = []
             if (key === $localUserSessionID) {
-              checkAudioProximity()
+              // checkAudioProximity()
             }
           } else {
             // Get next step, adjusting for delta
@@ -394,14 +389,14 @@
               // Set current area for users
               currentArea.set(localPlayers[$localUserSessionID].area)
               // Check proximity to audio installations every 30th step
-              checkAudioProximity()
+              // checkAudioProximity()
             }
           }
         } else {
           // Destination reached
           if (key === $localUserSessionID) {
             hideTarget()
-            checkAudioProximity()
+            // checkAudioProximity()
             // User was walking towards a project
             // if (intentToPickUp) {
             //   pickUpCaseStudy(intentToPickUp)
@@ -493,6 +488,10 @@
         const createPlayer = (playerOptions, sessionId) => {
           // __ Create sprites for all motion states
           const sprites = ["rest", "front", "back", "left", "right"].map(ms => {
+            console.log('******')
+            console.log('playerOptions.avatar', playerOptions.avatar)
+            console.log('avatarSpritesheets', avatarSpritesheets)
+            console.log('avatarSpritesheets[playerOptions.avatar]', avatarSpritesheets[playerOptions.avatar])
             const sprite = new PIXI.AnimatedSprite(
               avatarSpritesheets[playerOptions.avatar].animations[ms]
             )
@@ -1108,6 +1107,7 @@
             const spriteId = "project-" + cs._id
             const csLoader = new PIXI.Loader()
             csLoader.add(spriteId, spriteUrl).load((loader, resources) => {
+              console.log
               const frames = new PIXI.AnimatedSprite(
                 resources[spriteId].spritesheet.animations["frames"]
               )
@@ -1164,73 +1164,31 @@
           })
       })
 
-      // __ Add audio installations
-      audioInstallations.then(audioInstallations => {
-        audioInstallations.forEach((ai, i) => {
-          const effectiveRadius = ai.radius || 400
-          const audioInstallationLocation = new PIXI.Container()
-          // const aIgfx = new PIXI.Graphics()
-          // aIgfx.beginFill(0xff0000)
-          // aIgfx.alpha = 0.4
-          // aIgfx.drawCircle(effectiveRadius, effectiveRadius, effectiveRadius)
-          // aIgfx.endFill()
-          // audioInstallationLocation.addChild(aIgfx)
-
-          // __ Either load stream URL or audio file
-          if (ai.streamURL) {
-            audioInstallationLocation.audio = new Howl({
-              src: ai.streamURL,
-              html5: true,
-              format: ["mp3", "aac"],
-            })
-          } else {
-            audioInstallationLocation.audio = new Howl({
-              src: [ai.audioURL],
-              loop: true,
-            })
-          }
-
-          audioInstallationLocation.x = ai.x
-          audioInstallationLocation.y = ai.y
-          audioInstallationLocation.pivot.x =
-            audioInstallationLocation.width / 2
-          audioInstallationLocation.pivot.y =
-            audioInstallationLocation.height / 2
-          audioInstallationLocation.title = ai.title
-          audioInstallationLocation.noAutoplay = ai.noAutoplay
-          audioInstallationLocation.slug = get(ai, "slug.current")
-          audioInstallationLocation.radius = effectiveRadius
-          audioInstallationLocation.interactive = false
-
-          audioInstallationLayer.addChild(audioInstallationLocation)
-        })
-      })
-
       // __ Add landmarks
-      landMarks.then(landMarks => {
-        landMarks.forEach((lm, i) => {
-          const spriteUrl = get(lm, "spriteJsonURL", "")
-          const spriteId = "landMark-" + lm._id
-          const lmLoader = new PIXI.Loader()
+      // landMarks.then(landMarks => {
+      //   landMarks.forEach((lm, i) => {
+      //     const spriteUrl = get(lm, "spriteJsonURL", "")
+      //     const spriteId = "landMark-" + lm._id
+      //     const lmLoader = new PIXI.Loader()
 
-          lmLoader.add(spriteId, spriteUrl).load((loader, resources) => {
-            const frames = new PIXI.AnimatedSprite(
-              resources[spriteId].spritesheet.animations["frames"]
-            )
-            // frames.visible = true
-            frames.animationSpeed = 0.02
-            frames.play()
+      //     lmLoader.add(spriteId, spriteUrl).load((loader, resources) => {
+      //       const frames = new PIXI.AnimatedSprite(
+      //         resources[spriteId].spritesheet.animations["frames"]
+      //       )
+      //       // frames.visible = true
+      //       frames.animationSpeed = 0.02
+      //       frames.play()
 
-            const landMarkLocation = new PIXI.Container()
-            landMarkLocation.addChild(frames)
-            landMarkLocation.x = lm.x
-            landMarkLocation.y = lm.y
-            landMarkLocation.pivot.x = landMarkLocation.width / 2
-            landMarkLocation.pivot.y = landMarkLocation.height / 2
-            landMarkLayer.addChild(landMarkLocation)
-          })
-        })
-      })
+      //       const landMarkLocation = new PIXI.Container()
+      //       landMarkLocation.addChild(frames)
+      //       landMarkLocation.x = lm.x
+      //       landMarkLocation.y = lm.y
+      //       landMarkLocation.pivot.x = landMarkLocation.width / 2
+      //       landMarkLocation.pivot.y = landMarkLocation.height / 2
+      //       landMarkLayer.addChild(landMarkLocation)
+      //     })
+      //   })
+      // })
     })
   }
 
@@ -1270,15 +1228,15 @@
     mapLayer = new PIXI.Container()
     // emergentLayer = new PIXI.Container()
     exhibitionLayer = new PIXI.Container()
-    audioInstallationLayer = new PIXI.Container()
+    // audioInstallationLayer = new PIXI.Container()
     playerLayer = new PIXI.Container()
-    landMarkLayer = new PIXI.Container()
+    // landMarkLayer = new PIXI.Container()
     viewport.addChild(mapLayer)
-    viewport.addChild(audioInstallationLayer)
+    // viewport.addChild(audioInstallationLayer)
     viewport.addChild(exhibitionLayer)
     // viewport.addChild(emergentLayer)
     viewport.addChild(playerLayer)
-    viewport.addChild(landMarkLayer)
+    // viewport.addChild(landMarkLayer)
     // viewport.drag()
 
     // ___ Start Pixi ticker
@@ -1486,7 +1444,7 @@
   {/if}
 
   <!-- AUDIOZONE -->
-  {#if inAudioZone}
+  <!-- {#if inAudioZone}
     <div
       class="content-item active"
       aria-modal="true"
@@ -1502,7 +1460,7 @@
         />
       {/await}
     </div>
-  {/if}
+  {/if} -->
 
   <!-- LIVE -->
   {#await activeStreams then activeStreams}
@@ -1517,22 +1475,6 @@
         <LiveSingle event={currentStreamEvent} url={currentStreamUrl} />
       </div>
     {/if}
-    <!-- SUPPORT AREA -->
-    <!-- {#if $currentVideoRoom == 'support' && supportStreamUrl && !supportStreamClosed}
-      <div class="content-item active" aria-modal="true" role="dialog" transition:fly={{ y: -200 }}>
-        <div
-          class="close"
-          on:click={e => {
-            supportStreamClosed = true
-          }}>
-          <svg width="40" height="40" viewBox="0 0 40 40"  xmlns="http://www.w3.org/2000/svg">
-            <path d="M28.9 11.1C28.6 10.8 28.2 10.8 27.9 11.1L20 19L12.1 11.1C11.8 10.8 11.4 10.8 11.1 11.1C10.8 11.4 10.8 11.8 11.1 12.1L19 20L11.1 27.9C10.8 28.2 10.8 28.6 11.1 28.9C11.4 29.2 11.8 29.2 12.1 28.9L20 21L27.9 28.9C28.2 29.2 28.6 29.2 28.9 28.9C29.2 28.6 29.2 28.2 28.9 27.9L21 20L28.9 12.1C29.2 11.8 29.2 11.4 28.9 11.1Z" />
-            </svg>
-            
-        </div>
-        <LiveSingle url={supportStreamUrl} />
-      </div>
-    {/if} -->
   {/await}
 
   <!-- TEXT CONTENT -->
@@ -1681,13 +1623,6 @@
               </svg>
             </div>
           {/if}
-          <!-- {#if section == 'seminar'} -->
-          <!-- SEMINAR -->
-          <!-- <Seminar {slug} mobile={true} {mobileExpanded} /> -->
-          <!-- {:else if section == 'messages'} -->
-          <!-- MESSAGES -->
-          <!-- <Messaging {slug} mobile={true} {mobileExpanded} />
-          {:else} -->
           <!-- CHAT -->
           {#each TEXT_ROOMS as TR}
             {#if $currentTextRoom === TR}
@@ -1728,120 +1663,37 @@
   {/if}
 </MediaQuery>
 
-<!-- INVENTORY => DISABLED!
-{#if localPlayers && localPlayers[$localUserSessionID] && localPlayers[$localUserSessionID].carrying}
-  <div
-    class="inventory"
-    transition:fly={{ y: 100, duration: 300 }}
-    on:click={e => {
-      // if (e.target.nodeName == 'SPAN') {
-      //   dropCaseStudy(localPlayers[$localUserSessionID].carrying)
-      // }
-    }}>
-    <div>
-      <InventoryMessage
-        caseStudy={emergentLayer.children.find(cs => cs.uuid === localPlayers[$localUserSessionID].carrying)} />
-    </div>
-  </div>
-{/if} -->
-
 <!-- AUDIOCHAT BOX  -->
-{#await audioRoomNames then audioRoomNames}
-  <!-- $localUserAuthenticated &&  -->
-  <!-- {#if !audioChatActive && $currentAudioRoom && $localUserName}
-    <div class="audiochat-box">
-      <div class="message">
-        Nearby audioroom
-        <strong
-          >{get(
-            audioRoomNames,
-            "audioRoom_" + $currentAudioRoom,
-            "ERROR"
-          )}</strong
-        >
-      </div>
-
-      <div
-        class="mob-message"
-        aria-label="Join audioroom"
-        role="button"
-        tabindex="0"
-        on:click={e => {
-          audioChatActive = true
-        }}
-      >
-        Join Audio
-        <svg
-          role="presentation"
-          width="23"
-          height="20"
-          viewBox="0 0 23 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M7.3672 11.4041C8.52696 11.4041 9.49643 11.019 10.2756 10.2489C11.0549 9.47872 11.4445 8.51378 11.4445 7.35402C11.4445 6.19426 11.0549 5.22932 10.2756 4.45917C9.49643 3.68902 8.52696 3.30395 7.3672 3.30395C6.20745 3.30395 5.24251 3.68902 4.47235 4.45917C3.7022 5.22932 3.31713 6.19426 3.31713 7.35402C3.31713 8.51378 3.7022 9.47872 4.47235 10.2489C5.24251 11.019 6.20745 11.4041 7.3672 11.4041ZM8.53602 12.5185H6.22557C5.42824 12.5185 4.67622 12.6635 3.96949 12.9534C3.26277 13.2615 2.64665 13.6783 2.12114 14.2038C1.59562 14.7293 1.17884 15.3454 0.87078 16.0522C0.56272 16.7589 0.408691 17.5109 0.408691 18.3082V19.4771H14.3257V18.3082C14.3257 17.5109 14.1807 16.7589 13.8908 16.0522C13.5827 15.3454 13.166 14.7293 12.6405 14.2038C12.1149 13.6783 11.4988 13.2615 10.7921 12.9534C10.0854 12.6635 9.33335 12.5185 8.53602 12.5185ZM19.4087 0.477051L17.7506 2.13513C18.5117 2.89622 19.1006 3.77056 19.5174 4.75817C19.9342 5.74577 20.1426 6.7832 20.1426 7.87047C20.1426 8.95774 19.9342 9.99517 19.5174 10.9828C19.1006 11.9704 18.5117 12.8447 17.7506 13.6058L19.4087 15.2639C20.3872 14.2672 21.1393 13.1347 21.6648 11.8662C22.1903 10.5977 22.453 9.2658 22.453 7.87047C22.453 6.47514 22.1903 5.14325 21.6648 3.87476C21.1393 2.60628 20.3872 1.47372 19.4087 0.477051ZM16.1197 3.76603L14.4616 5.42412C14.8059 5.7503 15.0642 6.12178 15.2363 6.53857C15.4085 6.95536 15.4945 7.39932 15.4945 7.87047C15.4945 8.34162 15.4085 8.78558 15.2363 9.20237C15.0642 9.61916 14.8059 9.99064 14.4616 10.3168L16.1197 11.9749C16.6633 11.4313 17.0801 10.8061 17.3701 10.0994C17.66 9.39264 17.805 8.64968 17.805 7.87047C17.805 7.09126 17.66 6.3483 17.3701 5.64157C17.0801 4.93484 16.6633 4.30967 16.1197 3.76603Z"
-          />
-        </svg>
-      </div>
-
-      <div
-        class="button"
-        aria-label="Join audioroom"
-        role="button"
-        tabindex="0"
-        on:click={e => {
-          audioChatActive = true
-        }}
-      >
-        Join
-      </div>
+{#if $globalSettings.zoomLink && $localUserName}
+  <div class="audiochat-box">
+    <div class="message">
+      {$globalSettings.zoomText}
     </div>
-  {/if} -->
-
-  {#if $globalSettings.zoomLink && $localUserName}
-    <div class="audiochat-box">
-      <div class="message">
-        {$globalSettings.zoomText}
-      </div>
-      <a
-        href={$globalSettings.zoomLink}
-        target="_blank"
-        class="mob-message"
-        aria-label="Join Zoom Louge"
+    <a
+      href={$globalSettings.zoomLink}
+      target="_blank"
+      class="mob-message"
+      aria-label="Join Zoom Louge"
+    >
+      Join
+      <svg
+        role="presentation"
+        width="23"
+        height="20"
+        viewBox="0 0 23 20"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        Join
-        <svg
-          role="presentation"
-          width="23"
-          height="20"
-          viewBox="0 0 23 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M7.3672 11.4041C8.52696 11.4041 9.49643 11.019 10.2756 10.2489C11.0549 9.47872 11.4445 8.51378 11.4445 7.35402C11.4445 6.19426 11.0549 5.22932 10.2756 4.45917C9.49643 3.68902 8.52696 3.30395 7.3672 3.30395C6.20745 3.30395 5.24251 3.68902 4.47235 4.45917C3.7022 5.22932 3.31713 6.19426 3.31713 7.35402C3.31713 8.51378 3.7022 9.47872 4.47235 10.2489C5.24251 11.019 6.20745 11.4041 7.3672 11.4041ZM8.53602 12.5185H6.22557C5.42824 12.5185 4.67622 12.6635 3.96949 12.9534C3.26277 13.2615 2.64665 13.6783 2.12114 14.2038C1.59562 14.7293 1.17884 15.3454 0.87078 16.0522C0.56272 16.7589 0.408691 17.5109 0.408691 18.3082V19.4771H14.3257V18.3082C14.3257 17.5109 14.1807 16.7589 13.8908 16.0522C13.5827 15.3454 13.166 14.7293 12.6405 14.2038C12.1149 13.6783 11.4988 13.2615 10.7921 12.9534C10.0854 12.6635 9.33335 12.5185 8.53602 12.5185ZM19.4087 0.477051L17.7506 2.13513C18.5117 2.89622 19.1006 3.77056 19.5174 4.75817C19.9342 5.74577 20.1426 6.7832 20.1426 7.87047C20.1426 8.95774 19.9342 9.99517 19.5174 10.9828C19.1006 11.9704 18.5117 12.8447 17.7506 13.6058L19.4087 15.2639C20.3872 14.2672 21.1393 13.1347 21.6648 11.8662C22.1903 10.5977 22.453 9.2658 22.453 7.87047C22.453 6.47514 22.1903 5.14325 21.6648 3.87476C21.1393 2.60628 20.3872 1.47372 19.4087 0.477051ZM16.1197 3.76603L14.4616 5.42412C14.8059 5.7503 15.0642 6.12178 15.2363 6.53857C15.4085 6.95536 15.4945 7.39932 15.4945 7.87047C15.4945 8.34162 15.4085 8.78558 15.2363 9.20237C15.0642 9.61916 14.8059 9.99064 14.4616 10.3168L16.1197 11.9749C16.6633 11.4313 17.0801 10.8061 17.3701 10.0994C17.66 9.39264 17.805 8.64968 17.805 7.87047C17.805 7.09126 17.66 6.3483 17.3701 5.64157C17.0801 4.93484 16.6633 4.30967 16.1197 3.76603Z"
-          />
-        </svg>
-      </a>
+        <path
+          d="M7.3672 11.4041C8.52696 11.4041 9.49643 11.019 10.2756 10.2489C11.0549 9.47872 11.4445 8.51378 11.4445 7.35402C11.4445 6.19426 11.0549 5.22932 10.2756 4.45917C9.49643 3.68902 8.52696 3.30395 7.3672 3.30395C6.20745 3.30395 5.24251 3.68902 4.47235 4.45917C3.7022 5.22932 3.31713 6.19426 3.31713 7.35402C3.31713 8.51378 3.7022 9.47872 4.47235 10.2489C5.24251 11.019 6.20745 11.4041 7.3672 11.4041ZM8.53602 12.5185H6.22557C5.42824 12.5185 4.67622 12.6635 3.96949 12.9534C3.26277 13.2615 2.64665 13.6783 2.12114 14.2038C1.59562 14.7293 1.17884 15.3454 0.87078 16.0522C0.56272 16.7589 0.408691 17.5109 0.408691 18.3082V19.4771H14.3257V18.3082C14.3257 17.5109 14.1807 16.7589 13.8908 16.0522C13.5827 15.3454 13.166 14.7293 12.6405 14.2038C12.1149 13.6783 11.4988 13.2615 10.7921 12.9534C10.0854 12.6635 9.33335 12.5185 8.53602 12.5185ZM19.4087 0.477051L17.7506 2.13513C18.5117 2.89622 19.1006 3.77056 19.5174 4.75817C19.9342 5.74577 20.1426 6.7832 20.1426 7.87047C20.1426 8.95774 19.9342 9.99517 19.5174 10.9828C19.1006 11.9704 18.5117 12.8447 17.7506 13.6058L19.4087 15.2639C20.3872 14.2672 21.1393 13.1347 21.6648 11.8662C22.1903 10.5977 22.453 9.2658 22.453 7.87047C22.453 6.47514 22.1903 5.14325 21.6648 3.87476C21.1393 2.60628 20.3872 1.47372 19.4087 0.477051ZM16.1197 3.76603L14.4616 5.42412C14.8059 5.7503 15.0642 6.12178 15.2363 6.53857C15.4085 6.95536 15.4945 7.39932 15.4945 7.87047C15.4945 8.34162 15.4085 8.78558 15.2363 9.20237C15.0642 9.61916 14.8059 9.99064 14.4616 10.3168L16.1197 11.9749C16.6633 11.4313 17.0801 10.8061 17.3701 10.0994C17.66 9.39264 17.805 8.64968 17.805 7.87047C17.805 7.09126 17.66 6.3483 17.3701 5.64157C17.0801 4.93484 16.6633 4.30967 16.1197 3.76603Z"
+        />
+      </svg>
+    </a>
 
-      <a href={$globalSettings.zoomLink} target="_blank" class="button">
-        Join
-      </a>
-    </div>
-  {/if}
-
-  <!-- AUDIO CHAT -->
-  {#if audioChatActive}
-    <AudioChat
-      user={localPlayers[$localUserSessionID]}
-      userName={$localUserName}
-      roomName={get(audioRoomNames, "audioRoom_" + $currentAudioRoom, "ERROR")}
-      roomId={$currentAudioRoom}
-      on:close={e => {
-        audioChatActive = false
-      }}
-    />
-  {/if}
-{/await}
+    <a href={$globalSettings.zoomLink} target="_blank" class="button">
+      Join
+    </a>
+  </div>
+{/if}
 
 <!-- LOADING -->
 {#if UI.state == STATE.LOADING}
