@@ -6,6 +6,7 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
+  import { onMount } from "svelte"
   import get from "lodash/get"
   import { fade } from "svelte/transition"
   import { renderBlockText } from "../sanity.js"
@@ -23,12 +24,19 @@
 
   const dispatch = createEventDispatcher()
 
+  // *** VARIABLES
+  let el = {}
+
+  // *** ON MOUNT
+  onMount(async () => {
+      el.querySelector('h2').focus()
+    })
 </script>
 
 <!-- METADATA -->
 <MetaData post={project} />
 
-<div class="project-single" in:fade use:links>
+<div class="project-single" bind:this={el} in:fade use:links>
   <!-- HEADER -->
 
   {#if project.title}
@@ -57,7 +65,10 @@
       <!-- COLOR CODE  -->
       <div class="color-icon {project.category}" role="presentation" />
       <!-- TITLE -->
-      <h2 class="title">{project.title}</h2>
+      <h2 
+        class="title"
+        tabindex="0"
+      >{project.title}</h2>
       <!-- PARTICIPANTS -->
       {#if get(project, "participants", false) && Array.isArray(project.participants)}
         <div class="participants">

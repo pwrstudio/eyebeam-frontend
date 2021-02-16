@@ -6,6 +6,7 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
+  import { onMount } from "svelte"
   import get from "lodash/get"
   import { fade } from "svelte/transition"
   import { renderBlockText } from "../sanity.js"
@@ -16,16 +17,27 @@
 
   // *** PROPS
   export let page = {}
+
+  // *** VARIABLES
+  let el = {}
+
+  // *** ON MOUNT
+  onMount(async () => {
+    el.querySelector('h2').focus()
+  })
 </script>
 
 <!-- METADATA -->
 <MetaData post={page} />
 
-<div class="page-single" in:fade use:links>
+<div class="page-single" bind:this={el} in:fade use:links>
   <!-- HEADER -->
   <div class="main-header">
     <!-- TITLE -->
-    <h2 class="title">{page.title}</h2>
+    <h2 
+    class="title"
+    tabindex="0"
+    >{page.title}</h2>
   </div>
   <div class="divider" />
 
