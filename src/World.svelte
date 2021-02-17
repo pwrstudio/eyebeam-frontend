@@ -1300,7 +1300,7 @@
   {#if matches}
     {#if localPlayers[$localUserSessionID]}
       {#if !sidebarHidden}
-        <div
+        <!-- <div
           class="hide-button"
           aria-label="hide sidebar"
           role="button"
@@ -1311,7 +1311,7 @@
           }}
         >
           »
-        </div>
+        </div> -->
       {/if}
       <aside
         class="sidebar"
