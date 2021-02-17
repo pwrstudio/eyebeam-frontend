@@ -92,7 +92,7 @@
     <div class="toolbar">
       <div class="sort">
         <div>Sort by:</div>
-        <select name="sortOrder" bind:value={sortOrder}>
+        <select name="sortOrder" aria-label="Sort by this value" bind:value={sortOrder}>
           <option value="title" selected>Title</option>
           <option value="seminar">Type</option>
         </select>
