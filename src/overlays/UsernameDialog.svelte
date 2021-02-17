@@ -108,17 +108,27 @@
         }
 
         &:focus {
-          border: 1px solid $COLOR_LIGHT;
+          border: 1px solid $COLOR_DARK;
+          color: $COLOR_DARK !important;
         }
 
         &::placeholder {
-          opacity: 0.5;
+          opacity: 0.8;
+        }
+
+        &::-webkit-input-placeholder {
+          opacity: 1;
         }
 
         input[type="text"] {
           -webkit-appearance: none;
           &::placeholder {
-            color: $COLOR_LIGHT;
+            color: $COLOR_DARK !important;
+            opacity: 1;
+          }
+          &::-webkit-input-placeholder {
+            color: $COLOR_DARK !important;
+            opacity: 1;
           }
         }
 
