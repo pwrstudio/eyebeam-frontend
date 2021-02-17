@@ -19,7 +19,7 @@
   let currentIndex = 0
 </script>
 
-<div class="tutorial-wrap-inner">
+<div class="tutorial-wrap-inner" aria-modal="true">
   <div class="tutorial" use:links>
     <div
       class="close"
