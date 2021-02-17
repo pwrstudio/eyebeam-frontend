@@ -1923,8 +1923,10 @@
     top: 0;
     right: 0;
     width: $SIDEBAR_WIDTH;
-    height: 100vh;
+    min-height: 100vh;
+    height: -webkit-fill-available;
     padding: 0;
+    margin:0;
     overflow: hidden;
     z-index: 100;
     transform: translateX(0);
