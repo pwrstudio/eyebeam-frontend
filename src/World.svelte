@@ -1743,6 +1743,10 @@
   @import "./responsive.scss";
   @import "./world.theme.scss";
 
+  html {
+    height: -webkit-fill-available;
+  }
+
   * {
     box-sizing: border-box;
     font-family: $SANS_STACK;
