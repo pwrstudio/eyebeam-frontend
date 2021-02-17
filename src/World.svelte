@@ -1286,6 +1286,24 @@
   <h1 aria-hidden="true">{$globalSettings.title}</h1>
 {/if}
 
+<!-- WELCOME / TUTORIAL -->
+{#if UI.state != STATE.LOADING && showWelcomeCard}
+  {#await tutorialCard then tutorialCard}
+    <div class="tutorial-wrap-outer" transition:fade>
+      <Tutorial card={tutorialCard} bind:showWelcomeCard />
+      <div
+        class="background-hittable"
+        aria-label="Close tutorial"
+        role="button"
+        tabindex="0"
+        on:click={e => {
+          showWelcomeCard = false
+        }}
+      />
+    </div>
+  {/await}
+{/if}
+
 <!-- GAME WORLD -->
 <div
   class="game"
@@ -1470,8 +1488,6 @@
       <div
         class="content-item active"
         aria-label="Livestream"
-        aria-modal="true"
-        role="dialog"
         transition:fly={{ y: -200 }}
       >
         <LiveSingle event={currentStreamEvent} url={currentStreamUrl} />
@@ -1701,23 +1717,7 @@
   <LoadingScreen />
 {/if}
 
-<!-- WELCOME / TUTORIAL -->
-{#if UI.state != STATE.LOADING && showWelcomeCard}
-  {#await tutorialCard then tutorialCard}
-    <div class="tutorial-wrap-outer" transition:fade>
-      <Tutorial card={tutorialCard} bind:showWelcomeCard />
-      <div
-        class="background-hittable"
-        aria-label="Close tutorial"
-        role="button"
-        tabindex="0"
-        on:click={e => {
-          showWelcomeCard = false
-        }}
-      />
-    </div>
-  {/await}
-{/if}
+
 
 <!-- ERROR -->
 {#if UI.state == STATE.ERROR}
