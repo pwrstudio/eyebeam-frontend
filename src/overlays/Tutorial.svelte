@@ -26,7 +26,12 @@
 </script>
 
 <div class="tutorial-wrap-inner">
-  <div class="tutorial" use:links>
+  <div class="tutorial"
+    role="dialog" 
+    aria-modal="true"
+    bind:this={tutorialSlide} 
+    use:links
+  >
     <div
       class="close"
       aria-label="Close card"
@@ -50,8 +55,8 @@
     </div>
     {#each card.slides as slide, index (slide._key)}
       {#if Array.isArray(get(slide, "content.content", false)) && currentIndex === index}
-        <div class="tutorial-slide" tabindex="-1" aria-modal="true" bind:this={tutorialSlide} in:fade|local>
-          <img min-height="300" src={urlFor(get(slide, "topImage", "")).url()} />
+        <div class="tutorial-slide" in:fade|local>
+          <!-- <img min-height="300" src={urlFor(get(slide, "topImage", "")).url()} /> -->
           {@html renderBlockText(get(slide, "content.content", []))}
         </div>
       {/if}
