@@ -39,10 +39,10 @@
     <input
       type="text"
       aria-required="true"
-      aria-label="Choose a name for interaction"
+      aria-label="Type in your name to enter"
       bind:this={inputEl}
       bind:value={username}
-      placeholder="Choose your username"
+      placeholder="Type your name to enter..."
       on:keydown={e => {
         if (e.keyCode == 13) dispatch("username", { username: username })
       }}
