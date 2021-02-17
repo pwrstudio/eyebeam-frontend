@@ -17,9 +17,10 @@
 
   // *** VARIABLES
   let currentIndex = 0
+  let tutorialSlide = {}
 </script>
 
-<div class="tutorial-wrap-inner" aria-modal="true">
+<div class="tutorial-wrap-inner">
   <div class="tutorial" use:links>
     <div
       class="close"
@@ -44,7 +45,7 @@
     </div>
     {#each card.slides as slide, index (slide._key)}
       {#if Array.isArray(get(slide, "content.content", false)) && currentIndex === index}
-        <div class="tutorial-slide" in:fade|local>
+        <div class="tutorial-slide" tabindex="0" aria-modal="true" bind:this={tutorialSlide} in:fade|local>
           <img min-height="300" src={urlFor(get(slide, "topImage", "")).url()} />
           {@html renderBlockText(get(slide, "content.content", []))}
         </div>
@@ -60,6 +61,7 @@
           tabindex="0"
           on:click={e => {
             currentIndex -= 1
+            tutorialSlide.focus()
           }}
         >
           Back
@@ -73,6 +75,7 @@
             class:disabled={currentIndex === card.slides.length - 1}
             on:click={e => {
               currentIndex += 1
+              tutorialSlide.focus()
             }}
           >
             Next
@@ -122,6 +125,7 @@
     width: 50vw;
     max-width: 900px;
     min-height: 60%;
+    max-height: 90%;
     pointer-events: all;
     position: relative;
 
@@ -206,6 +210,7 @@
       width: 90%;
       min-height: 30%;
       text-align: left;
+      overflow-y: scroll;
 
       @include screen-size("small") {
         width: 100%;
