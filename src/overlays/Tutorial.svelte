@@ -6,6 +6,7 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORT
+  import {onMount} from "svelte"
   import { fade } from "svelte/transition"
   import { urlFor, renderBlockText } from "../sanity.js"
   import { links } from "svelte-routing"
@@ -18,6 +19,10 @@
   // *** VARIABLES
   let currentIndex = 0
   let tutorialSlide = {}
+
+  onMount(() => {
+    tutorialSlide.focus()
+  })
 </script>
 
 <div class="tutorial-wrap-inner">
@@ -45,7 +50,7 @@
     </div>
     {#each card.slides as slide, index (slide._key)}
       {#if Array.isArray(get(slide, "content.content", false)) && currentIndex === index}
-        <div class="tutorial-slide" tabindex="0" aria-modal="true" bind:this={tutorialSlide} in:fade|local>
+        <div class="tutorial-slide" tabindex="-1" aria-modal="true" bind:this={tutorialSlide} in:fade|local>
           <img min-height="300" src={urlFor(get(slide, "topImage", "")).url()} />
           {@html renderBlockText(get(slide, "content.content", []))}
         </div>
