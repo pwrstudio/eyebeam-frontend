@@ -142,7 +142,7 @@
       .participants {
         margin-top: $SPACE_XS;
         color: $COLOR_GREY_3;
-        font-family: $MONO_STACK;
+        font-family: $SANS_STACK;
         font-size: $FONT_SIZE_SMALL;
         display: inline-block;
       }
