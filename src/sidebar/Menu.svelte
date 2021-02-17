@@ -22,8 +22,8 @@
     <a href="/pages/about" class="menu-item">About</a>
   </nav>
 
-  <MediaQuery query="(width: 786px)" let:matches>
-    {#if matches}}
+  <MediaQuery query="(min-width: 768px)" let:matches>
+    {#if matches}
     <span
       aria-label="Change your name for interaction"
       role="button"
