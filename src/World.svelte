@@ -1286,6 +1286,24 @@
   <h1 aria-hidden="true">{$globalSettings.title}</h1>
 {/if}
 
+<!-- WELCOME / TUTORIAL -->
+{#if UI.state != STATE.LOADING && showWelcomeCard}
+  {#await tutorialCard then tutorialCard}
+    <div class="tutorial-wrap-outer" transition:fade>
+      <Tutorial card={tutorialCard} bind:showWelcomeCard />
+      <div
+        class="background-hittable"
+        aria-label="Close tutorial"
+        role="button"
+        tabindex="0"
+        on:click={e => {
+          showWelcomeCard = false
+        }}
+      />
+    </div>
+  {/await}
+{/if}
+
 <!-- GAME WORLD -->
 <div
   class="game"
@@ -1470,8 +1488,6 @@
       <div
         class="content-item active"
         aria-label="Livestream"
-        aria-modal="true"
-        role="dialog"
         transition:fly={{ y: -200 }}
       >
         <LiveSingle event={currentStreamEvent} url={currentStreamUrl} />
@@ -1701,23 +1717,7 @@
   <LoadingScreen />
 {/if}
 
-<!-- WELCOME / TUTORIAL -->
-{#if UI.state != STATE.LOADING && showWelcomeCard}
-  {#await tutorialCard then tutorialCard}
-    <div class="tutorial-wrap-outer" transition:fade>
-      <Tutorial card={tutorialCard} bind:showWelcomeCard />
-      <div
-        class="background-hittable"
-        aria-label="Close tutorial"
-        role="button"
-        tabindex="0"
-        on:click={e => {
-          showWelcomeCard = false
-        }}
-      />
-    </div>
-  {/await}
-{/if}
+
 
 <!-- ERROR -->
 {#if UI.state == STATE.ERROR}
@@ -1742,6 +1742,10 @@
 <style lang="scss">
   @import "./responsive.scss";
   @import "./world.theme.scss";
+
+  html {
+    height: -webkit-fill-available;
+  }
 
   * {
     box-sizing: border-box;
@@ -1923,8 +1927,10 @@
     top: 0;
     right: 0;
     width: $SIDEBAR_WIDTH;
-    height: 100vh;
+    min-height: 100vh;
+    height: -webkit-fill-available;
     padding: 0;
+    margin:0;
     overflow: hidden;
     z-index: 100;
     transform: translateX(0);

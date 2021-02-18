@@ -6,6 +6,7 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
+  import { onMount } from "svelte"
   import get from "lodash/get"
   import Fuse from "fuse.js"
   import { renderBlockText } from "../sanity.js"
@@ -26,6 +27,7 @@
   let orderedProjects = {}
   let fuseList = {}
   let sortOrder = "title"
+  let el = {}
 
   const titleSort = (a, b) => {
     const textA = a.title ? a.title.toUpperCase() : "Undefined"
@@ -38,6 +40,11 @@
     const textB = b.category ? b.category.toUpperCase() : "Undefined"
     return textA < textB ? -1 : textA > textB ? 1 : 0
   }
+
+  // *** On Mount
+  onMount(async () => {
+    el.querySelector('.project-item').focus()
+  })
 
   // Order project based on title or seminar
   orderedProjects["title"] = [...projects].sort(titleSort)
@@ -64,9 +71,9 @@
   }
 </script>
 
-<div class="project-container">
+<div class="project-container" bind:this={el}>
   <!-- HEADER -->
-  <div class="project-item header" class:related>
+  <div class="project-item header" tabindex="0" class:related>
     <div class="inner">
       <div class="row">
         <div>{related ? "Connected Projects" : "Projects"}</div>
@@ -85,7 +92,7 @@
     <div class="toolbar">
       <div class="sort">
         <div>Sort by:</div>
-        <select name="sortOrder" bind:value={sortOrder}>
+        <select name="sortOrder" aria-label="Sort by this value" bind:value={sortOrder}>
           <option value="title" selected>Title</option>
           <option value="seminar">Type</option>
         </select>

@@ -6,6 +6,7 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORT
+  import {onMount} from "svelte"
   import { fade } from "svelte/transition"
   import { urlFor, renderBlockText } from "../sanity.js"
   import { links } from "svelte-routing"
@@ -17,10 +18,20 @@
 
   // *** VARIABLES
   let currentIndex = 0
+  let tutorialSlide = {}
+
+  onMount(() => {
+    tutorialSlide.focus()
+  })
 </script>
 
 <div class="tutorial-wrap-inner">
-  <div class="tutorial" use:links>
+  <div class="tutorial"
+    role="dialog" 
+    aria-modal="true"
+    bind:this={tutorialSlide} 
+    use:links
+  >
     <div
       class="close"
       aria-label="Close card"
@@ -45,7 +56,7 @@
     {#each card.slides as slide, index (slide._key)}
       {#if Array.isArray(get(slide, "content.content", false)) && currentIndex === index}
         <div class="tutorial-slide" in:fade|local>
-          <img min-height="300" src={urlFor(get(slide, "topImage", "")).url()} />
+          <!-- <img min-height="300" src={urlFor(get(slide, "topImage", "")).url()} /> -->
           {@html renderBlockText(get(slide, "content.content", []))}
         </div>
       {/if}
@@ -60,6 +71,7 @@
           tabindex="0"
           on:click={e => {
             currentIndex -= 1
+            tutorialSlide.focus()
           }}
         >
           Back
@@ -73,6 +85,7 @@
             class:disabled={currentIndex === card.slides.length - 1}
             on:click={e => {
               currentIndex += 1
+              tutorialSlide.focus()
             }}
           >
             Next
@@ -122,6 +135,7 @@
     width: 50vw;
     max-width: 900px;
     min-height: 60%;
+    max-height: 90%;
     pointer-events: all;
     position: relative;
 
@@ -206,6 +220,7 @@
       width: 90%;
       min-height: 30%;
       text-align: left;
+      overflow-y: scroll;
 
       @include screen-size("small") {
         width: 100%;

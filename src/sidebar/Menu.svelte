@@ -7,6 +7,7 @@
 
   // *** IMPORTS
   import { createEventDispatcher } from "svelte"
+  import MediaQuery from "svelte-media-query"
 
   // *** CONSTANTS
   const dispatch = createEventDispatcher()
@@ -16,20 +17,25 @@
   <nav>
     <!-- <a href="/pages/schedule" class="menu-item">Schedule</a> -->
     <a href="/projects" class="menu-item">Artist Projects</a>
-    <a href="/schedule" class="menu-item">Schedule</a>
+    <a href="/pages/schedule" class="menu-item">Schedule</a>
     <a href="/pages/guide" class="menu-item">Guide</a>
     <a href="/pages/about" class="menu-item">About</a>
   </nav>
 
-  <span
-    aria-label="Change your name for interaction"
-    role="button"
-    tabindex="0"
-    on:click={e => {
-      dispatch("username")
-    }}
-    class="menu-item login">Change name</span
-  >
+  <MediaQuery query="(min-width: 768px)" let:matches>
+    {#if matches}
+    <span
+      aria-label="Change your name for interaction"
+      role="button"
+      tabindex="0"
+      on:click={e => {
+        dispatch("username")
+      }}
+      class="menu-item login">Change name</span
+    >
+  {/if}
+</MediaQuery>
+
 </div>
 
 <style lang="scss">

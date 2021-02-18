@@ -18,6 +18,7 @@
 
   // *** STORES
   import { globalSettings } from "../stores.js"
+import { afterUpdate, onMount } from "svelte";
 
   // *** PROPS
   export let events = []
@@ -25,6 +26,7 @@
 
   // *** VARIABLES
   let containerWidth = "100%"
+  let el = {}
 
   const now = Date.now()
   const upcomingEvents = events.filter(
@@ -33,11 +35,19 @@
   const archivedEvents = events.filter(
     e => Date.parse(e.endDate ? e.endDate : e.startDate) < now
   )
+
+  onMount(() => {
+    el.querySelector('.event.header').focus()  
+  })
+
+  afterUpdate(() => {
+    el.querySelector('.event.header').focus()  
+  })
 </script>
 
-<div class="eventlist-container" style={"width:" + containerWidth + ";"}>
+<div class="eventlist-container" bind:this={el} style={"width:" + containerWidth + ";"}>
   <!-- HEADER -->
-  <div class="event header">
+  <div class="event header event-header" tabindex="0">
     <div class="inner">
       <div class="row">
         <div>Events</div>
