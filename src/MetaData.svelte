@@ -109,5 +109,5 @@
   <meta property="og:url" content={url} />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="EYEBEAM: From the Rupture"" />
-  <meta name="twitter:user" content="@eyebeamnyc">
+  <meta name="twitter:site" content="@eyebeamnyc">
 </svelte:head>
