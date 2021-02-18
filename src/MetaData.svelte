@@ -29,7 +29,7 @@
   // *** VARIABLES
   let title = "EYEBEAM: From the Rupture"
   let description = "Eyebeam presents a 4-day, multi-venue arts & ideas festival that is free and open to all, featuring today's most radical artists and thinkers."
-  let image = "https://eyebeam-frontend.netlify.app/img/from-the-rupture.jpg"
+  let image = "https://fromtherupture.eyebeam.org/img/from-the-rupture.jpg"
   let url = window.location
 
   const stripHtml = html => {
@@ -108,5 +108,6 @@
   <meta name="twitter:url" content={url} />
   <meta property="og:url" content={url} />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="postrational.foundation" />
+  <meta property="og:site_name" content="EYEBEAM: From the Rupture" />
+  <meta name="twitter:site" content="@eyebeamnyc">
 </svelte:head>
