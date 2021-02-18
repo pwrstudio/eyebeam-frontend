@@ -128,6 +128,7 @@
   .chat-container {
     position: relative;
     height: 100%;
+    overflow:scroll;
 
     @include screen-size("small") {
       height: calc(100% - 40px);
@@ -153,7 +154,7 @@
     overflow-x: hidden;
     // padding-bottom: $SPACE_S;
     padding-top: $SPACE_S;
-    @include hide-scroll;
+    // @include hide-scroll;
 
     .pinned-message {
       background: $COLOR_DARK;
