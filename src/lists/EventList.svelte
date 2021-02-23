@@ -6,40 +6,42 @@
   // # # # # # # # # # # # # #
 
   // *** IMPORTS
-  import { onMount } from "svelte"
-  import { fade } from "svelte/transition"
-  import get from "lodash/get"
+  import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
+  import get from "lodash/get";
 
   // *** GLOBAL
-  import { formatDate } from "../global.js"
+  import { formatDate } from "../global.js";
 
   // COMPONENTS
-  import ParticipantList from "./ParticipantList.svelte"
+  import ParticipantList from "./ParticipantList.svelte";
 
   // *** PROPS
-  export let events = []
-  export let exhibitions = []
-  export let related = false
-  export let showArchived = false
+  export let events = [];
+  export let exhibitions = [];
+  export let related = false;
+  export let showArchived = false;
 
   // *** VARIABLES
-  let containerWidth = "100%"
+  let containerWidth = "100%";
 
-  const now = Date.now()
+  const now = Date.now();
   // __ HACK: Show all events if related
   const upcomingEvents = related
     ? events
-    : events.filter(e => Date.parse(e.endDate ? e.endDate : e.startDate) > now)
+    : events.filter(
+        (e) => Date.parse(e.endDate ? e.endDate : e.startDate) > now
+      );
   const archivedEvents = events.filter(
-    e => Date.parse(e.endDate ? e.endDate : e.startDate) < now
-  )
+    (e) => Date.parse(e.endDate ? e.endDate : e.startDate) < now
+  );
 
   onMount(async () => {
     // __ Enabled horizontal scroll layout on mobile
     if (window.matchMedia("(max-width: 800px)").matches && !related) {
-      containerWidth = window.innerWidth * 0.8 * events.length + "px"
+      containerWidth = window.innerWidth * 0.8 * events.length + "px";
     }
-  })
+  });
 </script>
 
 <div class="eventlist-container" style={"width:" + containerWidth + ";"}>
@@ -51,7 +53,7 @@
           <div>Related Events</div>
           <a href="/events" class="archive-link">Archived events</a>
         {:else}
-          <a href="/events">Today's Events</a>
+          <a href="/events" aria-label="View All Events">Events</a>
           <a href="/events" class="archive-link">Archived events</a>
           <!-- <div on:click={e => {showArchive = !showArchive}} class="archive-link">{showArchive ? 'Upcoming Events' : 'Event Archive'}</div> -->
         {/if}
