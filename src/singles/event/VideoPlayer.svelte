@@ -32,7 +32,6 @@
         allow="autoplay; fullscreen"
         allowfullscreen
         aria-hidden="true"
-
       />
     </div>
   {:else if streamUrl.includes("youtube") || streamUrl.includes("youtu.be")}
