@@ -767,7 +767,7 @@
               if(!moveQ[$localUserSessionID] && ['a', 's', 'd', 'w'].includes(get(event, 'key', '').toLowerCase())) {
 
                 let targetX = 0
-                let targetY = 0 
+                let targetY = 0
 
                 const STEP_SIZE = 50
 
@@ -781,18 +781,18 @@
                     targetY = localPlayers[$localUserSessionID].avatar.y
                     break;
                   case 'w':
-                    targetX = localPlayers[$localUserSessionID].avatar.x 
+                    targetX = localPlayers[$localUserSessionID].avatar.x
                     targetY = localPlayers[$localUserSessionID].avatar.y - STEP_SIZE
                     break;
                   case 's':
-                    targetX = localPlayers[$localUserSessionID].avatar.x 
+                    targetX = localPlayers[$localUserSessionID].avatar.x
                     targetY = localPlayers[$localUserSessionID].avatar.y + STEP_SIZE
                     break;
                   default:
-                    targetX = localPlayers[$localUserSessionID].avatar.x 
+                    targetX = localPlayers[$localUserSessionID].avatar.x
                     targetY = localPlayers[$localUserSessionID].avatar.y
                 }
-  
+
                 showTarget(targetX, targetY)
 
                 gameRoom.send("go", {
@@ -1346,11 +1346,11 @@
       >
 
       <!-- <a class="hidden-link" aria-label="Skip to the Menu">Skip to the Menu</a>   -->
-      
+
         <!-- MINIMAP -->
         <div class="clock" aria-label="Clock">
           <Clock />
-        </div>      
+        </div>
         {#if LINK_OUT}
           <div class="link-to-ac">
             <a
@@ -1412,7 +1412,7 @@
             </div>
           </div>
         </div>
-        <!-- MENUBAR --> 
+        <!-- MENUBAR -->
         <div class="menu">
           <Menu
             on:username={e => {
@@ -1432,7 +1432,7 @@
   {#if get($currentAreaObject, "informationCard", false) && !closedAreaCards.includes($currentAreaObject.areaIndex)}
     <div
       class="content-item active"
-      
+
       transition:fly={{ y: -200 }}
     >
       <div
@@ -1925,6 +1925,7 @@
   .sidebar {
     position: fixed;
     top: 0;
+    bottom: 0;
     right: 0;
     width: $SIDEBAR_WIDTH;
     min-height: 100vh;
