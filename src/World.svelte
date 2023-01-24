@@ -488,10 +488,13 @@
         const createPlayer = (playerOptions, sessionId) => {
           // __ Create sprites for all motion states
           const sprites = ["rest", "front", "back", "left", "right"].map(ms => {
-            console.log('******')
-            console.log('playerOptions.avatar', playerOptions.avatar)
-            console.log('avatarSpritesheets', avatarSpritesheets)
-            console.log('avatarSpritesheets[playerOptions.avatar]', avatarSpritesheets[playerOptions.avatar])
+            console.log("******")
+            console.log("playerOptions.avatar", playerOptions.avatar)
+            console.log("avatarSpritesheets", avatarSpritesheets)
+            console.log(
+              "avatarSpritesheets[playerOptions.avatar]",
+              avatarSpritesheets[playerOptions.avatar]
+            )
             const sprite = new PIXI.AnimatedSprite(
               avatarSpritesheets[playerOptions.avatar].animations[ms]
             )
@@ -761,38 +764,46 @@
             })
 
             // Keyboard navigation (ASDW)
-            document.addEventListener('keydown', event => {
-              console.log(event.key);
+            document.addEventListener("keydown", event => {
+              console.log(event.key)
 
-              if(!moveQ[$localUserSessionID] && ['a', 's', 'd', 'w'].includes(get(event, 'key', '').toLowerCase())) {
-
+              if (
+                !moveQ[$localUserSessionID] &&
+                ["a", "s", "d", "w"].includes(
+                  get(event, "key", "").toLowerCase()
+                )
+              ) {
                 let targetX = 0
-                let targetY = 0 
+                let targetY = 0
 
                 const STEP_SIZE = 50
 
-                switch(event.key) {
-                  case 'd':
-                    targetX = localPlayers[$localUserSessionID].avatar.x + STEP_SIZE
+                switch (event.key) {
+                  case "d":
+                    targetX =
+                      localPlayers[$localUserSessionID].avatar.x + STEP_SIZE
                     targetY = localPlayers[$localUserSessionID].avatar.y
-                    break;
-                  case 'a':
-                    targetX = localPlayers[$localUserSessionID].avatar.x - STEP_SIZE
+                    break
+                  case "a":
+                    targetX =
+                      localPlayers[$localUserSessionID].avatar.x - STEP_SIZE
                     targetY = localPlayers[$localUserSessionID].avatar.y
-                    break;
-                  case 'w':
-                    targetX = localPlayers[$localUserSessionID].avatar.x 
-                    targetY = localPlayers[$localUserSessionID].avatar.y - STEP_SIZE
-                    break;
-                  case 's':
-                    targetX = localPlayers[$localUserSessionID].avatar.x 
-                    targetY = localPlayers[$localUserSessionID].avatar.y + STEP_SIZE
-                    break;
+                    break
+                  case "w":
+                    targetX = localPlayers[$localUserSessionID].avatar.x
+                    targetY =
+                      localPlayers[$localUserSessionID].avatar.y - STEP_SIZE
+                    break
+                  case "s":
+                    targetX = localPlayers[$localUserSessionID].avatar.x
+                    targetY =
+                      localPlayers[$localUserSessionID].avatar.y + STEP_SIZE
+                    break
                   default:
-                    targetX = localPlayers[$localUserSessionID].avatar.x 
+                    targetX = localPlayers[$localUserSessionID].avatar.x
                     targetY = localPlayers[$localUserSessionID].avatar.y
                 }
-  
+
                 showTarget(targetX, targetY)
 
                 gameRoom.send("go", {
@@ -802,7 +813,7 @@
                   originY: localPlayers[$localUserSessionID].avatar.y,
                 })
               }
-            });
+            })
 
             // PLAYER => TOUCH END
             viewport.on("touchend", e => {
@@ -847,8 +858,6 @@
               })
             }
 
-
-
             // *******
             // MESSAGE
             // *******
@@ -857,9 +866,8 @@
             gameRoom.state.messages.onAdd = message => {
               chatMessages = [...chatMessages, message]
               if ($localUserUUID == message.uuid) {
-                const messageContainerEl = document.querySelector(
-                  "#message-container"
-                )
+                const messageContainerEl =
+                  document.querySelector("#message-container")
                 if (messageContainerEl) {
                   setTimeout(() => {
                     messageContainerEl.scrollTo({
@@ -1344,13 +1352,12 @@
           }
         }}
       >
+        <!-- <a class="hidden-link" aria-label="Skip to the Menu">Skip to the Menu</a>   -->
 
-      <!-- <a class="hidden-link" aria-label="Skip to the Menu">Skip to the Menu</a>   -->
-      
         <!-- MINIMAP -->
         <div class="clock" aria-label="Clock">
           <Clock />
-        </div>      
+        </div>
         {#if LINK_OUT}
           <div class="link-to-ac">
             <a
@@ -1412,7 +1419,7 @@
             </div>
           </div>
         </div>
-        <!-- MENUBAR --> 
+        <!-- MENUBAR -->
         <div class="menu">
           <Menu
             on:username={e => {
@@ -1430,11 +1437,7 @@
 <main class="main-content-slot" class:pushed={sidebarHidden}>
   <!-- INFORMATION BOX -->
   {#if get($currentAreaObject, "informationCard", false) && !closedAreaCards.includes($currentAreaObject.areaIndex)}
-    <div
-      class="content-item active"
-      
-      transition:fly={{ y: -200 }}
-    >
+    <div class="content-item active" transition:fly={{ y: -200 }}>
       <div
         class="close"
         role="button"
@@ -1484,7 +1487,9 @@
   {#await activeStreams then activeStreams}
     <!-- MAIN AREA -->
     {#if $currentVideoRoom == "main" && currentStreamUrl && !activeContentClosed && $localUserName}
-    <div aria-label="The following item is a youtube embed of the livestream of our festival"></div>
+      <div
+        aria-label="The following item is a youtube embed of the livestream of our festival"
+      />
       <div
         class="content-item active"
         aria-label="Livestream"
@@ -1505,7 +1510,12 @@
       use:links
       transition:fly={{ y: 200, duration: 400, easing: quartOut }}
     >
-      <a class="close" role="button" aria-label={slug ? `Close ${slug}` : `Close section`} href="/">
+      <a
+        class="close"
+        role="button"
+        aria-label={slug ? `Close ${slug}` : `Close section`}
+        href="/"
+      >
         <svg
           role="presentation"
           width="40"
@@ -1706,7 +1716,12 @@
         />
       </svg>
     </a>
-    <a href={$globalSettings.zoomLink} aria-label="Join Zoom Lounge" target="_blank" class="button">
+    <a
+      href={$globalSettings.zoomLink}
+      aria-label="Join Zoom Lounge"
+      target="_blank"
+      class="button"
+    >
       Join
     </a>
   </div>
@@ -1716,8 +1731,6 @@
 {#if UI.state == STATE.LOADING}
   <LoadingScreen />
 {/if}
-
-
 
 <!-- ERROR -->
 {#if UI.state == STATE.ERROR}
@@ -1753,19 +1766,19 @@
   }
 
   .hidden-link {
-      opacity: 0;
-      transform: scale(1.2);
-      position: absolute;
-      right: 8px;
-      top: 8px;
-      background-color: $COLOR_LIGHT;
-      z-index: 10000;
-      padding: 1rem;
-      border: 1px solid $COLOR_DARK;
-      &:focus {
-        opacity: 1;
-      }
+    opacity: 0;
+    transform: scale(1.2);
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background-color: $COLOR_LIGHT;
+    z-index: 10000;
+    padding: 1rem;
+    border: 1px solid $COLOR_DARK;
+    &:focus {
+      opacity: 1;
     }
+  }
 
   .inventory {
     position: fixed;
@@ -1930,7 +1943,7 @@
     min-height: 100vh;
     height: -webkit-fill-available;
     padding: 0;
-    margin:0;
+    margin: 0;
     overflow: hidden;
     z-index: 100;
     transform: translateX(0);
@@ -2078,7 +2091,7 @@
   .mobile-toolkit {
     background: linear-gradient(
       0deg,
-      rgba(0, 0, 0, .9) 75%,
+      rgba(0, 0, 0, 0.9) 75%,
       rgba(0, 0, 0, 0) 100%
     );
     position: fixed;

@@ -1,7 +1,6 @@
 import { format, getYear } from "date-fns"
 
 export const SANITY_PROJECT_ID = "1hwmqt2a"
-export const GAME_SERVER_URL = "wss://eyebeam-gameserver.post-rational.org";
 
 export const VIDEO_ROOMS = { MAIN: "main", SUPPORT: "support" }
 export const AUDIO_ROOMS = [1, 2, 3, 4, 5, 6, 7]
